@@ -1,0 +1,6 @@
+<li>
+      {{if values.length > 0}}
+            <span style="font-weight:bold">${type} :</span>
+            {{each values}}{{if $index > 0}}, {{/if}}${$value}{{/each}}
+      {{/if}}
+</li>

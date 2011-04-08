@@ -1,0 +1,10 @@
+
+#AuthName "Restricted area"
+#AuthType Basic
+#AuthUserFile "/Users/pirhoo/Lab/Web/dataframework/apps/branches/cust_conseil_paris/.htpasswd"
+#AuthUserFile "/Users/pirhoo/Lab/Web/dataframework/apps/branches/cust_conseil_paris/.htpasswd"
+AuthUserFile "/home/owni/public_html/app.owni.fr/public/conseil-paris/.htpasswd"
+AuthUserFile "/home/owni/public_html/app.owni.fr/public/conseil-paris/.htpasswd"
+#Require valid-user
+
+

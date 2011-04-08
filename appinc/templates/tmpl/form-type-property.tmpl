@@ -1,0 +1,251 @@
+
+{{if relation_type == 1}}
+      <!-- Friends -->
+
+      <label>
+            From: <input type="text" name="property_1" class="basic-datepicker half" placeholder="Date" />
+      </label>
+
+      <label>
+            Comment:   <input type="text" name="property_2" placeholder="Text" />
+      </label>
+
+      <label>
+            Source:   <input type="text" name="property_3" placeholder="URL" class="required chk_URL" />
+      </label>
+
+{{/if}}
+
+
+{{if relation_type == 2}}
+      <!-- Rivals -->
+
+      <label>
+            From: <input type="text" name="property_4" class="basic-datepicker half" placeholder="Date" />
+      </label>
+
+      <label>
+            Comment:   <input type="text" name="property_5" placeholder="Text" />
+      </label>
+
+      <label>
+            Source:   <input type="text" name="property_6" placeholder="URL" class="required chk_URL" />
+      </label>
+
+{{/if}}
+
+
+{{if relation_type == 3}}
+      <!-- Colleagues  -->
+
+      <label>
+            From: <input type="text" name="property_7" class="basic-datepicker half" placeholder="Date" />
+      </label>
+
+      <label>
+            To:   <input type="text" name="property_8" class="basic-datepicker half" placeholder="Date" />
+      </label>
+
+      <label>
+            Organization:   <input type="text" name="property_9" placeholder="Organization" class="chk_organization" />
+      </label>
+
+      <label>
+            City:   <input type="text" name="property_10" placeholder="City" class="chk_city" />
+      </label>
+
+      <label>
+            Comment:   <input type="text" name="property_11" placeholder="Text" />
+      </label>
+
+      <label>
+            Source:   <input type="text" name="property_"12 placeholder="URL" class="required chk_URL" />
+      </label>
+
+{{/if}}
+
+
+{{if relation_type == 4}}
+      <!-- Commercial relation -->
+
+      <label>
+            From: <input type="text" name="property_13" class="basic-datepicker half" placeholder="Date" />
+      </label>
+
+      <label>
+            To:   <input type="text" name="property_14 " class="basic-datepicker half" placeholder="Date" />
+      </label>
+
+      <label>
+            Work description:   <input type="text" name="property_15" placeholder="Text" />
+      </label>
+
+      <label>
+            Comment:   <input type="text" name="property_16" placeholder="Text" />
+      </label>
+
+      <label>
+            Source:   <input type="text" name="property_17" placeholder="URL" class="required chk_URL" />
+      </label>
+{{/if}}
+
+
+{{if relation_type == 5}}
+      <!-- Ownership  -->
+
+      <label>
+            From: <input type="text" name="property_18" class="basic-datepicker half" placeholder="Date" />
+      </label>
+
+      <label>
+            To:   <input type="text" name="property_19" class="basic-datepicker half" placeholder="Date" />
+      </label>
+
+      <label>
+            Transaction amount in EUR:   <input type="text" name="property_20" placeholder="Number" class="half" />
+      </label>
+
+      <label>
+            Comment:   <input type="text" name="property_21" placeholder="Text" />
+      </label>
+
+      <label>
+            Source:   <input type="text" name="property_22" placeholder="URL" class="required chk_URL" />
+      </label>
+{{/if}}
+
+
+{{if relation_type == 6}}
+      <!--  Classmates -->
+
+      <label>
+            From: <input type="text" name="property_23" class="basic-datepicker half" placeholder="Date" />
+      </label>
+
+      <label>
+            To:   <input type="text" name="property_24" class="basic-datepicker half" placeholder="Date" />
+      </label>
+
+      <label>
+            Educational Institution:   <input type="text" name="property_25" placeholder="Educational Institution" class="chk_educational_institution" />
+      </label>
+
+      <label>
+            City:   <input type="text" name="property_26" placeholder="City" class="chk_city" />
+      </label>
+
+      <label>
+            Comment:   <input type="text" name="property_27" placeholder="Text" />
+      </label>
+
+      <label>
+            Source:   <input type="text" name="property_28" placeholder="URL" class="required chk_URL" />
+      </label>
+{{/if}}
+
+
+{{if relation_type == 7}}
+      <!-- Marriage -->
+
+
+      <label>
+            From: <input type="text" name="property_29" class="basic-datepicker half" placeholder="Date" />
+      </label>
+
+      <label>
+            To:   <input type="text" name="property_30" class="basic-datepicker half" placeholder="Date" />
+      </label>
+
+      <label>
+            Wedding venue:   <input type="text" name="property_31" placeholder="Location" class="chk_location" />
+      </label>
+
+      <label>
+            Comment:   <input type="text" name="property_32" placeholder="Text" />
+      </label>
+
+      <label>
+            Source:   <input type="text" name="property_33" placeholder="URL" class="required chk_URL" />
+      </label>
+{{/if}}
+
+{{if relation_type == 8}}
+      <!-- Love Affair -->
+
+
+      <label>
+            From: <input type="text" name="property_34" class="basic-datepicker half" placeholder="Date" />
+      </label>
+
+      <label>
+            To:   <input type="text" name="property_35" class="basic-datepicker half" placeholder="Date" />
+      </label>
+
+      <label>
+            Comment:   <input type="text" name="property_36" placeholder="Text" />
+      </label>
+
+      <label>
+            Source:   <input type="text" name="property_37" placeholder="URL" class="required chk_URL" />
+      </label>
+{{/if}}
+
+
+{{if relation_type == 9}}
+      <!-- Family relationship -->
+
+      <label>
+            Relationship degree: 
+            <select name="property_38">
+                  <option value="1st">1st degree (child, parent, sibling)</option>
+                  <option value="2d">2d degree (grandchild, grandparent, uncle, aunt, cousin)</option>
+                  <option value="3d">3d degree and further</option>
+            </select>
+      </label>
+
+
+      <label>
+            Comment:   <input type="text" name="property_39" placeholder="Text" />
+      </label>
+
+      <label>
+            Source:   <input type="text" name="property_40" placeholder="URL" class="required chk_URL" />
+      </label>
+{{/if}}
+
+{{if relation_type == 10}}
+      <!-- Membership -->
+
+      <label>
+            From: <input type="text" name="property_44" class="basic-datepicker half" placeholder="Date" />
+      </label>
+
+      <label>
+            To:   <input type="text" name="property_45" class="basic-datepicker half" placeholder="Date" />
+      </label>
+
+      <label>
+            Organization:   <input type="text" name="property_46" placeholder="Organization" class="chk_organization" />
+      </label>
+
+      <label>
+            Comment:   <input type="text" name="property_41" placeholder="Text" />
+      </label>
+
+      <label>
+            Source:   <input type="text" name="property_42" placeholder="URL" class="required chk_URL" />
+      </label>
+{{/if}}
+
+{{if relation_type == 11}}
+      <!-- Other -->
+
+      <label>
+            Comment:   <input type="text" name="property_47" placeholder="Text" />
+      </label>
+
+      <label>
+            Source:   <input type="text" name="property_48" placeholder="URL" class="required chk_URL" />
+      </label>
+{{/if}}
+
