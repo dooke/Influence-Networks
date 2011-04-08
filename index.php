@@ -50,9 +50,9 @@
 
       // Smarty settings
       $s->register_block('t', 'smarty_translate');
-      $s->template_dir  = BASE_DIR . '/appinc/templates';
-      $s->compile_dir   = BASE_DIR . '/appinc/templates/_compiled';
-      $s->cache_dir     = BASE_DIR . '/appinc/templates/_cache';
+      $s->template_dir  = BASE_DIR . '/appinc/template';
+      $s->compile_dir   = BASE_DIR . '/appinc/template/_compiled';
+      $s->cache_dir     = BASE_DIR . '/appinc/template/_cache';
       $s->config_dir    = BASE_DIR . '/configs';
 
       // Error Array
