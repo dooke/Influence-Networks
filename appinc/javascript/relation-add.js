@@ -8,10 +8,10 @@ $(document).ready(function () {
       /*************************
       * Pre-load template files
       ***/
-      $.get("./templates/tmpl/node-property.tmpl", {}, function(tmpl) {
+      $.get("./appinc/template/tmpl/node-property.tmpl", {}, function(tmpl) {
             $.template( "node-property", tmpl);
       } );
-      $.get("./templates/tmpl/form-type-property.tmpl", {}, function(tmpl) {
+      $.get("./appinc/template/tmpl/form-type-property.tmpl", {}, function(tmpl) {
             $.template( "form-type-property", tmpl);
       } );
      

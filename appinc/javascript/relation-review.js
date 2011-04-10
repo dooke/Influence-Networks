@@ -2,7 +2,7 @@
 /*************************
 * Pre-load template files
 ***/
-$.get("./templates/tmpl/node-property.tmpl", {}, function(tmpl) {$.template( "node-property", tmpl);} );
+$.get("./appinc/template/tmpl/node-property.tmpl", {}, function(tmpl) {$.template( "node-property", tmpl);} );
                         
 $(document).ready(function () {
     
