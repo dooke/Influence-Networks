@@ -49,7 +49,7 @@ $(document).ready(function () {
      * Templates
      ***/
       // error
-      $.get("./templates/tmpl/error-tooltip.tmpl", {}, function(tmpl) {
+      $.get("./appinc/template/tmpl/error-tooltip.tmpl", {}, function(tmpl) {
             $.template( "error-tooltip", tmpl);
             $("#errors").html();
             
