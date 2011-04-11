@@ -13,9 +13,9 @@
         
             /* *** PROD ENVIRONMENT *** */
             define('MYSQL_HOST', 'localhost');
-            define('MYSQL_DB', '');
-            define('MYSQL_USER', '');
-            define('MYSQL_PASS', '');
+            define('MYSQL_DB',   '@@MYSQL_DB@@');
+            define('MYSQL_USER', '@@MYSQL_USER@@');
+            define('MYSQL_PASS', '@@MYSQL_PASS@@');
             
             define('TABLE_PREFIX', 'inf_');
 
