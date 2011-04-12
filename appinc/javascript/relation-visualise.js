@@ -42,7 +42,9 @@ $(function () {
         }).blur(function() {
             // hide tooltips when the input take the focus
             $(this).tipsy("hide");
-        });
+        
+        // prevent a bug with google font
+        }).tipsy("show").tipsy("hide");
 
 
         $(".node_search").suggest({
