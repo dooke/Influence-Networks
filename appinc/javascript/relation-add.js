@@ -19,13 +19,48 @@ $(document).ready(function () {
       
     /*********************
       * Autocomplete module
-      ***/               
+      ***/   
+     
+     // a tooltips to indicate which input is empty
+     $(".node_search").tipsy({
+            trigger: "manual", 
+            gravity: "s",
+            opacity: 1,
+            html   : true
+     }).blur(function() {
+         // hide tooltips when the input take the focus
+         $(this).tipsy("hide");
+     });
+    
+    
     $(".node_search").suggest({
+        
+        // looking for person or organization
         type: ["/people/person", "/organization/organization"],
+        // result must be strict
         type_strict: "any",
-        all_types: true            
-    }).bind("fb-select", function(e, data) {
+        all_types: true,
+        // selection is required
+        required: true
+        
+        
+    }).bind("fb-select", function(e, data) { // select event
+        
+        // hide tooltips when we select an entity
+       $(this).tipsy("hide"); 
+        
+        // load data from freebase
         loadFreebaseData(data, $(this) );
+        
+    }).bind("fb-required", function () { // fail event
+        
+       // Hack to hide every tipsy tooltips
+       $(".node_search").each(function(i, n) { $(n).tipsy("hide"); });
+       
+       // show the right tooltips
+       if( $(this).val() != "" && $(this).val() != $(this).attr("placeholder") )
+            $(this).tipsy("show"); 
+       
     });
       
       

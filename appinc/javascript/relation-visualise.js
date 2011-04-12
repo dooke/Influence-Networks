@@ -1,51 +1,81 @@
 var data_rel;
 
 $(function () {      
-      
-      
-      $(".tooltips").tipsy({          
+
+
+        $(".tooltips").tipsy({          
             gravity: 's',
             html: true,
             opacity:1,
             trigger: "manual"
-      });
-      
-      
-      
-      /*************************
-      * Pre-load template files
-      ***/
-      $.get("./appinc/template/tmpl/node-property.tmpl", {}, function(tmpl) {
+        });
+
+
+
+        /*************************
+        * Pre-load template files
+        ***/
+        $.get("./appinc/template/tmpl/node-property.tmpl", {}, function(tmpl) {
             $.template( "node-property", tmpl);
-      } );
-            
-      $.get("./appinc/template/tmpl/li-relation.tmpl", {}, function(tmpl) {
+        } );
+
+        $.get("./appinc/template/tmpl/li-relation.tmpl", {}, function(tmpl) {
             $.template( "li-relation", tmpl);
-      } );
-     
-      
-      /*************
-       * Put event *
-       *************/
-      
-      
-      /*********************
-      * Autocomplete module
-      ***/               
-      $(".node_search").suggest({
+        } );
+
+
+        /*************
+        * Put event *
+        *************/
+
+
+        /*********************
+        * Autocomplete module
+        ***/          
+
+        // a tooltips to indicate which input is empty
+        $(".node_search").tipsy({
+            trigger: "manual", 
+            gravity: "s",
+            opacity: 1,
+            html   : true
+        }).blur(function() {
+            // hide tooltips when the input take the focus
+            $(this).tipsy("hide");
+        });
+
+
+        $(".node_search").suggest({
+
+            // looking for person or organization
             type: ["/people/person", "/organization/organization"],
+            // result must be strict
             type_strict: "any",
-            all_types: true            
-      }).bind("fb-select", function(e, data) {
-            //loadFreebaseData(data, $(this) );
+            all_types: true,
+            // selection is required
+            required: true
+
+
+        }).bind("fb-select", function(e, data) { // select event
+
+            // hide tooltips when we select an entity
+            $(this).tipsy("hide"); 
+
             $(":input[name="+ $(this).attr("id").replace("to-", "") + "-mid]").val(data.id);
             relationBetweenNodes();
-      });
+
+        }).bind("fb-required", function () { // fail event
+
+            // Hack to hide every tipsy tooltips
+            $(".node_search").each(function(i, n) { $(n).tipsy("hide"); });
+
+            // show the right tooltips
+            if( $(this).val() != "" && $(this).val() != $(this).attr("placeholder") )
+                $(this).tipsy("show"); 
+
+        });
       
       
-      $(".node_search").change(function () {           
-            freeSetview( $(this) );                      
-      });        
 
 
       $("#node-informations .close").click(function () {
@@ -101,21 +131,6 @@ $(function () {
             ], 0);   
 });
 
-function freeSetview(input) {
-      
-      if( input.val() == "" || input.val() == input.attr("placeholder") ) {
-            
-            var setview = $("#"+ input.attr("id").replace("to-", "") );
-
-            $("h4", setview).html("");
-            $("ul", setview).html("");
-            $(":input[type=hidden]", setview).val("");            
-
-            setview.addClass("loading");
-            setview.addClass("default");
-      }
-
-}
 
 function loadFreebaseData(data) {
            
