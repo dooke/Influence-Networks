@@ -12,9 +12,9 @@
             <input type="hidden"  name="rate" value="1" />
             
             <div style="text-align:center;">
-                  <input type="text" name="node-left"  id="to-entity-left" class="node_search required node_left" placeholder="Personality or institution" />
+                  <input type="text" name="node-left"  title="{t}You must choose an entity from Freebase. Please select one in the list below.{/t}"  id="to-entity-left" class="node_search required node_left" placeholder="Personality or institution" />
                   <img src="./appinc/images/and.png" alt="&" class="and" />
-                  <input type="text" name="node-right" id="to-entity-right" class="node_search required node_right" placeholder="Personality or institution" />
+                  <input type="text" name="node-right" title="{t}You must choose an entity from Freebase. Please select one in the list below.{/t}" id="to-entity-right" class="node_search required node_right" placeholder="Personality or institution" />
             </div>
 
             <section>
