@@ -149,6 +149,7 @@ class RelationManager extends Manager {
                   $row = false;
                   $i = 0;
 
+                  // trys 5 times to find a random relation
                   while ($row == false && $i < 5 && $offset_max > 0) {
 
                         $offset = rand(0, $offset_max);
