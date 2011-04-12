@@ -90,7 +90,7 @@ $(document).ready(function () {
                         "position"        : "BL",
                         "text"		: "Looks solid"
                   }, {
-                        "url"             : "./?ecran=relation-visualise"
+                        "url"             : "./?screen=relation-visualise"
                   }
             ], 0);
 

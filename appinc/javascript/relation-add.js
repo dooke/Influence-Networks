@@ -126,7 +126,7 @@ $(document).ready(function () {
             "position"        : "T",
             "text"		: "How are the two related?"
         }, {
-            "url"             : "./?ecran=relation-review"
+            "url"             : "./?screen=relation-review"
         }
         ], 0)
      

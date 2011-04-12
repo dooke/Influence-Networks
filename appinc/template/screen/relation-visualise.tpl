@@ -111,7 +111,7 @@
             </script>
             {/literal}
                   
-            <div class="tooltips" title="{t}No relations yet between these entities.{/t} {if $isConnected}<a href='./?ecran=relation-add'>{t}Contribute to the database.{/t}</a>{else}{t}Log in to contribute.{/t}{/if}">
+            <div class="tooltips" title="{t}No relations yet between these entities.{/t} {if $isConnected}<a href='./?screen=relation-add'>{t}Contribute to the database.{/t}</a>{else}{t}Log in to contribute.{/t}{/if}">
                   {t}Double click an entity to view its description.{/t}
             </div>
             <div id="visualize-layout">

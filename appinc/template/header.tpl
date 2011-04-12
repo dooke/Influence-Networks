@@ -77,15 +77,15 @@
             <!-- #  Display script according to screen  -->
             <!-- ###################################### -->
             
-            {if $ecran=="relation-add"}
+            {if $screen=="relation-add"}
             
                   <script type="text/javascript" src="{$smarty.const.APP_URL}appinc/javascript/relation-add.js"></script>                  
             
-            {elseif $ecran=="relation-review"}
+            {elseif $screen=="relation-review"}
                   
                   <script type="text/javascript" src="{$smarty.const.APP_URL}appinc/javascript/relation-review.js"></script>                  
             
-            {elseif $ecran=="relation-visualise"}
+            {elseif $screen=="relation-visualise"}
                   
                   <script type="text/javascript" src="{$smarty.const.APP_URL}appinc/javascript/relation-visualise.js"></script>                  
             
@@ -97,7 +97,7 @@
                                     if(! $.cookies.get("no-website-tour") ) {
                                           new makeWebsiteTour([
                                                 {
-                                                      "url" s: "./?ecran=relation-add&website-tour"
+                                                      "url" s: "./?screen=relation-add&website-tour"
                                                 }
                                           ]);
                                      }

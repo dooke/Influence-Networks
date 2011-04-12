@@ -9,7 +9,7 @@
       {if $relation}
       
             <h3>{t}Review the relation between...{/t}</h3>
-            <form method="POST" action="index.php?ecran=relation-review">
+            <form method="POST" action="index.php?screen=relation-review">
 
                  <input type="hidden" name="relation-id" value="{$relation->getId()}" />
 
@@ -335,7 +335,7 @@
 
                   <div style="clear:both; text-align:right; padding-top:10px; padding-right: 20px;">
                         <input type="submit" class="submit light" value="Submit" />
-                        <a class="button submit light" href="?ecran=relation-review">I don't know</a>
+                        <a class="button submit light" href="?screen=relation-review">I don't know</a>
                   </div>
             </form>
             

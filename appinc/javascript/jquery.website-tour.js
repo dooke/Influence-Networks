@@ -278,7 +278,7 @@ function makeWebsiteTour(config, start_step) {
                                     </div>\n\
                                     <br />';
 
-                  $tourcontrols += '<span id="stopTheTour"><a href="./?ecran=relation-add">Restart the tour</a> | <a id="endtour">End the tour</a></span>';            
+                  $tourcontrols += '<span id="stopTheTour"><a href="./?screen=relation-add">Restart the tour</a> | <a id="endtour">End the tour</a></span>';            
                   $tourcontrols += '<span class="close" id="canceltour"></span>';
                   
             $tourcontrols += '</div>';

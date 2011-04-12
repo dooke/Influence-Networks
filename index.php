@@ -134,13 +134,13 @@
       /* @TODO: - Make URL more beutiful
        *        - Put this switch case in a dedicate function
        */   
-      switch ($_GET["ecran"]) {
+      switch ($_GET["screen"]) {
 
             // ** **************************************************************
             case "relation-add":
             // ** **************
                   // assing the screen
-                  $s->assign('ecran', 'relation-add');
+                  $s->assign('screen', 'relation-add');
             
                   // check if we need to add a relation
                   if( isset($_POST["entity-left-mid"]) && isset($_POST["entity-right-mid"]) && isset($_POST["relation_type"]) )
@@ -160,7 +160,7 @@
             // ** *****************
                   
                   // assing the screen
-                  $s->assign('ecran', 'relation-review');
+                  $s->assign('screen', 'relation-review');
                   
                   // check if we need to add a relation
                   if( isset($_POST["relation-id"]) && isset($_POST["rate"]) )
@@ -206,12 +206,12 @@
             case "relation-visualise":
             // ** ********************      
                   // assing the screen
-                  $s->assign('ecran', 'relation-visualise');
+                  $s->assign('screen', 'relation-visualise');
                   break;
 
-            default:
+        default:
                   // assing the screen
-                  $s->assign('ecran', 'homepage');
+                  $s->assign('screen', 'homepage');
                   break;
       }
       

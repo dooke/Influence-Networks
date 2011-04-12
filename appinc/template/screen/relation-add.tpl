@@ -7,7 +7,7 @@
 
 <section class="classic-form">
       <h3>{t}Add a new relation between...{/t}</h3>
-      <form method="POST" action="index.php?ecran=relation-add">
+      <form method="POST" action="index.php?screen=relation-add">
             
             <div style="text-align:center;">
                   <input type="text" name="node-left"  id="to-entity-left" class="node_search required node_left" placeholder="Personality or institution" />
