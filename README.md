@@ -2,6 +2,10 @@
 
 [Influence Networks](http://influencenetworks.org) is an open-source, collaborative directory of relationships between people, institutions and companies. Each relation has its own level of trustworthiness, so that facts can be distinguished from noise. 
 
+## Issue report ##
+
+Go on [http://bug.influencenetworks.org](http://bug.influencenetworks.org) to report a bug.
+
 ## How does it work? ##
 
 There was a need for a network analysis tool who could be used by journalists and that be both open and reliable. Influence Networks aims at solving this problem. The platform allows for anyone to add a ‘relationship' in the database (though the "add a relation" tab). The bit of information the user inputs is given a "rumor" status as long as its reliability has not been assessed by another user.
