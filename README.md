@@ -2,7 +2,7 @@
 
 [Influence Networks](http://influencenetworks.org) is an open-source, collaborative directory of relationships between people, institutions and companies. Each relation has its own level of trustworthiness, so that facts can be distinguished from noise. 
 
-## Report issue ##
+## Issue report ##
 
 Go on [http://bug.influencenetworks.org](http://bug.influencenetworks.org) to report bug.
 
