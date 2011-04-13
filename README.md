@@ -4,7 +4,7 @@
 
 ## Issue report ##
 
-Go on [http://bug.influencenetworks.org](http://bug.influencenetworks.org) to report bug.
+Go on [http://bug.influencenetworks.org](http://bug.influencenetworks.org) to report a bug.
 
 ## How does it work? ##
 
