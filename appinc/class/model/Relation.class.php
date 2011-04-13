@@ -1,169 +1,356 @@
 <?php
 
 /**
- * Description of Relation
- *
- * @author pirhoo
+ * Node class extends Record class
+ * 
+ * This class represents every relation between entities. 
+ * .
+ * 
+ * @author Pirhoo <pierre@owni.fr>
+ * @version 1.0
+ * @package Record
+ * @subpackage Relation
  */
 class Relation extends Record {
 
-      private $node_left;  // sujet
-      private $node_right; // objet
-      private $creator;
-      private $type; // predicat
-      private $trust_level;
-      // list of property values
-      // not initialized in constructor
-      private $propertyValues;  
-      private $type_label;
-      private $node_left_label;   
-      private $node_right_label;   
-      private $node_left_freebase_id;   
-      private $node_right_freebase_id;
-      private $node_left_type;   
-      private $node_right_type;
+    /**
+     * @var integer
+     * @access private
+     */
+    private $node_left;  // subject
+    /**
+     * @var integer
+     * @access private
+     */
+    private $node_right; // object
+    /**
+     * @var integer
+     * @access private
+     */
+    private $creator;
+    /**
+     * @var integer
+     * @access private
+     */
+    private $type; // predicate
+    /**
+     * @var float
+     * @access private
+     */
+    private $trust_level;
+    // not initialized in constructor
+    /**
+     * List of property values...
+     * @var array
+     * @access private
+     */
+    private $propertyValues;
+    /**
+     * @var string
+     * @access private
+     */
+    private $type_label;
+    /**
+     * @var string
+     * @access private
+     */
+    private $node_left_label;
+    /**
+     * @var string
+     * @access private
+     */
+    private $node_right_label;
+    /**
+     * @var string
+     * @access private
+     */
+    private $node_left_freebase_id;
+    /**
+     * @var string
+     * @access private
+     */
+    private $node_right_freebase_id;
+    /**
+     * @var string
+     * @access private
+     */
+    private $node_left_type;
+    /**
+     * @var string
+     * @access private
+     */
+    private $node_right_type;
 
-      public function getId() {
-            return $this->id;
-      }
+    /**
+     * $node_left attribute getter
+     * @return mixed
+     * @access public
+     */
+    public function getNodeLeft() {
+        return $this->node_left;
+    }
 
-      public function setId($id) {
-            $this->id = $id;
-      }
+    /**
+     * $node_left attribute setter
+     * @param mixed $node_left
+     * @access public
+     */
+    public function setNodeLeft($node_left) {
+        $this->node_left = $node_left;
+    }
 
-      public function getNodeLeft() {
-            return $this->node_left;
-      }
+    /**
+     * $node_right attribute getter
+     * @return mixed
+     * @access public
+     */
+    public function getNodeRight() {
+        return $this->node_right;
+    }
 
-      public function setNodeLeft($node_left) {
-            $this->node_left = $node_left;
-      }
+    /**
+     * $node_right attribute setter
+     * @param mixed $node_right
+     * @access public
+     */
+    public function setNodeRight($node_right) {
+        $this->node_right = $node_right;
+    }
 
-      public function getNodeRight() {
-            return $this->node_right;
-      }
+    /**
+     * $creator attribute getter
+     * @return integer
+     * @access public
+     */
+    public function getCreator() {
+        return $this->creator;
+    }
 
-      public function setNodeRight($node_right) {
-            $this->node_right = $node_right;
-      }
+    /**
+     * $creator attribute setter
+     * @param integer $creator
+     * @access public
+     */
+    public function setCreator($creator) {
+        $this->creator = $creator;
+    }
 
-      public function getCreator() {
-            return $this->creator;
-      }
+    /**
+     * $type attribute getter
+     * @return integer
+     * @access public
+     */
+    public function getType() {
+        return $this->type;
+    }
 
-      public function setCreator($creator) {
-            $this->creator = $creator;
-      }
+    /**
+     * $type attribute setter
+     * @param integer $type
+     * @access public
+     */
+    public function setType($type) {
+        $this->type = $type;
+    }
 
-      public function getType() {
-            return $this->type;
-      }
+    /**
+     * $trust_level attribute getter
+     * @return float
+     * @access public
+     */
+    public function getTrustLevel() {
+        return $this->trust_level;
+    }
 
-      public function setType($type) {
-            $this->type = $type;
-      }
+    /**
+     * $trust_level attribute setter
+     * @param float $trust_level
+     * @access public
+     */
+    public function setTrustLevel($trust_level) {
+        $this->trust_level = $trust_level;
+    }
 
-      public function getTrustLevel() {
-            return $this->trust_level;
-      }
+    /**
+     * $type_label attribute getter
+     * @return string
+     * @access public
+     */
+    public function getTypeLabel() {
+        return $this->type_label;
+    }
 
-      public function setTrustLevel($trust_level) {
-            $this->trust_level = $trust_level;
-      }
-      
-      public function getTypeLabel() {
-            return $this->type_label;
-      }
+    /**
+     * $type_label attribute setter
+     * @param string $typeLabel
+     * @access public
+     */
+    public function setTypeLabel($typeLabel) {
+        $this->type_label = $typeLabel;
+    }
 
-      public function setTypeLabel($typeLabel) {
-            $this->type_label = $typeLabel;
-      }
+    /**
+     * $propertyValues attribute getter
+     * @return array
+     * @access public
+     */
+    public function getPropertyValues() {
+        return $this->propertyValues;
+    }
 
-      
-      
-      public function getPropertyValues() {
-            return $this->propertyValues;
-      }
+    /**
+     * $propertyValues attribute setter
+     * @param array $property
+     * @access public
+     */
+    public function setPropertyValues($property) {
+        $this->propertyValues = $property;
+    }
 
-      public function setPropertyValues($property) {
-            $this->propertyValues = $property;
-      }
-      
-      public function getNodeLeftLabel() {
-            return $this->node_left_label;
-      }
+    /**
+     * $node_left_label attribute getter
+     * @return string
+     * @access public
+     */
+    public function getNodeLeftLabel() {
+        return $this->node_left_label;
+    }
 
-      public function setNodeLeftLabel($node_left_label) {
-            $this->node_left_label = $node_left_label;
-      }
+    /**
+     * $node_left_label attribute setter
+     * @param string $node_left_label
+     * @access public
+     */
+    public function setNodeLeftLabel($node_left_label) {
+        $this->node_left_label = $node_left_label;
+    }
 
-      public function getNodeRightLabel() {
-            return $this->node_right_label;
-      }
+    /**
+     * $node_left_right attribute getter
+     * @return string
+     * @access public
+     */
+    public function getNodeRightLabel() {
+        return $this->node_right_label;
+    }
 
-      public function setNodeRightLabel($node_right_label) {
-            $this->node_right_label = $node_right_label;
-      }
+    /**
+     * $node_left_right attribute setter
+     * @param string $node_right_label
+     * @access public
+     */
+    public function setNodeRightLabel($node_right_label) {
+        $this->node_right_label = $node_right_label;
+    }
 
-      public function getNodeRightType() {
-            return $this->node_right_type;
-      }
+    /**
+     * $node_right_type attribute getter
+     * @return integer
+     * @access public
+     */
+    public function getNodeRightType() {
+        return $this->node_right_type;
+    }
 
-      public function setNodeRightType($node_right_type) {
-            $this->node_right_type = $node_right_type;
-      }
-      
+    /**
+     * $node_right_type attribute setter
+     * @param integer $node_right_type
+     * @access public
+     */
+    public function setNodeRightType($node_right_type) {
+        $this->node_right_type = $node_right_type;
+    }
 
-      public function getNodeLeftType() {
-            return $this->node_left_type;
-      }
+    /**
+     * $node_left_type attribute getter
+     * @return integer
+     * @access public
+     */
+    public function getNodeLeftType() {
+        return $this->node_left_type;
+    }
 
-      public function setNodeLeftType($node_left_type) {
-            $this->node_left_type = $node_left_type;
-      }
+    /**
+     * $node_left_type attribute setter
+     * @param integer $node_left_type
+     * @access public
+     */
+    public function setNodeLeftType($node_left_type) {
+        $this->node_left_type = $node_left_type;
+    }
 
-      public function getJson() {
 
-            return json_encode( $this->getArray() );
-      }
-      public function getNodeLeftFreebaseId() {
-            return $this->node_left_freebase_id;
-      }
+    /**
+     * $node_left_freebase_id attribute getter
+     * @return string 
+     * @access public
+     */
+    public function getNodeLeftFreebaseId() {
+        return $this->node_left_freebase_id;
+    }
 
-      public function setNodeLeftFreebaseId($node_left_freebase_id) {
-            $this->node_left_freebase_id = $node_left_freebase_id;
-      }
+    /**
+     * $node_left_freebase_id attribute setter
+     * @param string $node_left_freebase_id
+     * @access public
+     */
+    public function setNodeLeftFreebaseId($node_left_freebase_id) {
+        $this->node_left_freebase_id = $node_left_freebase_id;
+    }
 
-      public function getNodeRightFreebaseId() {
-            return $this->node_right_freebase_id;
-      }
+    /**
+     * $node_right_freebase_id attribute getter
+     * @return string 
+     * @access public
+     */
+    public function getNodeRightFreebaseId() {
+        return $this->node_right_freebase_id;
+    }
 
-      public function setNodeRightFreebaseId($node_right_freebase_id) {
-            $this->node_right_freebase_id = $node_right_freebase_id;
-      }
+    /**
+     * $node_right_freebase_id attribute setter
+     * @param string $node_right_freebase_id
+     * @access public
+     */
+    public function setNodeRightFreebaseId($node_right_freebase_id) {
+        $this->node_right_freebase_id = $node_right_freebase_id;
+    }
 
-            
-      public function getArray() {
+    /**
+     * Return an array with all value of this object
+     * @return array
+     * @access public
+     */
+    public function getArray() {
 
-            $r = Array(
-                "id"          => $this->id,
-                "node_left"   => $this->node_left,
-                "node_right"  => $this->node_right,
-                "creator"     => $this->creator,
-                "type"        => $this->type,
-                "trust_level" => $this->trust_level,
-                "type_label"        => $this->type_label,
-                "node_left_label" => $this->node_left_label,
-                "node_right_label" => $this->node_right_label,
-                "node_left_freebase_id" => $this->node_left_freebase_id,
-                "node_right_freebase_id" => $this->node_right_freebase_id,
-                "node_left_type" => $this->node_left_type,
-                "node_right_type" => $this->node_right_type
-            );
-            
-            
-            return $r;
-      }
+        $r = Array(
+            "id" => $this->id,
+            "node_left" => $this->node_left,
+            "node_right" => $this->node_right,
+            "creator" => $this->creator,
+            "type" => $this->type,
+            "trust_level" => $this->trust_level,
+            "type_label" => $this->type_label,
+            "node_left_label" => $this->node_left_label,
+            "node_right_label" => $this->node_right_label,
+            "node_left_freebase_id" => $this->node_left_freebase_id,
+            "node_right_freebase_id" => $this->node_right_freebase_id,
+            "node_left_type" => $this->node_left_type,
+            "node_right_type" => $this->node_right_type
+        );
+
+
+        return $r;
+    }
+
+    /**
+     * Return a json string from all value of this object
+     * @return string
+     * @access public
+     */
+    public function getJson() {
+        return json_encode($this->getArray());
+    }
 
 }
 

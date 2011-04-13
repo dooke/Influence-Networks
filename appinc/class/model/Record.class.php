@@ -124,7 +124,7 @@ abstract class Record implements ArrayAccess {
     /**
      * Checks if we can set the named value and sets it
      * @param string $var
-     * @param $value
+     * @param mixed $value
      * @access public
      */  
     public function offsetSet($var, $value) {
@@ -147,6 +147,18 @@ abstract class Record implements ArrayAccess {
         return isset($this->$var) && is_callable(array($this, $var));
         
     }
+    
+    /**
+     * Implements an abstract method from ArrayAccess 
+     * (and trow an exception, we can't unset a value)
+     * @param string $var 
+     */
+    public function offsetUnset($var) {
+        
+        throw new Exception( _('Remove value failled.') );
+        
+    }
+    
     
     
     /**
