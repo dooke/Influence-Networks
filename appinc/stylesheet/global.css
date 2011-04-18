@@ -829,9 +829,31 @@ input.half {
       bottom:-7px;
 }
 
+.visualize .min-rate {
+    position:absolute;
+    right:-170px;
+    top:70px;
+    width:auto;
+}
+
+.visualize #rate-slider {
+    width:6px;
+    margin-bottom:20px;
+    height:240px;
+}
+
+.visualize #rate-slider a{
+    margin-left:-3px;
+}
+.visualize .min-rate .rate-legend {
+    text-align:center;
+    width:auto;
+}
+
 .relation-type a {
       color: rgb(224, 223, 206);       
 }
+
 
 .deroule {
       cursor:pointer;
@@ -978,15 +1000,21 @@ input.half {
 #visualize-layout {
     z-index:2;
     position:relative;
-    margin-left:-275px; 
+    margin-left:-300px;
+    margin-top:10px;
     width:990px; 
-    height:327px;
+    height:390px;
 }
 
 .tooltips {
-      position:relative;
-      bottom:-320px;
+      position:absolute;
+      bottom:-40px;
+      left:140px;
       z-index:1;
       color:#DAE9EA;
       text-shadow:0px 0px 10px black;
+}
+
+.classic-form.visualize {
+    top:145px;
 }

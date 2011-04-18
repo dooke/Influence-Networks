@@ -5,7 +5,7 @@
 
 <h2>{t}Visualize relations{/t}</h2>
 
-<section class="classic-form">
+<section class="classic-form visualize">
       <h3>{t}See the relationship between...{/t}</h3>
       <form method="POST" action="">
 
@@ -59,13 +59,13 @@
             </div>
 
             <div class="min-rate">
-                  <div style="float:left; text-align: right;" class="rate-legend">
-                        {t}Rumor{/t}
-                  </div>
-                  <div style="float:right" class="rate-legend">
+                  <div class="rate-legend">
                         {t}Established fact{/t}
                   </div>
                   <div id="rate-slider"></div>
+                  <div class="rate-legend">
+                        {t}Rumor{/t}
+                  </div>
             </div>
 
             {literal}
@@ -77,6 +77,7 @@
                               min: 1,
                               max: 5,
                               step: 0.1,
+                              orientation: "vertical",
                               slide: function( event, ui ) {
                                     $( ":input[name=rate]" ).val( ui.value );
                                     if(data_rel != undefined) resetDataVis();
@@ -99,7 +100,7 @@
 
                         $("#rate-slider .ui-slider-handle").attr("title", "<span style='font-size:30px'>"+$( ":input[name=rate]" ).val()+"</span>/5")
                         .tipsy({
-                              gravity: 'n',
+                              gravity: 'e',
                               html: true,
                               opacity:1
                         });
@@ -125,15 +126,16 @@
 
                               vis = new pv.Panel()
                                     .width(990)
-                                    .height(327)
+                                    .height(390)
                                     .fillStyle("transparent");
 
                               force = vis.add(pv.Layout.Force)
-                                    .springLength(110)
-                                    .bound(true)
-                                    .springConstant(0.6)
+                                    .springLength(120)
+                                    .springConstant(0.3)
                                     .nodes(treeData.nodes)
-                                    .links(treeData.links);
+                                    .links(treeData.links)
+                                    .bound(true)
+                                    .chargeConstant(-200)
 
                               force.link.add(pv.Line)
                                   .lineWidth(1)
@@ -159,9 +161,7 @@
 
 
                               vis.render();
-
-                              // data_rel = {"1":{"id":"1","node_left":"1","node_right":"2","creator":"3","type":"7","trust_level":"5","node_left_label":"Nicolas Sarkozy","node_right_label":"Carla Bruni","node_left_freebase_id":"\/en\/nicolas_sarkozy","node_right_freebase_id":"\/en\/carla_bruni","node_left_type":"\/people\/person","node_right_type":"\/people\/person"},"2":{"id":"2","node_left":"3","node_right":"1","creator":"3","type":"9","trust_level":"5","node_left_label":"Jean Sarkozy","node_right_label":"Nicolas Sarkozy","node_left_freebase_id":"\/en\/jean_sarkozy","node_right_freebase_id":"\/en\/nicolas_sarkozy","node_left_type":"\/people\/person","node_right_type":"\/people\/person"},"3":{"id":"3","node_left":"4","node_right":"1","creator":"3","type":"8","trust_level":"5","node_left_label":"Vladimir Putin","node_right_label":"Nicolas Sarkozy","node_left_freebase_id":"\/en\/vladimir_putin","node_right_freebase_id":"\/en\/nicolas_sarkozy","node_left_type":"\/people\/person","node_right_type":"\/people\/person"},"5":{"id":"5","node_left":"1","node_right":"5","creator":"3","type":"1","trust_level":"5","node_left_label":"Nicolas Sarkozy","node_right_label":"Edward Elgar","node_left_freebase_id":"\/en\/nicolas_sarkozy","node_right_freebase_id":"\/en\/edward_elgar","node_left_type":"\/people\/person","node_right_type":"\/people\/person"},"4":{"id":"4","node_left":"4","node_right":"2","creator":"3","type":"9","trust_level":"5","node_left_label":"Vladimir Putin","node_right_label":"Carla Bruni","node_left_freebase_id":"\/en\/vladimir_putin","node_right_freebase_id":"\/en\/carla_bruni","node_left_type":"\/people\/person","node_right_type":"\/people\/person"}};
-                              // resetDataVis();
+                              
                         
                         } else {
                         
