@@ -18,7 +18,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="http://http://obsweb.net/" target="_blank" title="Observatoire du WebJournalisme">
+                        <a href="http://obsweb.net/" target="_blank" title="Observatoire du WebJournalisme">
                             <img src="./appinc/images/obs.png" alt="Observatoire du WebJournalisme" />
                         </a>
                     </li>
