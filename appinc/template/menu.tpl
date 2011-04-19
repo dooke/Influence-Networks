@@ -1,3 +1,9 @@
+<li class="hp">
+    <a href="./">
+        {t}Home{/t}
+    </a>
+</li>
+
 {if $isConnected}
       <li  class="add {if $screen=='relation-add'}current{/if}" title="{t}Add a relation between 2 nodes.{/t}">
             <a href="{$smarty.const.APP_URL}?screen=relation-add" class="label">
