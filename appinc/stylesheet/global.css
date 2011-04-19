@@ -334,6 +334,15 @@ form.inscription {
       color:#F4F3E0;     
 }
 
+.intro.step-2 {
+    top:500px;
+}
+
+.intro.step-2 a{
+    margin:0px 10px;
+    color:#F4F3E0;
+}
+
 .main_menu li{
       display:inline-block !important;
       display:block;
@@ -1018,3 +1027,4 @@ input.half {
 .classic-form.visualize {
     top:145px;
 }
+
