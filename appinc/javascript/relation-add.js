@@ -57,7 +57,7 @@ $(document).ready(function () {
     }).bind("fb-required", function () { // fail event
         
        // Hack to hide every tipsy tooltips
-       $(".node_search").each(function(i, n) { $(n).tipsy("hide"); });
+       $(".node_search").each(function(i, n) {$(n).tipsy("hide");});
        
        // show the right tooltips
        if( $(this).val() != "" && $(this).val() != $(this).attr("placeholder") )
@@ -114,7 +114,15 @@ $(document).ready(function () {
             
         var dontForget = false;
         $(".required").each(function () {
-            if( $(this).val() == "" || $(this).val() == $(this).attr("placeholder") ) {
+            
+            var mailPattern = /(((https?:\/\/[a-zA-Z0-9_-]*\.?)|(w{3}\.))[a-zA-Z0-9_-]+\.[a-z0-9]{2,5}[a-zA-Z0-9/_\.\?\#-]*)/;
+            
+            if( $(this).hasClass("chk_URL") && ! mailPattern.test( $(this).val() ) ) {
+                
+                dontForget = true;
+                $(this).addClass("highlight");
+                
+            } else if( $(this).val() == "" || $(this).val() == $(this).attr("placeholder") ) {
                         
                 dontForget = true;
                 $(this).addClass("highlight");
