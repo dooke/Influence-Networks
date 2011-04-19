@@ -9,7 +9,7 @@
       <h3>{t}See the relationship between...{/t}</h3>
       <form method="POST" action="">
 
-            <input type="hidden"  name="rate" value="1" />
+            <input type="hidden"  name="rate" value="3" />
             
             <div style="text-align:center;">
                   <input type="text" name="node-left"  title="{t}You must choose an entity from Freebase. Please select one in the list below.{/t}"  id="to-entity-left" class="node_search required node_left" placeholder="Personality or institution" />
@@ -73,7 +73,7 @@
                   $(function() {
                         
                         $( "#rate-slider" ).slider({
-                              value:1,
+                              value:3,
                               min: 1,
                               max: 5,
                               step: 0.1,
@@ -118,7 +118,6 @@
             <div id="visualize-layout">
                   {literal}
                   <script type="text/javascript+protovis">
-                        //+protovis
                         
                         if (Modernizr.svg){ 
                         
@@ -147,7 +146,7 @@
                                     .fillStyle(function(d) { return d.type == "/organization/organization" ? "#DAE9EA" : "#432946" })
                                     .strokeStyle( "rgb(55, 33, 55)" )
                                     .lineWidth(0)
-                                    .title(function(d) { return d.type } )
+                                    .title(function(d) { return d.freebase_id } )
                                     .event("mousedown", pv.Behavior.drag())
                                     .event("drag", force)
                                     .add(pv.Label)
