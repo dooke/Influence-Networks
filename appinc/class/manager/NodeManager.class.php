@@ -100,25 +100,18 @@ class NodeManager extends Manager {
             $n = $this->managers["node"]->getNode($freebase_id);
             if($n == false) {
 
-                  // we use freenet to obtain some data about it
-                  $url = "http://www.freebase.com/api/service/mqlread?query=";
-                  $url .= '{ "query"%3A [{ "id"%3A "' . $freebase_id . '"%2C "name"%3A null%2C "type|%3D"%3A [ "%2Fpeople%2Fperson"%2C "%2Forganization%2Forganization" ]%2C "type"%3A null }] }';
+                  // we found data
+                  $node_label = "";
+                  $node_type  = "";
 
-                  $node = json_decode(file_get_contents($url));
+                  // we insert it on the database
+                  $query = "INSERT INTO " . TABLE_PREFIX . "node (freebase_id, label, type) VALUES('{$freebase_id}', '{$node_label}', '{$node_type}')";
+                  $this->db->query($query) or die("Database error. Sorry, try again.");
                   
-                  if (count($node->result) == 1) {
-                        
-                        // we found data
-                        $node_label = $node->result[0]->name;
-                        $node_type  = $node->result[0]->type;
+                  $this->updateNodeInfo();
+                  
+                  return $this->managers["node"]->getNode($freebase_id);
 
-                        // we insert it on the database
-                        $query = "INSERT INTO " . TABLE_PREFIX . "node (freebase_id, label, type) VALUES('{$freebase_id}', '{$node_label}', '{$node_type}')";
-                        $this->db->query($query) or die("Database error. Sorry, try again.");
-
-                        return $this->managers["node"]->getNode($freebase_id);
-
-                  } else return false;
                   
             } return $n;
             
@@ -127,6 +120,7 @@ class NodeManager extends Manager {
       /**
        * Remove every useless nodes
        * @access public
+       * @return string
        */
       public function removeUselessNode() {
             
@@ -145,6 +139,38 @@ class NodeManager extends Manager {
             $this->db->query($query) or die("Database error. Sorry, try again.");
             
             return json_encode(array("status" => true));
+      }
+      
+      /**
+       * Complete node without label
+       * @access public
+       * @return string
+       */
+      public function updateNodeInfo() {
+            
+            // select every nodes without name
+            $query = "SELECT * FROM " . TABLE_PREFIX . "node WHERE label = '' AND freebase_id != ''";
+            $this->db->query($query) or die("Database error. Sorry, try again.");
+            
+            // for each node
+            while($row = $this->db->fetch() ) {
+                  
+                  // load name from freebase
+                  $url = "http://www.freebase.com/api/service/mqlread?query=";
+                  $url .= '{ "query"%3A [{ "id"%3A "' . $row["freebase_id"] . '"%2C "name"%3A null%2C "type|%3D"%3A [ "%2Fpeople%2Fperson"%2C "%2Forganization%2Forganization" ]%2C "type"%3A null }] }';
+
+                  $node = json_decode(file_get_contents($url));
+                  $node_label = $node->result[0]->name;
+                  $node_type  = $node->result[0]->type;
+                  
+                  // update node
+                  $query = "UPDATE " . TABLE_PREFIX . "node SET label = '{$node_label}', type = '{$node_type}' WHERE id = {$row["id"]}";
+                  $this->db->query($query) or die("Database error. Sorry, try again.");
+                  
+                  
+            }
+            
+            return json_encode(array("status" => true));            
       }
       
 }
