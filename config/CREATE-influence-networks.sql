@@ -3,17 +3,11 @@
 -- http://www.phpmyadmin.net
 --
 -- Serveur: localhost
--- Généré le : Dim 10 Avril 2011 à 18:01
+-- Généré le : Ven 29 Avril 2011 à 22:52
 -- Version du serveur: 5.1.44
 -- Version de PHP: 5.2.13
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
 
 --
 -- Base de données: `influence_networks`
@@ -31,7 +25,7 @@ CREATE TABLE `inf_node` (
   `label` varchar(255) DEFAULT NULL,
   `type` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=48 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5845 ;
 
 -- --------------------------------------------------------
 
@@ -48,7 +42,7 @@ CREATE TABLE `inf_relation` (
   `trust_level` float DEFAULT NULL,
   `locked` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=23 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=725 ;
 
 -- --------------------------------------------------------
 
@@ -61,7 +55,7 @@ CREATE TABLE `inf_relation_trust_level` (
   `user_id` int(11) NOT NULL,
   `trust_level` float DEFAULT NULL,
   PRIMARY KEY (`user_id`,`relation_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -74,7 +68,7 @@ CREATE TABLE `inf_relation_type` (
   `freebase_id` varchar(45) DEFAULT NULL,
   `label` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=13 ;
 
 -- --------------------------------------------------------
 
@@ -88,7 +82,7 @@ CREATE TABLE `inf_relation_type_property` (
   `label` varchar(255) NOT NULL,
   `freebase_id` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=49 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=56 ;
 
 -- --------------------------------------------------------
 
@@ -102,7 +96,7 @@ CREATE TABLE `inf_relation_value` (
   `relation` int(11) NOT NULL,
   `value` text,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=100 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2817 ;
 
 -- --------------------------------------------------------
 
@@ -116,4 +110,4 @@ CREATE TABLE `inf_user` (
   `password` varchar(50) DEFAULT NULL,
   `trust_level` float DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=989 ;
