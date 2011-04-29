@@ -111,10 +111,10 @@ class NodeManager extends Manager {
                   $node = json_decode(file_get_contents($url));
                   
                   if (count($node->result) == 1) {
-
+                        
                         // we found data
                         $node_label = $node->result[0]->name;
-                        $node_type = $node->result[0]->type;
+                        $node_type  = $node->result[0]->type;
 
                         // we insert it on the database
                         $query = "INSERT INTO " . TABLE_PREFIX . "node (freebase_id, label, type) VALUES('{$freebase_id}', '{$node_label}', '{$node_type}')";
@@ -126,6 +126,29 @@ class NodeManager extends Manager {
                   
             } return $n;
             
+      }
+      
+      /**
+       * Remove every useless nodes
+       * @access public
+       */
+      public function removeUselessNode() {
+            
+            // select every useless nodes
+            $query = "SELECT id FROM " . TABLE_PREFIX . "node WHERE id NOT IN (SELECT N.id FROM " . TABLE_PREFIX . "node N,  " . TABLE_PREFIX . "relation R WHERE R.node_left = N.id OR R.node_right = N.id)";
+            $this->db->query($query) or die("Database error. Sorry, try again.");
+            
+            $ids = "null";
+            
+            // put every node in a string
+            while($row = $this->db->fetch() )
+                  $ids .= ",".$row["id"];
+            
+            // remove query
+            $query = "DELETE FROM " . TABLE_PREFIX . "node WHERE id IN ({$ids})";
+            $this->db->query($query) or die("Database error. Sorry, try again.");
+            
+            return json_encode(array("status" => true));
       }
       
 }
