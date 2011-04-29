@@ -162,11 +162,11 @@ abstract class Record implements ArrayAccess {
 
       /**
        * Method to convert an Unicode to UTF8
-       * @access private
+       * @access protected
        * @param string
        * @return string
        */
-      private function unicodeToHtml($string) {
+      protected function unicodeToHtml($string) {
             if (preg_match_all('/\\\u[0-9A-F]{4}/i', $string, $matches)) {
                   foreach ($matches[0] as $v) {
                         $unicode_hexacode = $v[2] . $v[3] . $v[4] . $v[5];
