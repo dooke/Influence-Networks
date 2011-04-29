@@ -161,12 +161,12 @@ abstract class Record implements ArrayAccess {
 
 
       /**
-       * Method to convert an Unicode to UTF8
-       * @access protected
+       * Method to convert an Unicode to UTF8 (Freebas returns unicode)
+       * @access public
        * @param string
        * @return string
        */
-      protected function unicodeToHtml($string) {
+      public function unicodeToHtml($string) {
             if (preg_match_all('/\\\u[0-9A-F]{4}/i', $string, $matches)) {
                   foreach ($matches[0] as $v) {
                         $unicode_hexacode = $v[2] . $v[3] . $v[4] . $v[5];
