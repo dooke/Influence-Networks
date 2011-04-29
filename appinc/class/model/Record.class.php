@@ -167,12 +167,15 @@ abstract class Record implements ArrayAccess {
        * @return string
        */
       public function unicodeToHtml($string) {
-            if (preg_match_all('/\\\u[0-9A-F]{4}/i', $string, $matches)) {
-                  foreach ($matches[0] as $v) {
+            
+            if (preg_match_all('!\\\u([0-9A-Fa-f]{4})!i', $string, $matches)) {
+                  
+                  foreach ($matches[0] as $v) {                        
                         $unicode_hexacode = $v[2] . $v[3] . $v[4] . $v[5];
                         $string = str_replace($v, '&#' . base_convert($unicode_hexacode, 16, 10) . ';', $string);
                   }
             }
+            
             return $string;
       }
 

@@ -472,6 +472,7 @@ class RelationManager extends Manager {
                               $relations[$key] = $rel->getArray();
 
                         $nodes[ $nodeLeft->getId() ] = $nodeLeft->getArray();
+                        
                   }
                   
             }
@@ -495,12 +496,9 @@ class RelationManager extends Manager {
             }
             
             // return results as json
-            return json_encode(Array("nodes" => $nodes, "relations" => $relations));
+            return (json_encode(Array("nodes" => $nodes, "relations" => $relations)) );
       }
-
-      public function getArray() {
-            
-      }
+      
 
 }
 

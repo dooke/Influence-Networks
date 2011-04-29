@@ -94,8 +94,8 @@ class Node extends Record {
         $r = Array(
             "id" => $this->id,
             "freebase_id" => $this->freebase_id,
-            "label" => utf8_encode($this->label),
-            "type" => $this->type,
+            "label" => $this->label,
+            "type" => $this->type
         );
 
 
@@ -103,5 +103,6 @@ class Node extends Record {
     }
 
 }
+
 
 ?>
