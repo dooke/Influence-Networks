@@ -1,5 +1,7 @@
 <?php
 
+      header("Content-type: text/html; charset=UTF-8");
+      
       // Load the current configuration 
       // ------------------------------
       require_once('./config/config.global.php');
@@ -121,6 +123,11 @@
                       echo $managers["relation_value"]->getRelationValuesJSON($_REQUEST["relation_id"]);
                       exit;
                       break;
+                
+                case "removeUselessNodes":
+                      echo $managers["node"]->removeUselessNode();
+                      exit;
+                      break;
 
                 default:break;
           }
@@ -214,6 +221,7 @@
                   $s->assign('screen', 'homepage');
                   break;
       }
+      
       
       // every errors to a JSON
       $s->assign("err_json", json_encode($err) );
