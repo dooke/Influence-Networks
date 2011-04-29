@@ -128,6 +128,11 @@
                       echo $managers["node"]->removeUselessNode();
                       exit;
                       break;
+                
+                case "updateNodeInfo":
+                      echo $managers["node"]->updateNodeInfo();
+                      exit;
+                      break;
 
                 default:break;
           }
