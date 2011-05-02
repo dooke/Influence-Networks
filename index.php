@@ -219,6 +219,30 @@
             // ** ********************      
                   // assing the screen
                   $s->assign('screen', 'relation-visualise');
+                  
+                  $node_left  = null;
+                  $node_right = null;
+
+                  // if a relation is given
+                  if( isset($_GET["rel"]) ) {
+                        
+                        $rel = explode("|", $_GET["rel"]);
+                        // pattern to test if the string is a freebase ID
+                        $freebase_id_pattern = "!(\/[a-z]{1,3}\/){1}([a-z0-9_]){3,}!i";
+                        
+                        if( preg_match($freebase_id_pattern, $rel[0]) )
+                              $node_left  = $managers["node"]->getNode($rel[0]);
+                        
+                        if(count($rel) == 2 && preg_match($freebase_id_pattern, $rel[1]) )
+                              $node_right = $managers["node"]->getNode($rel[1]);
+                  }
+                  
+                  $s->assign("trust_rank",  isset($_GET["trust_rank"]) && is_numeric($_GET["trust_rank"]) && $_GET["trust_rank"] <= 5 && $_GET["trust_rank"] >= 1 ? $_GET["trust_rank"] : 3);
+                  $s->assign("node_left",  $node_left);      
+                  $s->assign("node_right", $node_right);      
+                  
+                  
+                  
                   break;
 
         default:

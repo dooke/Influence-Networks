@@ -6,7 +6,7 @@
 <h2>{t}Visualize relations{/t}</h2>
 
 <section class="classic-form visualize">
-      <h3>{t}See the relationship between...{/t}</h3>
+      <h3>{t}See the relationship between...{/t}&nbsp;<a href="./" class="permalink">{t}Permalink{/t}</a></h3>
       <form method="POST" action="">
 
             <input type="hidden"  name="rate" value="{$trust_rank}" />
@@ -31,7 +31,7 @@
             
             <div id="node-informations" class="simpleShadow radiusLight">                  
                   <div class="close">close</div>
-                  <h4></h4>
+                  <h4>An entity name</h4>
                   <div class="dynamique-content">
                         <h5>{t}Informations{/t}</h5>
                         <div class="freebase default loading">
@@ -135,25 +135,26 @@
                                     .chargeConstant(-100)
 
                               force.link.add(pv.Line)
-                                  .lineWidth(1)
-                                  .strokeStyle("#DAE9EA");
+                                  .lineWidth(2)
+                                  //.interpolate("step-after")
+                                  .strokeStyle("rgba(255,250,255,0.7)");
 
                               force.node.add(pv.Dot)
                                     .event("dblclick", function (d) { loadFreebaseData(d); })
                                     .radius(function(d) 5 + d.linkDegree/10000 )
-                                    .fillStyle(function(d) { return d.type == "/organization/organization" ? "#DAE9EA" : "#432946" })
-                                    .strokeStyle( "rgba(55, 33, 55, 0.4)" )
-                                    .lineWidth(0)
+                                    .fillStyle(function(d)    { return d.type == "/organization/organization" ? "#DAE9EA" : "#432946" })
+                                    .lineWidth(function(d)    { return d.group == 1 ? 2 : 2 } )
+                                    .strokeStyle( function(d) { return d.type == "/organization/organization" ? "#432946" : "#DAE9EA" })
                                     .title(function(d) { return d.freebase_id } )
                                     .event("mousedown", pv.Behavior.drag())
                                     .event("drag", force)
                                     .add(pv.Label)
                                           .text( function (d) { return d.label })
-                                          .font(function(d) { return d.group == 1 ? "bold 16px Helvetica" : "bold 11px Helvetica"; })
+                                          .font(function(d) { return d.group == 1 ? "bold 16px Verdana" : "bold 11px Verdana"; })
                                           .textStyle("#432946")
                                           .textAlign("center")
                                           .textBaseline("top")
-                                          .textDecoration("none")
+                                          .textDecoration("navy")
                                           .textMargin(function(d) { return -3 * this.radius() })
                                           
                               vis.render();

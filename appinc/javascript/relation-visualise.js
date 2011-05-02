@@ -74,6 +74,7 @@ $(function () {
             relationBetweenNodes();
 
       }).bind("fb-required", function () { // fail event
+            
 
             // Hack to hide every tipsy tooltips
             $(".node_search").each(function(i, n) {
@@ -84,10 +85,16 @@ $(function () {
             if( $(this).val() != "" && $(this).val() != $(this).attr("placeholder") )
                   $(this).tipsy("show"); 
 
+
+      }).change(function () {
+            
+            if( $(this).val() == "" || $(this).val() == $(this).attr("placeholder") ) {
+                  
+                  $(":input[name="+ $(this).attr("id").replace("to-", "") + "-mid]").val("");
+                  relationBetweenNodes();
+            } 
       });
       
-      
-
 
       $("#node-informations .close").click(function () {
                         
@@ -115,6 +122,7 @@ $(function () {
             opacity:1
       });
       
+      // if a default graph is called
       relationBetweenNodes();
       
       /********************
@@ -323,11 +331,12 @@ function completeInfoFromFreebase(data) {
 
 
 function relationBetweenNodes() {
-      
+
+
       if( $(".entity-left-mid").val()  != "" 
       ||  $(".entity-right-mid").val() != "" ) {
-       
-            $.ajax({               
+            
+            $.ajax({      
                   url:"./?action=getMergeRelationNodes",
                   data: $(".classic-form form").serialize(),
                   dataType: "json",
@@ -336,11 +345,31 @@ function relationBetweenNodes() {
                         resetDataVis(data); 
                   }
             });       
-      }
+            
+      } else resetDataVis({relations:[],nodes:[]});
       
 }
 
+function updatePermalink() {
+      
+      if( $(".entity-left-mid").val()  != "" 
+      ||  $(".entity-right-mid").val() != "" ) {
+            
+            var permalink = "?screen=relation-visualise&rel=";
+            permalink    += $(".entity-left-mid").val()  != "" ? $(".entity-left-mid").val() + "|"  : "";
+            permalink    += $(".entity-right-mid").val() != "" ? $(".entity-right-mid").val()       : "";
+            permalink    += "&trust_rank=" + $( ":input[name=rate]" ).val();
+            
+            $("h3 a.permalink").attr("href", permalink).show();
+            
+      } else $("h3 a.permalink").attr("href", "").hide();
+}
+
+
 function resetDataVis(data) {
+      
+      // update the permalink
+      updatePermalink();
       
       if(data != undefined) data_rel = data;
       
