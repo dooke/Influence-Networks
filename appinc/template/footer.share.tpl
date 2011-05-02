@@ -22,7 +22,7 @@
                target="_blank"
                title=""
                href='http://www.addtoany.com/email?linkurl={$smarty.const.DOC_URL}&amp;linkname={$smarty.const.DOC_TITLE}&amp;t={$smarty.const.DOC_TITLE}'>
-               <img alt="share mail" src="./appinc/image/mini-email.png" /> email
+               <img alt="share mail" src="./appinc/images/mini-email.png" /> email
             </a>
         </section>
 
