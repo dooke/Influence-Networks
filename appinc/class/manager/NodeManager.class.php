@@ -148,12 +148,14 @@ class NodeManager extends Manager {
        */
       public function updateNodeInfo() {
             
-            // select every nodes without name
-            $query = "SELECT * FROM " . TABLE_PREFIX . "node WHERE label = '' AND freebase_id != ''";
+            // select every nodes without name (no more than 50 nodes updated each time)
+            $query = "SELECT * FROM " . TABLE_PREFIX . "node WHERE label = '' AND freebase_id != '' LIMIT 50";
             $this->db->query($query) or die("Database error. Sorry, try again.");
             
+            $result = $this->db->getResult();
+            
             // for each node
-            while($row = $this->db->fetch() ) {
+            while($row = mysql_fetch_array($result)) {
                   
                   // load name from freebase
                   $url = "http://www.freebase.com/api/service/mqlread?query=";
