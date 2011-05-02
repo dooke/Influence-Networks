@@ -499,6 +499,19 @@ class RelationManager extends Manager {
             return (json_encode(Array("nodes" => $nodes, "relations" => $relations)) );
       }
       
+      /**
+       * Return the number of relations
+       * @return int 
+       */
+      public function getRelationCount() {
+            
+            $query = "SELECT count(id) AS nb  FROM ".TABLE_PREFIX."relation";
+            $this->db->query($query) or die("Database error. Sorry, try again.");
+            $row = $this->db->fetch();
+            
+            return $row["nb"];
+            
+      }
 
 }
 
