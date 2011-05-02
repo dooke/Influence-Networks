@@ -9,23 +9,23 @@
       <h3>{t}See the relationship between...{/t}</h3>
       <form method="POST" action="">
 
-            <input type="hidden"  name="rate" value="3" />
+            <input type="hidden"  name="rate" value="{$trust_rank}" />
             
             <div style="text-align:center;">
-                  <input type="text" name="node-left"  title="{t}You must choose an entity from Freebase. Please select one in the list below.{/t}"  id="to-entity-left" class="node_search required node_left" placeholder="Personality or institution" />
+                  <input type="text" name="node-left"  title="{t}You must choose an entity from Freebase. Please select one in the list below.{/t}"  id="to-entity-left" class="node_search required node_left" placeholder="Personality or institution" value="{if $node_left}{$node_left->getLabel()}{/if}" />
                   <img src="./appinc/images/and.png" alt="&" class="and" />
-                  <input type="text" name="node-right" title="{t}You must choose an entity from Freebase. Please select one in the list below.{/t}" id="to-entity-right" class="node_search required node_right" placeholder="Personality or institution" />
+                  <input type="text" name="node-right" title="{t}You must choose an entity from Freebase. Please select one in the list below.{/t}" id="to-entity-right" class="node_search required node_right" placeholder="Personality or institution" value="{if $node_right}{$node_right->getLabel()}{/if}" />
             </div>
 
             <section>
                   <div class="entity-desc loading default" id="entity-left">
-                        <input type="hidden" class="entity-left-mid" name="entity-left-mid" class="required" value="" />
+                        <input type="hidden" class="entity-left-mid" name="entity-left-mid" class="required"  value="{if $node_left}{$node_left->getFreebaseId()}{/if}" />
                   </div>
             </section>
 
             <section>
                   <div class="entity-desc loading default" id="entity-right">
-                        <input type="hidden" class="entity-right-mid" name="entity-right-mid" class="required" value="" />
+                        <input type="hidden" class="entity-right-mid" name="entity-right-mid" class="required" value="{if $node_right}{$node_right->getFreebaseId()}{/if}" />
                   </div>
             </section>
             
@@ -73,7 +73,7 @@
                   $(function() {
                         
                         $( "#rate-slider" ).slider({
-                              value:3,
+                              value: $( ":input[name=rate]" ).val(),
                               min: 1,
                               max: 5,
                               step: 0.1,
@@ -129,12 +129,11 @@
                                     .fillStyle("transparent");
 
                               force = vis.add(pv.Layout.Force)
-                                    .springLength(120)
-                                    .springConstant(0.3)
                                     .nodes(treeData.nodes)
                                     .links(treeData.links)
                                     .bound(true)
-                                    .chargeConstant(-200)
+                                    .chargeConstant(-100)
+                                    .springLength(120)
 
                               force.link.add(pv.Line)
                                   .lineWidth(1)
@@ -142,9 +141,9 @@
 
                               force.node.add(pv.Dot)
                                     .event("dblclick", function (d) { loadFreebaseData(d); })
-                                    .size(function(d) { return d.group == 1 ? 150 : 50; })
+                                    .radius(function(d) 5 + d.linkDegree/10 )
                                     .fillStyle(function(d) { return d.type == "/organization/organization" ? "#DAE9EA" : "#432946" })
-                                    .strokeStyle( "rgb(55, 33, 55)" )
+                                    .strokeStyle( "rgba(55, 33, 55, 0.4)" )
                                     .lineWidth(0)
                                     .title(function(d) { return d.freebase_id } )
                                     .event("mousedown", pv.Behavior.drag())
@@ -156,7 +155,8 @@
                                           .textAlign("center")
                                           .textBaseline("top")
                                           .textDecoration("none")
-                                          .textMargin(function(d) { return d.group == 1 ? -30 : -20 });
+                                          .textMargin(function(d) { return -3 * this.radius() })
+                                          
 
 
                               vis.render();
