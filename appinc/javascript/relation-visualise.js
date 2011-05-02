@@ -1,53 +1,60 @@
 var data_rel;
+                                   
+var treeData = {
+      nodes: new Array(), 
+      links: new Array()
+};
+var force = null, vis;
 
-$(function () {      
+$(function () {    
+      
 
 
-        $(".tooltips").tipsy({          
+      $(".tooltips").tipsy({          
             gravity: 's',
             html: true,
             opacity:1,
             trigger: "manual"
-        });
+      });
 
 
 
-        /*************************
+      /*************************
         * Pre-load template files
         ***/
-        $.get("./appinc/template/tmpl/node-property.tmpl", {}, function(tmpl) {
+      $.get("./appinc/template/tmpl/node-property.tmpl", {}, function(tmpl) {
             $.template( "node-property", tmpl);
-        } );
+      } );
 
-        $.get("./appinc/template/tmpl/li-relation.tmpl", {}, function(tmpl) {
+      $.get("./appinc/template/tmpl/li-relation.tmpl", {}, function(tmpl) {
             $.template( "li-relation", tmpl);
-        } );
+      } );
 
 
-        /*************
+      /*************
         * Put event *
         *************/
 
 
-        /*********************
+      /*********************
         * Autocomplete module
         ***/          
 
-        // a tooltips to indicate which input is empty
-        $(".node_search").tipsy({
+      // a tooltips to indicate which input is empty
+      $(".node_search").tipsy({
             trigger: "manual", 
             gravity: "s",
             opacity: 1,
             html   : true
-        }).blur(function() {
+      }).blur(function() {
             // hide tooltips when the input take the focus
             $(this).tipsy("hide");
         
-        // prevent a bug with google font
-        }).tipsy("show").tipsy("hide");
+      // prevent a bug with google font
+      }).tipsy("show").tipsy("hide");
 
 
-        $(".node_search").suggest({
+      $(".node_search").suggest({
 
             // looking for person or organization
             type: ["/people/person", "/organization/organization"],
@@ -58,7 +65,7 @@ $(function () {
             required: true
 
 
-        }).bind("fb-select", function(e, data) { // select event
+      }).bind("fb-select", function(e, data) { // select event
 
             // hide tooltips when we select an entity
             $(this).tipsy("hide"); 
@@ -66,16 +73,18 @@ $(function () {
             $(":input[name="+ $(this).attr("id").replace("to-", "") + "-mid]").val(data.id);
             relationBetweenNodes();
 
-        }).bind("fb-required", function () { // fail event
+      }).bind("fb-required", function () { // fail event
 
             // Hack to hide every tipsy tooltips
-            $(".node_search").each(function(i, n) { $(n).tipsy("hide"); });
+            $(".node_search").each(function(i, n) {
+                  $(n).tipsy("hide");
+            });
 
             // show the right tooltips
             if( $(this).val() != "" && $(this).val() != $(this).attr("placeholder") )
-                $(this).tipsy("show"); 
+                  $(this).tipsy("show"); 
 
-        });
+      });
       
       
 
@@ -96,40 +105,48 @@ $(function () {
             
       });
       
-      $("#node-informations .relations tbody tr:not(.details)").live("click", function () {showRelationDetails(this);} );
+      $("#node-informations .relations tbody tr:not(.details)").live("click", function () {
+            showRelationDetails(this);
+      } );
    
-      $(".relations .arrow").tipsy({gravity:"e", live:true, opacity:1});
+      $(".relations .arrow").tipsy({
+            gravity:"e", 
+            live:true, 
+            opacity:1
+      });
+      
+      relationBetweenNodes();
       
       /********************
       * WEBSITE TOUR
       ***/          
       if(! $.cookies.get("no-website-tour") && isConnected)
             new makeWebsiteTour([
-                  {
-                        "selector"        : ".up_menu li.current",
-                        "position"        : "T",
-                        "text"            : "See entities relations."
-                  },
-                  {
-                        "selector" 		: ".node_search.node_left",
-                        "position"        : "BR",
-                        "text"		: "Example: Barack Obama"
-                  }, {
-                        "selector" 		: ".node_search.node_right",
-                        "position"        : "BL",
-                        "text"		: "Example: Michelle Obama"
-                  }, {
-                        "selector" 		: ".rate-legend:eq(0)",
-                        "position"        : "BR",
-                        "text"		: "Slide the cursor left to see more relations"
-                  }, {
-                        "selector" 		: ".rate-legend:eq(1)",
-                        "position"        : "BL",
-                        "text"		: "Slide the cursor right to see only the most valid relations"
-                  }, {
-                        "end"             : true,
-                        "url"             : "./"
-                  }
+            {
+                  "selector"        : ".up_menu li.current",
+                  "position"        : "T",
+                  "text"            : "See entities relations."
+            },
+            {
+                  "selector" 		: ".node_search.node_left",
+                  "position"        : "BR",
+                  "text"		: "Example: Barack Obama"
+            }, {
+                  "selector" 		: ".node_search.node_right",
+                  "position"        : "BL",
+                  "text"		: "Example: Michelle Obama"
+            }, {
+                  "selector" 		: ".rate-legend:eq(0)",
+                  "position"        : "BR",
+                  "text"		: "Slide the cursor left to see more relations"
+            }, {
+                  "selector" 		: ".rate-legend:eq(1)",
+                  "position"        : "BL",
+                  "text"		: "Slide the cursor right to see only the most valid relations"
+            }, {
+                  "end"             : true,
+                  "url"             : "./"
+            }
             ], 0);   
 });
 
@@ -307,7 +324,7 @@ function completeInfoFromFreebase(data) {
 
 function relationBetweenNodes() {
       
-      if( $(".entity-left-mid").val() != "" 
+      if( $(".entity-left-mid").val()  != "" 
       ||  $(".entity-right-mid").val() != "" ) {
        
             $.ajax({               
@@ -316,18 +333,12 @@ function relationBetweenNodes() {
                   dataType: "json",
                   type: "post",
                   success: function (data) {                                             
-                        resetDataVis(data);                     
+                        resetDataVis(data); 
                   }
             });       
       }
       
 }
-                                   
-var treeData = {
-      nodes: new Array(), 
-      links: new Array()
-};
-var force, vis;
 
 function resetDataVis(data) {
       
@@ -337,7 +348,7 @@ function resetDataVis(data) {
       var links = new Array();
       
 
-      $.each(data_rel.relations, function(i, rel) {               
+      $.each(data_rel.relations, function(i, rel) {                           
 
             if(rel.trust_level >= $(":input[name=rate]").val() ) {
                   if( !idExist(nodes, rel.node_left) )
@@ -370,7 +381,7 @@ function resetDataVis(data) {
                                     source     : getIndex(nodes, rel.node_left), 
                                     target     : getIndex(nodes, rel.node_right), 
                                     id         : rel.id,
-                                    value      : 1,
+                                    value      : 1000 * (rel.trust_level-1),
                                     trust_level : rel.trust_level
                               });
                   }
@@ -381,15 +392,15 @@ function resetDataVis(data) {
       $.each(data_rel.nodes, function(i, node) {               
             
             if( !idExist(nodes, node.id) )
-                        nodes.push( { 
-                              nodeName    : node.id,
-                              name        : node.id,
-                              id          : node.id,
-                              label       : node.label,
-                              freebase_id : node.freebase_id,
-                              type        : node.type,
-                              group       : 1
-                        } );             
+                  nodes.push( { 
+                        nodeName    : node.id,
+                        name        : node.id,
+                        id          : node.id,
+                        label       : node.label,
+                        freebase_id : node.freebase_id,
+                        type        : node.type,
+                        group       : 1
+                  } );             
 
       });       
       
@@ -398,36 +409,41 @@ function resetDataVis(data) {
       if( $(".entity-left-mid").val() != "" && $(".entity-right-mid").val() != "") {
           
           
-          var midLeft  = $(".entity-left-mid").val();
-          var midRight = $(".entity-right-mid").val();
+            var midLeft  = $(".entity-left-mid").val();
+            var midRight = $(".entity-right-mid").val();
           
-          var i = 0;
-          for(i in data_rel.relations) {
+            var i = 0;
+            for(i in data_rel.relations) {
               
-              var r = data_rel.relations[i];
+                  var r = data_rel.relations[i];
               
-              var a = (r.node_left_freebase_id  == midLeft && r.node_right_freebase_id == midRight);
-              var b = (r.node_right_freebase_id == midLeft && r.node_left_freebase_id  == midRight);
+                  var a = (r.node_left_freebase_id  == midLeft && r.node_right_freebase_id == midRight);
+                  var b = (r.node_right_freebase_id == midLeft && r.node_left_freebase_id  == midRight);
 
-              if(a || b) { $(".tooltips").tipsy("hide"); break; }
+                  if(a || b) {
+                        $(".tooltips").tipsy("hide");
+                        break;
+                  }
               
-          }
+            }
           
           
       } else $(".tooltips").tipsy("hide");  
-          
+ 
       
-      
-
-
-      if(typeof force != "undefined" && Modernizr.svg) {      
-      
+      // if the force layout are defined and SVG supported
+      if(Modernizr.svg) {      
+                  
             treeData.nodes = nodes;
             treeData.links = links;
             
-            force.nodes(treeData.nodes)
-            force.links(treeData.links);
-            force.reset();
+            if(force != null) {
+                  
+                  force.nodes(treeData.nodes)
+                  force.links(treeData.links);
+                  force.reset();
+                  
+            } 
             
             if(typeof vis != "undefined") vis.render();  
             
@@ -442,7 +458,9 @@ function showRelationDetails(element) {
             
             $("tr.open").removeClass("open");
             $(element).addClass("open");            
-            $("tr.details div.content").slideUp(300, function () {$(this).parents("tr.details").remove();});
+            $("tr.details div.content").slideUp(300, function () {
+                  $(this).parents("tr.details").remove();
+            });
             
             var tr = "<tr class='details " + ( $(element).hasClass("odd") ? "odd" : "" ) + "'>\n\
                               <td colspan='4'>\n\
@@ -458,14 +476,14 @@ function showRelationDetails(element) {
             $.getJSON("./?action=getRelationValues&relation_id=" + $(element).data("relation-id"), function(data) {                  
                                     
                   var html = "";                  
-                        $.each(data, function(key, d) {
-                              if(d.value != "") {
-                                    if(d.label == "Source")
-                                          html += "<li>"+ d.label + ": <span style='color:#A86372'><a href='"+ d.value + "' target='_blank'>"+ d.value + "</a></span></li>";
-                                    else
-                                          html += "<li>"+ d.label + ": <span style='color:#A86372'>"+ d.value + "</span></li>";
-                              } 
-                        });        
+                  $.each(data, function(key, d) {
+                        if(d.value != "") {
+                              if(d.label == "Source")
+                                    html += "<li>"+ d.label + ": <span style='color:#A86372'><a href='"+ d.value + "' target='_blank'>"+ d.value + "</a></span></li>";
+                              else
+                                    html += "<li>"+ d.label + ": <span style='color:#A86372'>"+ d.value + "</span></li>";
+                        } 
+                  });        
                   
                   $("tr.details .content > .load").slideUp(300, function () { 
                         if(html != "") {
@@ -481,7 +499,9 @@ function showRelationDetails(element) {
       } else {            
             
             $("tr.open").removeClass("open");     
-            $("tr.details div.content").slideUp(300, function () {$(this).parents("tr.details").remove();});
+            $("tr.details div.content").slideUp(300, function () {
+                  $(this).parents("tr.details").remove();
+            });
       }
       
 }
