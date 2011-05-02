@@ -82,7 +82,7 @@ class NodeManager extends Manager {
                   $this->db->query($query) or die(_("Database error. Sorry, try again."));
                   $row = $this->db->fetch();
 
-                  if($row) {
+                  if($row && isset($row["id"]) ) {                        
                         
                         $this->nodes[ $row["id"] ]          = new Node($row);                        
                         $this->nodes[ $row["freebase_id"] ] = new Node($row);
@@ -91,7 +91,7 @@ class NodeManager extends Manager {
                   
             }
 
-            return ( isset($this->nodes[$key]) ) ? $this->nodes[$key] : false;
+            return ( isset($this->nodes[$key]) && isset($row["id"]) ) ? $this->nodes[$key] : false;
       }
       
       public function addFreebaseNode($freebase_id) {
@@ -106,6 +106,7 @@ class NodeManager extends Manager {
 
                   // we insert it on the database
                   $query = "INSERT INTO " . TABLE_PREFIX . "node (freebase_id, label, type) VALUES('{$freebase_id}', '{$node_label}', '{$node_type}')";
+                  
                   $this->db->query($query) or die("Database error. Sorry, try again.");
                   
                   $this->updateNodeInfo();
