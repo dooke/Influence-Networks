@@ -87,6 +87,20 @@ class RelationTrustLevelManager extends Manager {
             
       }
       
+      /**
+       * Return the number of relation reviews
+       * @return int 
+       */
+      public function getRelationTrustLevelCount() {
+            
+            $query = "SELECT count(*) AS nb  FROM ".TABLE_PREFIX."relation_trust_level";
+            $this->db->query($query) or die("Database error. Sorry, try again.");
+            $row = $this->db->fetch();
+            
+            return $row["nb"];
+            
+      }
+
   
 
 }
