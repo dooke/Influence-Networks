@@ -160,7 +160,7 @@ class NodeManager extends Manager {
                   $url .= '{ "query"%3A [{ "id"%3A "' . $row["freebase_id"] . '"%2C "name"%3A null%2C "type|%3D"%3A [ "%2Fpeople%2Fperson"%2C "%2Forganization%2Forganization" ]%2C "type"%3A null }] }';
 
                   $node = json_decode(file_get_contents($url));
-                  $node_label = $node->result[0]->name;
+                  $node_label = addslashes($node->result[0]->name);
                   $node_type  = $node->result[0]->type;
                   
                   // update node
