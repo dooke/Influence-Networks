@@ -240,5 +240,88 @@
 			$this->error[] = $_errmsg;
 		}
 		
+            
+            public function getHost() {
+                  return $this->host;
+            }
+
+            public function setHost($host) {
+                  $this->host = $host;
+            }
+
+            public function getPort() {
+                  return $this->port;
+            }
+
+            public function setPort($port) {
+                  $this->port = $port;
+            }
+
+            public function getDb() {
+                  return $this->db;
+            }
+
+            public function setDb($db) {
+                  $this->db = $db;
+            }
+
+            public function getCnct() {
+                  return $this->cnct;
+            }
+
+            public function setCnct($cnct) {
+                  $this->cnct = $cnct;
+            }
+
+            public function getResult() {
+                  return $this->result;
+            }
+
+            public function setResult($result) {
+                  $this->result = $result;
+            }
+
+            public function getResults() {
+                  return $this->results;
+            }
+
+            public function setResults($results) {
+                  $this->results = $results;
+            }
+
+            public function getRows() {
+                  return $this->rows;
+            }
+
+            public function setRows($rows) {
+                  $this->rows = $rows;
+            }
+
+            public function getColumn() {
+                  return $this->column;
+            }
+
+            public function setColumn($column) {
+                  $this->column = $column;
+            }
+
+            public function getRecord() {
+                  return $this->record;
+            }
+
+            public function setRecord($record) {
+                  $this->record = $record;
+            }
+
+            public function getError() {
+                  return $this->error;
+            }
+
+            public function setError($error) {
+                  $this->error = $error;
+            }
+
+
+            
 	}
 ?>
