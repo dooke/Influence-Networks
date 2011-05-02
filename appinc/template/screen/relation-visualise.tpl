@@ -134,6 +134,7 @@
                                     .links(treeData.links)
                                     .bound(true)
                                     .chargeConstant(-100)
+                                    .springLength(120)
 
                               force.link.add(pv.Line)
                                   .lineWidth(2)
