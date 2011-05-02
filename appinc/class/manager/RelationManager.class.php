@@ -32,9 +32,9 @@ class RelationManager extends Manager {
 
             // check data
             if ($node_left_id != ""
-                    && $node_right_id != ""
-                    && is_numeric($relation_type)
-                    && count($this->err) == 0) {
+             && $node_right_id != ""
+             && is_numeric($relation_type)
+             && count($this->err) == 0) {
 
 
                   // if the node doesn't exist
@@ -381,7 +381,7 @@ class RelationManager extends Manager {
             $relations = Array();
 
             if (isset($_POST["entity-left-mid"])
-                    && isset($_POST["entity-right-mid"])) {
+             && isset($_POST["entity-right-mid"])) {
 
                   /* @var $nodeLeft Node */
                   $nodeLeft = $this->managers["node"]->getNode($_POST["entity-left-mid"]);
