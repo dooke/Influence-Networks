@@ -98,7 +98,7 @@ class NodeManager extends Manager {
             
             // if node doesn't exist
             $n = $this->managers["node"]->getNode($freebase_id);
-            if($n == false) {
+            if($n == false && $freebase_id != "") {
 
                   // we found data
                   $node_label = "";
