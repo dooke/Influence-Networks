@@ -223,10 +223,11 @@
 
         default:
                   // assing the screen
-                  $s->assign('screen', 'homepage');
+                  $s->assign('screen', 'homepage');      
+                  $s->assign("countRelation", $managers["relation"]->getRelationCount());      
+                  $s->assign("countUser",     $managers["user"]->getUserCount());
                   break;
       }
-      
       
       // every errors to a JSON
       $s->assign("err_json", json_encode($err) );

@@ -9,4 +9,6 @@
     &bull; <a href="https://github.com/Pirhoo/Influence-Networks/" target="_blank">Contribute to the code!</a>
     &bull; <a href="http://bug.influencenetworks.org/" target="_blank">Report an issue</a>
 </p>
-
+<p class="intro step-3">
+      Already {$countRelation} relations added and {$countUser} users registered.
+</p>

@@ -341,7 +341,7 @@ form.inscription {
       height:164px;
       width:990px;
       position:absolute;
-      top:200px;
+      top:155px;
 }
 
 .intro {
@@ -349,7 +349,7 @@ form.inscription {
       height:164px;
       width:690px;
       position:absolute;
-      top:400px;
+      top:350px;
       font-size:18px;
       left:150px;
       font-family: 'Vollkorn', arial, serif;
@@ -357,12 +357,17 @@ form.inscription {
 }
 
 .intro.step-2 {
-    top:500px;
+    top:525px;
 }
 
 .intro.step-2 a{
     margin:0px 10px;
     color:#F4F3E0;
+}
+
+
+.intro.step-3 {
+      top:465px;
 }
 
 .main_menu li{
