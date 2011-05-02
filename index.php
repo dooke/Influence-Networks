@@ -177,41 +177,46 @@
                   // check if we need to add a relation
                   if( isset($_POST["relation-id"]) && isset($_POST["rate"]) )
                         $managers['relation_trust_level']->addTrustLevel();
+                                    
+
+                  if(isset($_GET["id"]) && is_numeric($_GET["id"]))  
+                        /* @var $relation Relation */
+                        $relation = $managers["relation"]->getRelation($_GET["id"]);
+                  else  // get random relation
+                        /* @var $relation Relation */
+                        $relation = $managers["relation"]->getRandRelation();
                   
-                  // get random relation
-                  /* @var $relation Relation */
-                  $relation = $managers["relation"]->getRandRelation();
                   $s->assign("relation", $relation);  
-                  
-                 
+
                   if($relation === false)
                         $err[] = Array("time" => time(), "msg" => _("There is no relation to review.") );                       
-                 
-                  
+
+
                   if(!!$relation) {
-                        
+
                         $s->assign("relation_value", $relation->getPropertyValues() );
-                        
+
                         /* @var $entity_left Node */
                         $entity_left = $managers["node"]->getNode( $relation->getNodeLeft() );                        
                         // assign Smarty variable
                         if(!!$entity_left)
                               $s->assign("entity_left",  $entity_left );
-                        
-                        
+
+
                         /* @var $entity_right Node */
                         $entity_right = $managers["node"]->getNode( $relation->getNodeRight() );
                         // assign Smarty variable      
                         if(!!$entity_right) 
                               $s->assign("entity_right",  $entity_right);
-                        
-                        
+
+
                         /* @var $relation_type Relation_type */
                         $relation_type = $managers["relation_type"]->getType( $relation->getType() );
                         $s->assign("relation_type", $relation_type);
-                        
-                        
+
                   }
+
+
                   break;
 
             // ** **************************************************************
@@ -231,21 +236,18 @@
                         $freebase_id_pattern = "!(\/[a-z]{1,3}\/){1}([a-z0-9_]){3,}!i";
                         
                         if( preg_match($freebase_id_pattern, $rel[0]) )
-                              $node_left  = $managers["node"]->getNode($rel[0]);
+                              $entity_left  = $managers["node"]->getNode($rel[0]);
                         
                         if(count($rel) == 2 && preg_match($freebase_id_pattern, $rel[1]) )
-                              $node_right = $managers["node"]->getNode($rel[1]);
+                              $entity_right = $managers["node"]->getNode($rel[1]);
                   }
                   
                   $s->assign("trust_rank",  isset($_GET["trust_rank"]) && is_numeric($_GET["trust_rank"]) && $_GET["trust_rank"] <= 5 && $_GET["trust_rank"] >= 1 ? $_GET["trust_rank"] : 3);
-                  $s->assign("node_left",  $node_left);      
-                  $s->assign("node_right", $node_right);      
-                  
-                  
-                  
+                  $s->assign("entity_left",  $entity_left);      
+                  $s->assign("entity_right", $entity_right);      
                   break;
 
-        default:
+            default:
                   // assing the screen
                   $s->assign('screen', 'homepage');      
                   $s->assign("countRelation", $managers["relation"]->getRelationCount());      

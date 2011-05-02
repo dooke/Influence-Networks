@@ -932,6 +932,7 @@ input.half {
           
 }
 
+
 #node-informations .dynamique-content {
       float:left;
       border-top:1px solid #6E5671;     
@@ -984,6 +985,10 @@ input.half {
 #node-informations .freebase-label {
       font-style: italic;
       font-size:12px;
+}
+
+#node-informations .relations td.review a {
+      color:#F4F3E2;
 }
 
 #node-informations .relations tbody tr.odd{
@@ -1059,5 +1064,7 @@ h3 .permalink {
       font-size:16px;
       font-weight: normal;
       padding-left:5px;
+}
+.visualize h3 .permalink {
       display:none;
 }

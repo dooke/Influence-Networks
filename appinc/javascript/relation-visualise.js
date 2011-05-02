@@ -116,7 +116,7 @@ $(function () {
             showRelationDetails(this);
       } );
    
-      $(".relations .arrow").tipsy({
+      $(".relations .arrow,.relations .review").tipsy({
             gravity:"e", 
             live:true, 
             opacity:1
@@ -492,7 +492,7 @@ function showRelationDetails(element) {
             });
             
             var tr = "<tr class='details " + ( $(element).hasClass("odd") ? "odd" : "" ) + "'>\n\
-                              <td colspan='4'>\n\
+                              <td colspan='5'>\n\
                                     <div class='content' style='display:none'>\n\
                                           <div style='text-align:center; color:#A86372;' class='load'>Loading...</div>\n\
                                     </div>\n\

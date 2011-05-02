@@ -12,20 +12,20 @@
             <input type="hidden"  name="rate" value="{$trust_rank}" />
             
             <div style="text-align:center;">
-                  <input type="text" name="node-left"  title="{t}You must choose an entity from Freebase. Please select one in the list below.{/t}"  id="to-entity-left" class="node_search required node_left" placeholder="Personality or institution" value="{if $node_left}{$node_left->getLabel()}{/if}" />
+                  <input type="text" name="node-left"  title="{t}You must choose an entity from Freebase. Please select one in the list below.{/t}"  id="to-entity-left" class="node_search required node_left" placeholder="Personality or institution" value="{if $entity_left}{$entity_left->getLabel()}{/if}" />
                   <img src="./appinc/images/and.png" alt="&" class="and" />
-                  <input type="text" name="node-right" title="{t}You must choose an entity from Freebase. Please select one in the list below.{/t}" id="to-entity-right" class="node_search required node_right" placeholder="Personality or institution" value="{if $node_right}{$node_right->getLabel()}{/if}" />
+                  <input type="text" name="node-right" title="{t}You must choose an entity from Freebase. Please select one in the list below.{/t}" id="to-entity-right" class="node_search required node_right" placeholder="Personality or institution" value="{if $entity_right}{$entity_right->getLabel()}{/if}" />
             </div>
 
             <section>
                   <div class="entity-desc loading default" id="entity-left">
-                        <input type="hidden" class="entity-left-mid" name="entity-left-mid" class="required"  value="{if $node_left}{$node_left->getFreebaseId()}{/if}" />
+                        <input type="hidden" class="entity-left-mid" name="entity-left-mid" class="required"  value="{if $entity_left}{$entity_left->getFreebaseId()}{/if}" />
                   </div>
             </section>
 
             <section>
                   <div class="entity-desc loading default" id="entity-right">
-                        <input type="hidden" class="entity-right-mid" name="entity-right-mid" class="required" value="{if $node_right}{$node_right->getFreebaseId()}{/if}" />
+                        <input type="hidden" class="entity-right-mid" name="entity-right-mid" class="required" value="{if $entity_right}{$entity_right->getFreebaseId()}{/if}" />
                   </div>
             </section>
             
@@ -48,6 +48,7 @@
                                                 <td>{t}Entity{/t}</td>
                                                 <td style="min-width:80px">{t}Type of relation{/t}</td>
                                                 <td style=" text-align:center">{t}Trust rank{/t}</td>
+                                                <td></td>
                                                 <td style="width:10px;"></td>
                                           </tr>
                                     </thead>

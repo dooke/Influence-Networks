@@ -8,7 +8,7 @@
 <section class="classic-form relation-review">
       {if $relation}
       
-            <h3>{t}Review the relation between...{/t}</h3>
+            <h3>{t}Review the relation between...{/t}&nbsp;<a href="./?screen=relation-review&id={$relation->getId()}" class="permalink">{t}Permalink{/t}</a></h3>
             <form method="POST" action="index.php?screen=relation-review">
 
                  <input type="hidden" name="relation-id" value="{$relation->getId()}" />
