@@ -211,6 +211,20 @@ class UserManager extends Manager {
           
     }
     
+    /**
+     * Return the number of users
+     * @return integer
+     */
+    public function getUserCount() {
+                          
+          $query = "SELECT COUNT(id) AS nb FROM ".TABLE_PREFIX."user";
+          $this->db->query($query);
+          $count = $this->db->fetch();
+
+          return $count["nb"];
+    }
+    
+    
     public function countUserRelation($user_id) {
                     
           // key is an user id
@@ -225,7 +239,7 @@ class UserManager extends Manager {
           } 
     }
     
-        public function countUserRelationTrustLevel($user_id) {
+    public function countUserRelationTrustLevel($user_id) {
                     
           // key is an user id
           if( is_numeric($user_id) ) {
