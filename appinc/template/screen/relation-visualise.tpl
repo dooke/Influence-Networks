@@ -133,7 +133,6 @@
                                     .links(treeData.links)
                                     .bound(true)
                                     .chargeConstant(-100)
-                                    .springLength(120)
 
                               force.link.add(pv.Line)
                                   .lineWidth(1)
@@ -141,7 +140,7 @@
 
                               force.node.add(pv.Dot)
                                     .event("dblclick", function (d) { loadFreebaseData(d); })
-                                    .radius(function(d) 5 + d.linkDegree/10 )
+                                    .radius(function(d) 5 + d.linkDegree/10000 )
                                     .fillStyle(function(d) { return d.type == "/organization/organization" ? "#DAE9EA" : "#432946" })
                                     .strokeStyle( "rgba(55, 33, 55, 0.4)" )
                                     .lineWidth(0)
@@ -157,8 +156,6 @@
                                           .textDecoration("none")
                                           .textMargin(function(d) { return -3 * this.radius() })
                                           
-
-
                               vis.render();
                               
                         
