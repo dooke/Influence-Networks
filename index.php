@@ -162,7 +162,7 @@
                               $managers['relation']->addRelation();
 
                         // load type of relation                  
-                        $rt["-1"] = "--";
+                        $rt["-1"] = Array("label" => "--", "direction" => "", "hint" => "");
                         foreach ($managers['relation_type']->htmlOption() as $key => $val)
                               $rt[$key] = $val;
 

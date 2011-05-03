@@ -75,7 +75,15 @@ $(document).ready(function () {
       * Form for each type
       ***/    
     $(":input[name=relation_type]").change(function () {
-           
+          
+        updateRelationHint();
+        
+        // class according to the type direction
+        var dir  = $("option:selected", this).data("direction");
+        $(".classic-form").removeClass("ltr rtl tw").addClass( dir );
+        
+              
+              
         var rel_type = $(this).val();
         $(".relation-property-input").html("");
            
@@ -178,6 +186,27 @@ $(document).ready(function () {
 
 });
 
+function updateRelationHint() {
+
+        var hint = $(":input[name=relation_type] option:selected").data("hint");
+        $(".classic-form").removeClass("hint");
+        
+        // there is a hint ?
+        if(hint != "") {
+              $(".classic-form").addClass("hint");
+              
+              var entityLeft  = $("#entity-left h4").text();
+                  entityLeft  = entityLeft == "" ? "Left entity" : entityLeft;
+                  
+              var entityRight = $("#entity-right h4").text();
+                  entityRight = entityRight == "" ? "right entity" : entityRight;
+              
+              hint = hint.replace("%1", entityLeft).replace("%2", entityRight);
+              $(".relation-hint").html(hint);
+        }  
+        
+}
+
 function freeSetview(input) {
       
     if( input.val() == "" || input.val() == input.attr("placeholder") ) {
@@ -194,7 +223,7 @@ function freeSetview(input) {
 
 }
 
-function loadFreebaseData(data, input) {
+function loadFreebaseData(data, input) {      
       
     var type = null;
     for(var i in data.type)
@@ -249,7 +278,7 @@ function loadFreebaseData(data, input) {
 // * in the right block
 // ***
 function completeInfoFromFreebase(data) {
-         
+   
          
     var setview = null;      
 
@@ -271,7 +300,9 @@ function completeInfoFromFreebase(data) {
                 // change title
                 $("h4", setview).html(node.name);
                 $("ul", setview).html("");            
-
+                
+                // update the relation hint
+                updateRelationHint();
 
                 if(node.type == "/people/person") {
 

@@ -80,18 +80,17 @@ class NodeManager extends Manager {
             if (!isset($this->nodes[$key])) {
 
                   $this->db->query($query) or die(_("Database error. Sorry, try again."));
-                  $row = $this->db->fetch();
+                  $row = $this->db->fetch();                  
 
                   if($row && isset($row["id"]) ) {                        
                         
                         $this->nodes[ $row["id"] ]          = new Node($row);                        
-                        $this->nodes[ $row["freebase_id"] ] = new Node($row);
-                                
+                        $this->nodes[ $row["freebase_id"] ] = new Node($row);    
                   }
                   
             }
 
-            return ( isset($this->nodes[$key]) && isset($row["id"]) ) ? $this->nodes[$key] : false;
+            return ( isset($this->nodes[$key]) ) ? $this->nodes[$key] : false;
       }
       
       public function addFreebaseNode($freebase_id) {

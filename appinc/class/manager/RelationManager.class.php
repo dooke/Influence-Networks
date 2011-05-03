@@ -44,7 +44,7 @@ class RelationManager extends Manager {
                         // or alert
                               $this->err[] = Array("time" => time(), "msg" => _("Your left entity doesn't exist on Freebase."));
 
-
+                        
 
                   // if the node doesn't exist
                   if (!$this->managers["node"]->getNode($node_right_id))
@@ -52,16 +52,17 @@ class RelationManager extends Manager {
                         if (!$this->managers["node"]->addFreebaseNode($node_right_id))
                         // or alert
                               $this->err[] = Array("time" => time(), "msg" => _("Your right entity doesn't exist on Freebase."));
+                        
 
-
+                  $node_left  = $this->managers["node"]->getNode($node_left_id);
+                  $node_right = $this->managers["node"]->getNode($node_right_id);
+                        
                   // if we have met any error
                   // we can add the relation
-                  if (count($this->err) == 0) {
-
-                        $node_left = $this->managers["node"]->getNode($node_left_id);
-                        $node_right = $this->managers["node"]->getNode($node_right_id);
-                        $creator = $this->managers["user"]->getUser($_SESSION["user_id"]);
-
+                  if (count($this->err) == 0 && $node_left && $node_right) {
+                        
+                        $creator    = $this->managers["user"]->getUser($_SESSION["user_id"]);
+                        
                         // a user cannot add a relation twice
                         // get every relation between this nodes
                         $relations = $this->managers["relation"]->getRelations($node_left->getId(), $node_right->getId());

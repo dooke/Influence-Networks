@@ -9,9 +9,8 @@
       <h3>{t}Add a new relation between...{/t}</h3>
       <form method="POST" action="index.php?screen=relation-add">
             
-            <div style="text-align:center;">
+            <div class="relation-form">
                   <input type="text" name="node-left"  title="{t}You must choose an entity from Freebase. Please select one in the list below.{/t}" id="to-entity-left" class="node_search required node_left" placeholder="Personality or institution" />
-                  <img src="./appinc/images/and.png" alt="&" class="and" />
                   <input type="text" name="node-right" title="{t}You must choose an entity from Freebase. Please select one in the list below.{/t}" id="to-entity-right" class="node_search required node_right" placeholder="Personality or institution" />
             </div>
             
@@ -44,8 +43,15 @@
             <div class="select-type">
                   <label>
                         {t}Relation type:{/t}
-                        {html_options name=relation_type options=$relation_type_option}
-                  </label>       
+                        <select name="relation_type">
+                              {foreach from=$relation_type_option item=i key=k}
+                                    <option value="{$k}" data-direction="{$i.direction}" data-hint="{$i.hint}">{$i.label}</option>
+                              {/foreach}
+                        </select>
+                  </label>     
+                  <div class="relation-hint">
+                        Left entity is or was owner of right entity.
+                  </div>
             </div>
 
             <div class="relation-property"> 
