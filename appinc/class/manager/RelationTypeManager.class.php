@@ -24,7 +24,7 @@ class RelationTypeManager extends Manager {
             $options = array();
  
             while ( $row = $this->db->fetch() ) {
-                  $options[$row["id"]]       = _($row["label"]);
+                  $options[$row["id"]]       = Array("label" => _($row["label"]), "direction" => $row["direction"], "hint" => _($row["hint"]) );
                   $this->types[ $row["id"] ] = new Relation_type($row);
             }
 
