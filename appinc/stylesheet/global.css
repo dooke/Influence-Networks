@@ -866,7 +866,7 @@ input.half {
 
 .visualize .min-rate {
     position:absolute;
-    right:-170px;
+    right:-160px;
     top:70px;
     width:auto;
 }
@@ -1040,10 +1040,13 @@ input.half {
 #visualize-layout {
     z-index:2;
     position:relative;
-    margin-left:-300px;
+    margin-left:-280px;
     margin-top:10px;
-    width:990px; 
-    height:390px;
+    width:950px; 
+    height:380px;
+    /*background:rgba(255,255,255,0.4);*/
+    overflow:hidden;
+    border-radius:3px;
 }
 
 .tooltips {

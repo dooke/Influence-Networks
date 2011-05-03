@@ -61,7 +61,8 @@
 
             <div class="min-rate">
                   <div class="rate-legend">
-                        {t}Established fact{/t}
+                        {t}Established
+                        fact{/t}
                   </div>
                   <div id="rate-slider"></div>
                   <div class="rate-legend">
