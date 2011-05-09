@@ -30,6 +30,17 @@
             define('TABLE_PREFIX', 'inf_');
             
     endif;
+    
+    
+    // list of every screen
+    $arrScreen = Array(
+                  "404" => "./appinc/screen/inc.homepage.php",
+                  "homepage" => "./appinc/screen/inc.homepage.php",
+                  "relation-add" => "./appinc/screen/inc.relation-add.php",
+                  "relation-review" => "./appinc/screen/inc.relation-review.php",
+                  "relation-visualize" => "./appinc/screen/inc.relation-visualize.php",
+                  "relation-visualise" => "./appinc/screen/inc.relation-visualize.php" // retro-compatibility
+                      );
 
 
     // Sharing configuration
