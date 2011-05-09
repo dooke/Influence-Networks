@@ -48,7 +48,7 @@
             <!-- Usefull functions -->
             <script type="text/javascript" src="{$smarty.const.APP_URL}appinc/javascript/functions.utils.js"></script>
             <!-- JQuery library -->
-            <script type="text/javascript" src="{$smarty.const.APP_URL}appinc/javascript/jquery-1.5.min.js"></script>
+            <script type="text/javascript" src="{$smarty.const.APP_URL}appinc/javascript/jquery-last.min.js"></script>
             <!-- JQuery extend to center any object -->
             <script type="text/javascript" src="{$smarty.const.APP_URL}appinc/javascript/jquery-extend-center.js"></script>
             <!-- JQuery UI library -->
