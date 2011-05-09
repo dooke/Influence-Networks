@@ -27,8 +27,8 @@
             </span>
       </li>
 {/if}
-<li class="visualise {if $screen=='relation-visualise'}current{/if}"  title="{t}See entities relations.{/t}">
-      <a href="{$smarty.const.APP_URL}?screen=relation-visualise" class="label">
+<li class="visualise {if $screen=='relation-visualize'}current{/if}"  title="{t}See entities relations.{/t}">
+      <a href="{$smarty.const.APP_URL}?screen=relation-visualize" class="label">
             {t}Visualize a relation{/t}
       </a>
 </li>
