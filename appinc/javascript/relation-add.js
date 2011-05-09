@@ -196,7 +196,7 @@ function updateRelationHint() {
               $(".classic-form").addClass("hint");
               
               var entityLeft  = $("#entity-left h4").text();
-                  entityLeft  = entityLeft == "" ? "Left entity" : entityLeft;
+                  entityLeft  = entityLeft == "" ? "left entity" : entityLeft;
                   
               var entityRight = $("#entity-right h4").text();
                   entityRight = entityRight == "" ? "right entity" : entityRight;
