@@ -97,7 +97,7 @@
                                     if(! $.cookies.get("no-website-tour") ) {
                                           new makeWebsiteTour([
                                                 {
-                                                      "url" s: "./?screen=relation-add&website-tour"
+                                                      "url": "./?screen=relation-add&website-tour"
                                                 }
                                           ]);
                                      }
