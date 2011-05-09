@@ -139,139 +139,27 @@
       }
 
 
+      // -------------------------------------
+	// Include files
+	// see config.init.php for include pages
+	// -------------------------------------
+	$screen = strip_tags(trim($_GET['screen']));
+	if ( empty($screen) == FALSE && array_key_exists($screen, $arrScreen) ) {
+		if ( !file_exists( $arrScreen[$screen] ) ) {
+			$_require	= $arrScreen['404'];
+			$screen	= '404';
+		}
+		else $_require	= $arrScreen[$screen];
 
-      // Choose the right screen
-      // -----------------------
+	}
+	else {
+		$_require = $arrScreen['homepage'];
+		$screen	= 'homepage';
+	}
+	
+	if ( file_exists( $_require ) )
+		require_once( $_require );
+	// -------------------------------------
+      
 
-      /* @TODO: - Make URL more beutiful
-       *        - Put this switch case in a dedicate function
-       */
-      switch ($_GET["screen"]) {
-
-            // ** **************************************************************
-            case "relation-add":
-            // ** **************
-                  // assing the screen
-                  $s->assign('screen', 'relation-add');
-
-                  if(!$managers["user"]->isConnected() )
-                        $err[] = Array("time" => time(), "msg" => _("You must be connected to add a relation."));
-                  else {
-                        // check if we need to add a relation
-                        if (isset($_POST["entity-left-mid"]) && isset($_POST["entity-right-mid"]) && isset($_POST["relation_type"]))
-                              $managers['relation']->addRelation();
-
-                        // load type of relation                  
-                        $rt["-1"] = Array("label" => "--", "direction" => "", "hint" => "");
-                        foreach ($managers['relation_type']->htmlOption() as $key => $val)
-                              $rt[$key] = $val;
-
-                        $s->assign('relation_type_option', $rt);
-                  }
-                  
-                  break;
-
-            // ** **************************************************************
-            case "relation-review":
-            // ** *****************
-
-                  // assing the screen
-                  $s->assign('screen', 'relation-review');
-
-                  if(!$managers["user"]->isConnected() )
-                        $err[] = Array("time" => time(), "msg" => _("You must be connected to review a relation."));
-                  else {
-
-                        // check if we need to add a relation
-                        if (isset($_POST["relation-id"]) && isset($_POST["rate"]))
-                              $managers['relation_trust_level']->addTrustLevel();
-
-
-                        if (isset($_GET["id"]) && is_numeric($_GET["id"]))
-                        /* @var $relation Relation */
-                              $relation = $managers["relation"]->getRelation($_GET["id"]);
-                        else  // get random relation
-                        /* @var $relation Relation */
-                              $relation = $managers["relation"]->getRandRelation();
-
-
-
-                        if ($relation === false)
-                              $err[] = Array("time" => time(), "msg" => _("There is no relation to review."));
-
-
-                        if ($relation->getCreator() == $_SESSION["user_id"]) {
-                              $relation = false;
-                              $err[] = Array("time" => time(), "msg" => _("You can't review a relation you have created."));
-                        }
-
-                        $s->assign("relation", $relation);
-
-                        if (!!$relation) {
-
-                              $s->assign("relation_value", $relation->getPropertyValues());
-
-                              /* @var $entity_left Node */
-                              $entity_left = $managers["node"]->getNode($relation->getNodeLeft());
-                              // assign Smarty variable
-                              if (!!$entity_left)
-                                    $s->assign("entity_left", $entity_left);
-
-
-                              /* @var $entity_right Node */
-                              $entity_right = $managers["node"]->getNode($relation->getNodeRight());
-                              // assign Smarty variable      
-                              if (!!$entity_right)
-                                    $s->assign("entity_right", $entity_right);
-
-
-                              /* @var $relation_type Relation_type */
-                              $relation_type = $managers["relation_type"]->getType($relation->getType());
-                              $s->assign("relation_type", $relation_type);
-                        }
-                  }
-
-
-                  break;
-
-            // ** **************************************************************
-            case "relation-visualise":
-            // ** ********************      
-                  // assing the screen
-                  $s->assign('screen', 'relation-visualise');
-
-                  $node_left = null;
-                  $node_right = null;
-
-                  // if a relation is given
-                  if (isset($_GET["rel"])) {
-
-                        $rel = explode("|", $_GET["rel"]);
-                        // pattern to test if the string is a freebase ID
-                        $freebase_id_pattern = "!(\/[a-z]{1,3}\/){1}([a-z0-9_]){3,}!i";
-
-                        if (preg_match($freebase_id_pattern, $rel[0]))
-                              $entity_left = $managers["node"]->getNode($rel[0]);
-
-                        if (count($rel) == 2 && preg_match($freebase_id_pattern, $rel[1]))
-                              $entity_right = $managers["node"]->getNode($rel[1]);
-                  }
-
-                  $s->assign("trust_rank", isset($_GET["trust_rank"]) && is_numeric($_GET["trust_rank"]) && $_GET["trust_rank"] <= 5 && $_GET["trust_rank"] >= 1 ? $_GET["trust_rank"] : 3);
-                  $s->assign("entity_left", $entity_left);
-                  $s->assign("entity_right", $entity_right);
-                  break;
-
-            default:
-                  // assing the screen
-                  $s->assign('screen', 'homepage');
-                  $s->assign("countRelation", $managers["relation"]->getRelationCount());
-                  $s->assign("countRelationReview", $managers["relation_trust_level"]->getRelationTrustLevelCount());
-                  $s->assign("countUser", $managers["user"]->getUserCount());
-                  break;
-      }
-
-      // every errors to a JSON
-      $s->assign("err_json", json_encode($err));
-      $s->display('index.tpl');
 ?>
