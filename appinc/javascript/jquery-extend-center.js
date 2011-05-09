@@ -29,9 +29,9 @@
 	
 	                // recherche dans les éléments parents positionnés en absolute
 	                var par = $(this).parent();
-	
-	                while( par.attr("nodeName") != "BODY") {
-	
+
+	                while( par.get(0) != null && par.get(0).nodeName != "BODY") {
+                          
 	                    // l'élément est modifié
 	                    if( par.css("position") == "absolute" ) {
 	                        x -= par.css("left" ).replace("px", "").replace(",", ".") * 1;
