@@ -330,6 +330,9 @@ form.inscription {
 }
 .up_menu li.hp:hover {
       box-shadow:0px 0px 0px transparent;
+      -o-box-shadow:0px 0px 0px transparent;
+      -webkit-box-shadow:0px 0px 0px transparent;
+      -moz-box-shadow:0px 0px 0px transparent;
 }
 
 .main_menu li.hp {
@@ -390,6 +393,9 @@ form.inscription {
       border-radius:82px;
 
       box-shadow:0px 0px 0px rgba(100%,100%,100%, 0);
+      -o-box-shadow:0px 0px 0px rgba(100%,100%,100%, 0);
+      -webkit-box-shadow:0px 0px 0px rgba(100%,100%,100%, 0);
+      -moz-box-shadow:0px 0px 0px rgba(100%,100%,100%, 0);
 }
 
 .main_menu li.add{
@@ -457,6 +463,9 @@ form.inscription {
       border-radius:50px;
 
       box-shadow:0px 0px 0px rgba(100%,100%,100%, 0);
+      -o-box-shadow:0px 0px 0px rgba(100%,100%,100%, 0);
+      -webkit-box-shadow:0px 0px 0px rgba(100%,100%,100%, 0);
+      -moz-box-shadow:0px 0px 0px rgba(100%,100%,100%, 0);
 }
 
 .up_menu li.add{
@@ -575,6 +584,9 @@ input.text,
 textarea {
       background-color: #f4f3e2 !important;
       box-shadow:1px 1px 3px 0px rgb(0,0,0) inset; 
+      -moz-box-shadow:1px 1px 3px 0px rgb(0,0,0) inset; 
+      -webkit-box-shadow:1px 1px 3px 0px rgb(0,0,0) inset; 
+      -o-box-shadow:1px 1px 3px 0px rgb(0,0,0) inset; 
       /* multiple background method image
       background:url("../images/input-corner-shadow.png") top left no-repeat,
                  url("../images/input-y-shadow.png") top left repeat-y,
@@ -597,6 +609,9 @@ input.placeholder {
 .required.highlight {
       background-color: #f8eded !important;
       box-shadow:1px 1px 3px 0px rgb(0,0,0) inset, 0px 0px 15px 0px #f8eded; 
+      -o-box-shadow:1px 1px 3px 0px rgb(0,0,0) inset, 0px 0px 15px 0px #f8eded; 
+      -webkit-box-shadow:1px 1px 3px 0px rgb(0,0,0) inset, 0px 0px 15px 0px #f8eded; 
+      -moz-box-shadow:1px 1px 3px 0px rgb(0,0,0) inset, 0px 0px 15px 0px #f8eded; 
 }
 
 input[type=text]:focus,
@@ -605,6 +620,9 @@ input.text:focus,
 textarea:focus,
 .required.highlight:focus{
       box-shadow:1px 1px 3px 0px rgb(0,0,0) inset, 0px 0px 15px 0px #f4f3e2;
+      -o-box-shadow:1px 1px 3px 0px rgb(0,0,0) inset, 0px 0px 15px 0px #f4f3e2;
+      -moz-box-shadow:1px 1px 3px 0px rgb(0,0,0) inset, 0px 0px 15px 0px #f4f3e2;
+      -webkit-box-shadow:1px 1px 3px 0px rgb(0,0,0) inset, 0px 0px 15px 0px #f4f3e2;
       background-color: #f4f3e2 !important;
 }
 
@@ -890,6 +908,10 @@ input.ui-autocomplete-loading {
 .classic-form.hint .relation-hint {
       height:auto;
       padding:5px;
+}
+
+.relation-hint:first-letter{
+      text-transform: uppercase; 
 }
 
 input.half {
