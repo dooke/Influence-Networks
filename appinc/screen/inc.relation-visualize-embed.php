@@ -1,6 +1,7 @@
 <?php
+      
       /**
-       * This include construts the screen to visualize a relation.
+       * This include construts the embedable screen to visualize a relation.
        * 
        * Include must be declared into /config/config.init.php
        * in the $arrScreen associative Array.
@@ -10,7 +11,7 @@
        */
 
       // assing the screen
-      $s->assign('screen', 'relation-visualize');
+      $s->assign('screen', 'relation-visualize-embed');
 
       $node_left = null;
       $node_right = null;
@@ -35,5 +36,5 @@
 
       // every errors to a JSON
       $s->assign("err_json", json_encode($err));
-      $s->display('index.tpl');
+      $s->display('embed.tpl');
 ?>

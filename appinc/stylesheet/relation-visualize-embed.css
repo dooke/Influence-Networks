@@ -1,0 +1,253 @@
+/**
+ * Define the style of relation visualize embed mode
+ * @author Pirhoo <pierre@owni.fr>
+ */  
+ 
+ 
+h1 {
+      display:none;   
+}
+
+.radiusLight {
+      border-radius:3px;
+      -webkit-border-radius:3px;
+      -moz-border-radius:3px;
+      -khtml-border-radius:3px; 
+      -o-border-radius:3px;    
+      background: #d7d7d7;
+}
+
+.simpleShadow {
+      box-shadow:0px 2px 5px rgba(0,0,0,0.5); 
+      -moz-box-shadow:0px 2px 5px rgba(0,0,0,0.5); 
+      -khtml-box-shadow:0px 2px 5px rgba(0,0,0,0.5); 
+      -webkit-box-shadow:0px 2px 5px rgba(0,0,0,0.5); 
+      -o-box-shadow:0px 2px 5px rgba(0,0,0,0.5); 
+}
+
+
+#workspace, #visualize-layout {
+      position: absolute;
+      overflow:hidden;
+      top:0; left: 0;
+      z-index:8;
+      
+      width:100%;
+      height:100%;
+      
+      margin:0px;
+      padding:0px;
+      border:0px;
+      
+      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=rgb(60,92,107), endColorstr=rgb(158,210,221));
+      background-image:url("../images/line.png"), -webkit-gradient(linear, left bottom, left top,
+          color-stop(0, rgb(60,92,107)),
+          color-stop(0.72, rgb(158,210,221))
+      );
+      background-image:url("../images/line.png"), -moz-linear-gradient(center bottom,
+          rgb(60,92,107) 0%,
+          rgb(158,210,221) 72%
+      );
+}
+
+#visualize-layout {
+      background: url("../images/logo.png") no-repeat 5px 5px;
+}
+
+
+menu.ctrl {
+      padding:0px;
+      margin:0px;
+}
+
+menu.ctrl a {
+      position:absolute;
+      right:20px;
+      z-index:9;
+      
+      display:block;
+      
+      height:30px; 
+      width:30px;
+      
+      overflow:hidden;
+      
+      text-indent: -999px;
+      cursor:pointer;
+      
+      background: transparent;
+}
+
+menu.ctrl a.zoomIn {
+      top:20px;
+      background: url("../images/zoom-in.png") no-repeat center center;
+}
+
+menu.ctrl a.zoomOut {
+      top:60px;
+      background: url("../images/zoom-out.png") no-repeat center center;
+}
+
+a.backApp {
+      position:absolute;
+      top:auto;
+      bottom:20px;
+      text-indent: 0px !important;
+}
+
+.tooltips {
+      position:absolute;
+      bottom:20px;
+      left:20px;
+      z-index:9;
+      font-size:16px;
+      font-family: 'Vollkorn',arial,serif;
+      color:#DAE9EA;
+      text-shadow:0px 0px 10px black;
+      
+      padding-top:10px;
+}
+
+
+
+.deroule {
+      cursor:pointer;
+      margin-top:10px;
+      clear:both;
+      height:18px;
+      background:url("../images/deroule.png") no-repeat center -18px;
+}
+
+.deroule.open {
+      background:url("../images/deroule.png") no-repeat center top;
+}
+
+#node-informations {
+      color:#F4F3E2;
+
+      background: rgba(55, 33, 55, 0.8);
+
+      overflow:auto;
+      padding:1%;
+      position: relative;
+      top:1%;
+      left:110%;
+
+      z-index:555;
+      width:96%;
+      max-height:94%;
+      margin:0px;
+
+      display:none;
+}
+#node-informations .relations {
+      width:auto;
+      
+}
+
+#node-informations h4 {
+      border-bottom:2px solid #0B090B;
+      font-size:18px;
+      font-family: 'Vollkorn', arial, serif;
+ }
+
+
+#node-informations .dynamique-content {
+      margin-top:20px;
+      padding-right:10px;
+      font-size:14px;
+      overflow:auto;
+}
+
+#node-informations h5 {
+      color:#CAA8CF;
+      text-transform: uppercase;
+      padding:5px 0px;
+}
+
+
+#node-informations .close {
+      float:right;
+      text-indent: 999px;
+      width:16px;
+      height:16px;
+      margin-top:-5px;
+      margin-right:-5px;
+      background:url('../images/close.png') no-repeat center center;
+      overflow:hidden;
+      cursor: pointer;
+}
+
+#node-informations .relations table {
+      width:100%;
+      font-size:11px;
+}
+
+#node-informations .relations thead tr {
+      color:#F4F3E2;
+      background: rgb(55, 33, 55);
+      font-size:12px;
+}
+#node-informations .relations thead tr td {
+      padding:2px 6px;
+      font-weight:bold;
+}
+
+#node-informations .relations tbody tr td {      
+      padding:2px 6px;
+      cursor: pointer;
+}
+
+#node-informations .freebase-label {
+      font-style: italic;
+      font-size:12px;
+}
+
+#node-informations .relations td.review a {
+      color:#F4F3E2;
+}
+
+#node-informations .relations tbody tr.odd{
+      background: rgba(221, 195, 223, 0.1)
+}
+
+
+#node-informations .relations .arrow a {
+      display:block;
+      height: 5px;
+      width:13px;
+      overflow:hidden;
+      text-indent:-999px;
+      background:url('../images/topbottom-b.png') no-repeat 0px 0px;
+}
+
+#node-informations .relations tr.open .arrow a {
+      background-position: 0px -5px;
+}
+
+
+#node-informations .relations tr.details .content {
+      padding:10px;      
+      cursor:auto;
+}
+
+#node-informations .relations tr.details .content a{
+      color:#A86372;
+}
+
+.nograph {
+      text-align:center;
+      width:400px;
+      margin-left:-200px;
+      position:absolute;
+      top:50%;
+      left:50%
+}
+
+.nograph, 
+.nograph a {      
+      font-size:16px;
+      font-family: 'Vollkorn',arial,serif;
+      color:white;
+      text-shadow:0px 0px 5px black;
+}

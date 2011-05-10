@@ -217,3 +217,29 @@ footer section {
     background: black;
     margin-top:5px;
 }
+
+.button {
+      display:inline-block;
+      color: #372137;
+      font-family: 'Vollkorn',arial,serif;
+      font-weight: bold;
+      font-size:14px;
+      font-style: italic;
+      
+      border-radius:2px;
+      -webkit-border-radius:2px;
+      -o-border-radius:2px;
+      -moz-border-radius:2px;
+      
+      background: #f4f3e0 !important;
+      height:auto !important;
+      
+      box-shadow:0px 3px 4px #372137;
+      -webkit-box-shadow:0px 3px 4px #372137;
+      -o-box-shadow:0px 3px 4px #372137;
+      -moz-box-shadow:0px 3px 4px #372137;
+      
+      width:auto !important;
+      padding:5px;
+      text-decoration: none;
+}

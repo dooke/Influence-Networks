@@ -8,9 +8,9 @@
 
       {include file="screen/relation-review.tpl"}     
       
-{elseif $screen=="relation-visualise"}
+{elseif $screen=="relation-visualize"}
 
-      {include file="screen/relation-visualise.tpl"}
+      {include file="screen/relation-visualize.tpl"}
       
 {else}
 

@@ -3,7 +3,7 @@
 (function($){
     $.fn.extend({
         center: function() {
-
+              
             if( typeof $(this).data("center_last_update") == "undefined" ) {
                         $(this).data("center_last_update", 0); // timestamp who indicates the last center update
 

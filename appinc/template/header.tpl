@@ -85,9 +85,9 @@
                   
                   <script type="text/javascript" src="{$smarty.const.APP_URL}appinc/javascript/relation-review.js"></script>                  
             
-            {elseif $screen=="relation-visualise"}
+            {elseif $screen=="relation-visualize"}
                   
-                  <script type="text/javascript" src="{$smarty.const.APP_URL}appinc/javascript/relation-visualise.js"></script>                  
+                  <script type="text/javascript" src="{$smarty.const.APP_URL}appinc/javascript/relation-visualize.js"></script>                  
             
             {elseif $isConnected}            
                   {literal}

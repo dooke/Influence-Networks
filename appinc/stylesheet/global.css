@@ -1136,6 +1136,7 @@ input.half {
       z-index:1;
       color:#DAE9EA;
       text-shadow:0px 0px 10px black;
+      font-family: 'Vollkorn',arial,serif;
 }
 
 .classic-form.visualize {

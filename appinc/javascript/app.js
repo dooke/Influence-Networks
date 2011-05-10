@@ -200,7 +200,7 @@ $(document).ready(function () {
     
       initPlaceholder();
     
-      $(".center").center();
+      if( typeof $().center == "function") $(".center").center();
     
       $(".trust_level").tipsy({
             gravity:'ne', 
