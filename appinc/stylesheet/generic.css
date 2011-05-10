@@ -54,13 +54,23 @@ header h2 {
 #mask {
     height:667px;
     width:990px;
-    margin-top:-667px;
-    background: url("../images/mask.png");
+    background: rgba(250,250,250,0.6);
+    box-shadow:0px 0px 600px 50px #eee inset;
+    -webkit-box-shadow:0px 0px 600px 50px #eee inset;
+    -o-box-shadow:0px 0px 600px 50px #eee inset;
+    -moz-box-shadow:0px 0px 600px 50px #eee inset;
 
-    position:relative;
+    position:absolute;
     z-index:799;
 
     display:none;
+}
+
+
+.no-rgba #mask {
+      background: white;
+      opacity:0.6;
+      filter: alpha(opacity = 60);
 }
 
 footer {
@@ -242,4 +252,103 @@ footer section {
       width:auto !important;
       padding:5px;
       text-decoration: none;
+}
+
+
+
+.submit.violet {
+      border:0px;
+      background: url("../images/button-violet.png") 0px 0px no-repeat;
+      text-align: center;
+      width:93px;
+      height: 55px;
+      font-size:12px;
+      line-height: 30px;
+      padding-top: 17px;
+      padding-bottom:10px;
+      color:#d7d7d7;   
+      font-weight: bold;
+      font-family: 'Vollkorn', arial, serif; 
+      display:inline-block;
+      padding: 0;
+      cursor:pointer;
+      text-decoration: none;
+
+}
+
+input.submit.violet {
+      background: url("../images/button-violet.png") 0px 12px no-repeat;
+      padding-top:0px;
+}
+
+.light { 
+      border:0px;
+      background: url("../images/button-light.png") transparent 0px 5px no-repeat;
+      color: #372137;
+      float: right;
+      font-family: 'Vollkorn',arial,serif;
+      font-size: 16px;
+      font-weight: bold;
+      height: 55px;
+      line-height: 10px;
+      padding-top: 17px;
+      padding-bottom:10px;
+      position: relative;
+      text-align: center;
+      text-decoration: none;
+      width: 118px;
+}
+
+
+input.light {
+      padding-top:0px;
+}
+
+
+input[type=text],
+input[type=password],
+input.text,
+textarea {
+      background-color: #f4f3e2 !important;
+      box-shadow:1px 1px 3px 0px rgb(0,0,0) inset; 
+      -moz-box-shadow:1px 1px 3px 0px rgb(0,0,0) inset; 
+      -webkit-box-shadow:1px 1px 3px 0px rgb(0,0,0) inset; 
+      -o-box-shadow:1px 1px 3px 0px rgb(0,0,0) inset; 
+      /* multiple background method image
+      background:url("../images/input-corner-shadow.png") top left no-repeat,
+                 url("../images/input-y-shadow.png") top left repeat-y,
+                 url("../images/input-x-shadow.png") top left repeat-x;*/
+      border:0px;
+      padding:4px 4px;
+      color:#5d405d;
+
+      -moz-transition:0.5s;
+      -khtml-transition:0.5s;
+      -webkit-transition:0.5s;
+      -o-transition:0.5s;
+      transition:0.5s;
+}
+
+input.placeholder {
+      color:#a3a3a3;
+}
+
+.required.highlight {
+      background-color: #f8eded !important;
+      box-shadow:1px 1px 3px 0px rgb(0,0,0) inset, 0px 0px 15px 0px #f8eded; 
+      -o-box-shadow:1px 1px 3px 0px rgb(0,0,0) inset, 0px 0px 15px 0px #f8eded; 
+      -webkit-box-shadow:1px 1px 3px 0px rgb(0,0,0) inset, 0px 0px 15px 0px #f8eded; 
+      -moz-box-shadow:1px 1px 3px 0px rgb(0,0,0) inset, 0px 0px 15px 0px #f8eded; 
+}
+
+input[type=text]:focus,
+input[type=password]:focus,
+input.text:focus,
+textarea:focus,
+.required.highlight:focus{
+      box-shadow:1px 1px 3px 0px rgb(0,0,0) inset, 0px 0px 15px 0px #f4f3e2;
+      -o-box-shadow:1px 1px 3px 0px rgb(0,0,0) inset, 0px 0px 15px 0px #f4f3e2;
+      -moz-box-shadow:1px 1px 3px 0px rgb(0,0,0) inset, 0px 0px 15px 0px #f4f3e2;
+      -webkit-box-shadow:1px 1px 3px 0px rgb(0,0,0) inset, 0px 0px 15px 0px #f4f3e2;
+      background-color: #f4f3e2 !important;
 }

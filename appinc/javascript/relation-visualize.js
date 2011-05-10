@@ -6,8 +6,13 @@ var treeData = {
 };
 var force = null, vis;
 
-$(function () {    
+$(function () {  
       
+      
+      $(".embed-field input").click(function(event) {
+            $(this).select();
+            event.preventDefault();
+      });
 
 
       $(".tooltips").tipsy({          
@@ -15,6 +20,10 @@ $(function () {
             html: true,
             opacity:1,
             trigger: "manual"
+      });
+      
+      $(".visu-tool .embed").click(function(event) {
+            showVisuEmbed(event);
       });
 
 
@@ -31,15 +40,9 @@ $(function () {
       } );
 
 
-      /*************
-        * Put event *
-        *************/
-
-
       /*********************
         * Autocomplete module
         ***/          
-
       // a tooltips to indicate which input is empty
       $(".node_search").tipsy({
             trigger: "manual", 
@@ -355,14 +358,23 @@ function updatePermalink() {
       if( $(".entity-left-mid").val()  != "" 
       ||  $(".entity-right-mid").val() != "" ) {
             
+            // permalink
             var permalink = "?screen=relation-visualize&rel=";
             permalink    += $(".entity-left-mid").val()  != "" ? $(".entity-left-mid").val() + "|"  : "";
             permalink    += $(".entity-right-mid").val() != "" ? $(".entity-right-mid").val()       : "";
             permalink    += "&trust_rank=" + $( ":input[name=rate]" ).val();
             
-            $("h3 a.permalink").attr("href", permalink).show();
+            $(".visu-tool a.permalink").attr("href", permalink).show();
             
-      } else $("h3 a.permalink").attr("href", "").hide();
+            // embed 
+            var embed = "?screen=relation-visualize-embed&rel=";
+            embed    += $(".entity-left-mid").val()  != "" ? $(".entity-left-mid").val() + "|"  : "";
+            embed    += $(".entity-right-mid").val() != "" ? $(".entity-right-mid").val()       : "";
+            embed    += "&trust_rank=" + $( ":input[name=rate]" ).val();
+            
+            $(".visu-tool a.embed").attr("href", embed).show();
+            
+      } else $(".visu-tool a.permalink, .visu-tool a.embed").attr("href", "").hide();
 }
 
 
@@ -559,7 +571,23 @@ function isTarget(freebase_id) {
       return $(":input[name=entity-left-mid]").val() == freebase_id ^ $(":input[name=entity-right-mid]").val()  == freebase_id;
 }
 
-
+function showVisuEmbed(event) {
+      
+      event.preventDefault();
+      
+      // show field
+      $(".embed-field").fadeIn(400);
+      // put the right code
+      $(".embed-field input").val(   $(".embed-field input").data("code").replace("@@URL@@", $(".embed-field input").data("url") + $("a.embed").attr("href")) );      
+      // show mask
+      $("#mask").hide().fadeIn(400).unbind("click").bind("click", function() {
+            $("#mask").fadeOut(400);
+            $(".embed-field").fadeOut(400);
+      });
+      
+      
+      
+}
 
 function relationsRender() {
       

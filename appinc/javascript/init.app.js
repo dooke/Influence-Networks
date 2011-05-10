@@ -5,7 +5,7 @@ var keepFooterOpen = false;
 $(document).ready(function () {
     
     // centre les éléments avec la classe .center millieu de l'écran (ici l'app)
-    $(".center").center();
+    if(typeof $().center == "function") $(".center").center();
 
     
     // Déclenche les infobulles personnalisées sur les éléments .share et leur ajoute la classe "shareTitle"
@@ -44,19 +44,6 @@ $(document).ready(function () {
     }
 
 });
-
-
-// Affiche le code d'embed pour les apps
-function doEmbed() {
-
-	$("#mask").fadeIn(500);
-	$(".inputEmbed").fadeIn(500);
-
-	// cache l'embed au click sur le masque
-	$("#mask").click(function () {
-		$(".inputEmbed").fadeOut(500);
-	});
-}
 
 
 function showFooter() {

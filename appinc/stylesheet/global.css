@@ -163,60 +163,6 @@ form.connexion label, form.inscription label {
       margin-bottom:10px;   
 }
 
-.submit.violet {
-      border:0px;
-      background: url("../images/button-violet.png") 0px 0px no-repeat;
-      text-align: center;
-      width:93px;
-      height: 55px;
-      font-size:12px;
-      line-height: 30px;
-      padding-top: 17px;
-      padding-bottom:10px;
-      color:#d7d7d7;   
-      font-weight: bold;
-      font-family: 'Vollkorn', arial, serif; 
-      display:inline-block;
-      padding: 0;
-      cursor:pointer;
-      text-decoration: none;
-
-}
-
-input.submit.violet {
-      background: url("../images/button-violet.png") 0px 12px no-repeat;
-      padding-top:0px;
-}
-
-
-
-
-
-.light { 
-      border:0px;
-      background: url("../images/button-light.png") transparent 0px 5px no-repeat;
-      color: #372137;
-      float: right;
-      font-family: 'Vollkorn',arial,serif;
-      font-size: 16px;
-      font-weight: bold;
-      height: 55px;
-      line-height: 10px;
-      padding-top: 17px;
-      padding-bottom:10px;
-      position: relative;
-      text-align: center;
-      text-decoration: none;
-      width: 118px;
-}
-
-
-input.light {
-      padding-top:0px;
-}
-
-
-
 form.inscription {
       position:absolute;
       top:10px;    
@@ -564,6 +510,13 @@ input.node_right {
       float:right;
 }
 
+.visu-tool {
+      position:absolute;
+      top:26px;
+      left:480px;
+      font-size:12px;
+} 
+
 .relation-form {
       margin: auto;
       text-align: center;
@@ -578,53 +531,6 @@ input.node_right {
 }
 
 
-input[type=text],
-input[type=password],
-input.text,
-textarea {
-      background-color: #f4f3e2 !important;
-      box-shadow:1px 1px 3px 0px rgb(0,0,0) inset; 
-      -moz-box-shadow:1px 1px 3px 0px rgb(0,0,0) inset; 
-      -webkit-box-shadow:1px 1px 3px 0px rgb(0,0,0) inset; 
-      -o-box-shadow:1px 1px 3px 0px rgb(0,0,0) inset; 
-      /* multiple background method image
-      background:url("../images/input-corner-shadow.png") top left no-repeat,
-                 url("../images/input-y-shadow.png") top left repeat-y,
-                 url("../images/input-x-shadow.png") top left repeat-x;*/
-      border:0px;
-      padding:4px 4px;
-      color:#5d405d;
-
-      -moz-transition:0.5s;
-      -khtml-transition:0.5s;
-      -webkit-transition:0.5s;
-      -o-transition:0.5s;
-      transition:0.5s;
-}
-
-input.placeholder {
-      color:#a3a3a3;
-}
-
-.required.highlight {
-      background-color: #f8eded !important;
-      box-shadow:1px 1px 3px 0px rgb(0,0,0) inset, 0px 0px 15px 0px #f8eded; 
-      -o-box-shadow:1px 1px 3px 0px rgb(0,0,0) inset, 0px 0px 15px 0px #f8eded; 
-      -webkit-box-shadow:1px 1px 3px 0px rgb(0,0,0) inset, 0px 0px 15px 0px #f8eded; 
-      -moz-box-shadow:1px 1px 3px 0px rgb(0,0,0) inset, 0px 0px 15px 0px #f8eded; 
-}
-
-input[type=text]:focus,
-input[type=password]:focus,
-input.text:focus,
-textarea:focus,
-.required.highlight:focus{
-      box-shadow:1px 1px 3px 0px rgb(0,0,0) inset, 0px 0px 15px 0px #f4f3e2;
-      -o-box-shadow:1px 1px 3px 0px rgb(0,0,0) inset, 0px 0px 15px 0px #f4f3e2;
-      -moz-box-shadow:1px 1px 3px 0px rgb(0,0,0) inset, 0px 0px 15px 0px #f4f3e2;
-      -webkit-box-shadow:1px 1px 3px 0px rgb(0,0,0) inset, 0px 0px 15px 0px #f4f3e2;
-      background-color: #f4f3e2 !important;
-}
 
 .entity-desc  {
       margin:0px;
@@ -1151,4 +1057,30 @@ h3 .permalink {
 }
 .visualize h3 .permalink {
       display:none;
+}
+
+.embed-field {
+      z-index:888;
+      position:absolute;
+      width:990px;
+      height:100px;
+      top:50%;
+      margin-top:-50px;
+      
+      font-size:20px;
+      color:#372137;
+      font-family: 'Vollkorn',arial,serif;
+      
+      text-align:center;
+      
+      text-shadow:0px 0px 20px  #eee;
+      display:none;
+}
+
+
+
+.embed-field input{
+      margin-top:5px;
+      font-size:20px;
+      width:600px;
 }

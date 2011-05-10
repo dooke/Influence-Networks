@@ -6,14 +6,17 @@
 <h2>{t}Visualize relations{/t}</h2>
 
 <section class="classic-form visualize">
-      <h3>{t}See the relationship between...{/t}&nbsp;<a href="./" class="permalink">{t}Permalink{/t}</a></h3>
+      <h3>{t}See the relationship between...{/t}</h3>
       <form method="POST" action="">
 
             <input type="hidden"  name="rate" value="{$trust_rank}" />
             
-            <div style="text-align:center;">
+            <div class="visu-tool">
+                  <a href="./" class="permalink">{t}Permalink{/t}</a>
+                  <a href="./" class="embed">{t}Embed{/t}</a>
+            </div>
+            <div class="relation-form">
                   <input type="text" name="node-left"  title="{t}You must choose an entity from Freebase. Please select one in the list below.{/t}"  id="to-entity-left" class="node_search required node_left" placeholder="Personality or institution" value="{if $entity_left}{$entity_left->getLabel()}{/if}" />
-                  <img src="./appinc/images/and.png" alt="&" class="and" />
                   <input type="text" name="node-right" title="{t}You must choose an entity from Freebase. Please select one in the list below.{/t}" id="to-entity-right" class="node_search required node_right" placeholder="Personality or institution" value="{if $entity_right}{$entity_right->getLabel()}{/if}" />
             </div>
 
@@ -124,3 +127,10 @@
             </div>
       </form>
 </section>
+      
+<div class="embed-field">
+      
+      <p>{t}Use this code to embed the current visualization on your website:{/t}</p>
+      <input value='' data-code='<iframe src="@@URL@@" width="100%" height="400px"></iframe>' data-url='{$smarty.const.APP_URL}' readonly type="text" />
+
+</div>
