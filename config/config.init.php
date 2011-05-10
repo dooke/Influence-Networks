@@ -39,7 +39,8 @@
                   "relation-add" => "./appinc/screen/inc.relation-add.php",
                   "relation-review" => "./appinc/screen/inc.relation-review.php",
                   "relation-visualize" => "./appinc/screen/inc.relation-visualize.php",
-                  "relation-visualise" => "./appinc/screen/inc.relation-visualize.php" // retro-compatibility
+                  "relation-visualise" => "./appinc/screen/inc.relation-visualize.php", // retro-compatibility
+                  "relation-visualize-embed" => "./appinc/screen/inc.relation-visualize-embed.php"
                       );
 
 
