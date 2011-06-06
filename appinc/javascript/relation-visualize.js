@@ -379,118 +379,111 @@ function updatePermalink() {
 
 
 function resetDataVis(data) {
-      
-      // update the permalink
-      updatePermalink();
-      
-      if(data != undefined) data_rel = data;
-      
-      var nodes = new Array(); 
-      var links = new Array();
-      
+    
+    updatePermalink();
 
-      $.each(data_rel.relations, function(i, rel) {                           
+    if (data != undefined) data_rel = data;
 
-            if(rel.trust_level >= $(":input[name=rate]").val() ) {
-                  if( !idExist(nodes, rel.node_left) )
-                        nodes.push( { 
-                              nodeName    : rel.node_left,
-                              name        : rel.node_left,
-                              id          : rel.node_left,
-                              label       : rel.node_left_label,
-                              freebase_id : rel.node_left_freebase_id,
-                              type        : rel.node_left_type,
-                              group       : isTarget(rel.node_left_freebase_id) ? 1 : 2
-                        } );
+    var nodes = new Array();
+    var links = new Array();
 
-                  if( !idExist(nodes, rel.node_right) )
-                        nodes.push( { 
-                              nodeName    : rel.node_right,
-                              name        : rel.node_right,
-                              id          : rel.node_right,
-                              label       : rel.node_right_label,
-                              freebase_id : rel.node_right_freebase_id,
-                              type        : rel.node_right_type,
-                              group       : isTarget(rel.node_right_freebase_id) ? 1 : 2
-                        } );
+    $.each(data_rel.relations,
+        function(i, rel) {
 
-                  if( idExist(nodes, rel.node_right) && idExist(nodes, rel.node_left) ) {
+            if (rel.trust_level >= $(":input[name=rate]").val()) {
+                if (!idExist(nodes, rel.node_left))
+                    nodes.push({
+                        nodeName : rel.node_left,
+                        name : rel.node_left,
+                        id : rel.node_left,
+                        label : rel.node_left_label,
+                        freebase_id : rel.node_left_freebase_id,
+                        type : rel.node_left_type,
+                        group : isTarget(rel.node_left_freebase_id) ? 1 : 2
+                    });
 
-                        if( !idExist(links, rel.id) )
+                if (!idExist(nodes, rel.node_right))
+                    nodes.push({
+                        nodeName : rel.node_right,
+                        name : rel.node_right,
+                        id : rel.node_right,
+                        label : rel.node_right_label,
+                        freebase_id : rel.node_right_freebase_id,
+                        type : rel.node_right_type,
+                        group : isTarget(rel.node_right_freebase_id) ? 1 : 2
+                    });
 
-                              links.push({ 
-                                    source     : getIndex(nodes, rel.node_left), 
-                                    target     : getIndex(nodes, rel.node_right), 
-                                    id         : rel.id,
-                                    value      : 1000 * (rel.trust_level-1),
-                                    trust_level : rel.trust_level
-                              });
-                  }
+                if (idExist(nodes, rel.node_right)
+                    && idExist(nodes, rel.node_left)) {
+
+                    if (!idExist(links, rel.id))
+
+                        links.push({
+                            source : getIndex(nodes, rel.node_left),
+                            target : getIndex(nodes, rel.node_right),
+                            id : rel.id,
+                            value : 1000 * (rel.trust_level - 1),
+                            trust_level : rel.trust_level
+                        });
+                }
             }
 
-      });       
+        });
 
-      $.each(data_rel.nodes, function(i, node) {               
-            
-            if( !idExist(nodes, node.id) )
-                  nodes.push( { 
-                        nodeName    : node.id,
-                        name        : node.id,
-                        id          : node.id,
-                        label       : node.label,
-                        freebase_id : node.freebase_id,
-                        type        : node.type,
-                        group       : 1
-                  } );             
+    $.each(data_rel.nodes, function(i, node) {
 
-      });       
-      
-      $(".tooltips").tipsy("show");                  
-      // regarde si une relation existe entre les deux nodes      
-      if( $(".entity-left-mid").val() != "" && $(".entity-right-mid").val() != "") {
-          
-          
-            var midLeft  = $(".entity-left-mid").val();
-            var midRight = $(".entity-right-mid").val();
-          
-            var i = 0;
-            for(i in data_rel.relations) {
-              
-                  var r = data_rel.relations[i];
-              
-                  var a = (r.node_left_freebase_id  == midLeft && r.node_right_freebase_id == midRight);
-                  var b = (r.node_right_freebase_id == midLeft && r.node_left_freebase_id  == midRight);
+        if (!idExist(nodes, node.id))
+            nodes.push({
+                nodeName : node.id,
+                name : node.id,
+                id : node.id,
+                label : node.label,
+                freebase_id : node.freebase_id,
+                type : node.type,
+                group : 1
+            });
 
-                  if(a || b) {
-                        $(".tooltips").tipsy("hide");
-                        break;
-                  }
-              
+    });
+
+    $(".tooltips").tipsy("show");
+    // regarde si une relation existe entre les deux nodes
+    if ($(".entity-left-mid").val() != "" && $(".entity-right-mid").val() != "") {
+
+        var midLeft = $(".entity-left-mid").val();
+        var midRight = $(".entity-right-mid").val();
+
+        var i = 0;
+        for (i in data_rel.relations) {
+
+            var r = data_rel.relations[i];
+
+            var a = (r.node_left_freebase_id == midLeft && r.node_right_freebase_id == midRight);
+            var b = (r.node_right_freebase_id == midLeft && r.node_left_freebase_id == midRight);
+
+            if (a || b) {
+                $(".tooltips").tipsy("hide");
+                break;
             }
-          
-          
-      } else $(".tooltips").tipsy("hide");  
- 
-      
-      // if the force layout are defined and SVG supported
-      if(Modernizr.svg) {      
-                  
-            treeData.nodes = nodes;
-            treeData.links = links;
-            
-            if(force != null) {
-                  
-                  force.nodes(treeData.nodes)
-                  force.links(treeData.links);
-                  force.reset();
-                  
-            } 
-            
-            if(typeof vis != "undefined") vis.render();  
-            
-      }
-      
-      
+
+        }
+
+    } else
+        $(".tooltips").tipsy("hide");
+
+    treeData.nodes = nodes;
+    treeData.links = links;
+
+    if (force != null && Modernizr.svg) {
+
+        force.nodes(treeData.nodes)
+        force.links(treeData.links);
+        force.reset();
+
+        if (typeof vis != "undefined" && treeData.nodes.length > 0)
+            vis.render();
+
+    }
+
 }
 
 function showRelationDetails(element) {
@@ -590,55 +583,115 @@ function showVisuEmbed(event) {
 }
 
 function relationsRender() {
-      
+    
+    var lastMouseDown = 0;
+    
+    if (Modernizr.svg) {
+        
+        vis = new pv.Panel()
+                    // the same width if the contener
+                    .width($("#visualize-layout").outerWidth())
+                    // the same height if the contener
+                    .height($("#visualize-layout").outerHeight())
+                    // transparent color
+                    .fillStyle("rgba(255,255,255,0.01)");
 
-            if (Modernizr.svg){ 
-                  
-                  vis = new pv.Panel()
-                        .width( $("#visualize-layout").outerWidth() )
-                        .height( $("#visualize-layout").outerHeight() )
-                        .fillStyle("rgba(255,255,255,0.01)")    
-                        .event("mousedown", pv.Behavior.pan())
-                        .event("mousewheel", pv.Behavior.zoom());  
-                  
-                  // store panel to zoom (later)
-                  panel = vis;
-                  
-                  force = vis.add(pv.Layout.Force)
-                        .nodes(treeData.nodes)
-                        .links(treeData.links)
-                        .chargeConstant(-100)
-                        .springLength(120)
-                        .bound(true);
-                        
-                  force.link.add(pv.Line)
-                      .lineWidth(2)
-                      .strokeStyle("rgba(255,250,255,0.7)");
+        // enable zoom
+        if (Modernizr.svg)
+            vis.event("mousewheel", pv.Behavior.zoom());
 
-                  force.node.add(pv.Dot)
-                        .event("dblclick", function (d) {loadFreebaseData(d);})
-                        .radius(function(d) {return 5 + d.linkDegree/10000} )
-                        .fillStyle(function(d)    {return d.type == "/organization/organization" ? "#DAE9EA" : "#432946"})
-                        .lineWidth(function(d)    {return d.group == 1 ? 2 : 2} )
-                        .strokeStyle( function(d) {return d.type == "/organization/organization" ? "#432946" : "#DAE9EA"})
-                        .title(function(d) {return d.freebase_id} )
-                        .event("mousedown", pv.Behavior.drag())
-                        .event("drag", force)
-                        .anchor("top")
-                              .add(pv.Label)
-                                    .text( function (d) {return d.label})
-                                    .font(function(d) {return d.group == 1 ? "bold 16px Verdana" : "bold 12px Verdana";})
-                                    .textStyle("#432946")
-                                    .textAlign("center")
-                                    .textDecoration("none");
-                  vis.render();
-                  
-                  
+        // registers the mousedown time to distingate the click to the drag event
+        pv.listen($("#visualize-layout")[0], "mousedown", function() {
+            lastMouseDown = new Date().getTime();        
+        });
 
-            } else {
+        // store panel to zoom (later)
+        var panel = vis;
 
-                  $(function () {
-                        $("#visualize-layout").append('<div class="nograph">Your web browser cannot display the graph. Please, use <a href="http://www.mozilla-europe.org/fr/firefox/">Mozilla Firefox</a> or <a href="http://www.google.com/chrome">Google Chrome</a>.</div>');
-                  });
-            }
+        force = vis.add(pv.Layout.Force)
+                    // sets nodes data
+                    .nodes(treeData.nodes)
+                    // sets links data
+                    .links(treeData.links)
+                    // minimum lenght bewteen nodes
+                    .springLength(120)
+                    .chargeConstant(-100)
+                    .bound(true);
+
+        // desables animation for flash
+        if (!Modernizr.svg) force.iterations(99);
+
+        // creates line for each link
+        force.link.add(pv.Line)
+                    // line width
+                    .lineWidth(2)
+                    // line color
+                    .strokeStyle("#DAE9EA");
+
+        // creates dots for each nodes
+        force.node.add(pv.Dot)
+            // dot radius according to the link degree (number of links)
+            .shapeRadius(function(d) {
+                return 5 + d.linkDegree / 10000
+            })
+            // change the border color according to the node type
+            .fillStyle(function(d) {
+                return d.type == "/organization/organization" ? "#DAE9EA" : "#432946"
+            })
+            // border size according to the node type
+            .lineWidth(function(d) {
+                return d.group == 1 ? 2 : 2
+            })
+            // border color according to the node type
+            .strokeStyle(function(d) {
+                return d.type == "/organization/organization" ? "#432946" : "#DAE9EA"
+            })
+            // title of the node (on mouse hover) according to the node type
+            .title(function(d) {
+                return d.freebase_id
+            })
+            // event to enable the force behavior
+            .event("drag", force)
+            // event to enable the drag event on each node
+            .event("mousedown", pv.Behavior.drag())
+            // event to show the list of relations for each nodes
+            .event("mouseup", function() {     
+
+                var d = treeData.nodes[this.index];
+
+                // we add a temporisation to distingate click and drag
+                if (new Date().getTime() - lastMouseDown < 400) {
+
+                    lastMouseDown = 0;
+
+                    // show the list
+                    loadFreebaseData(d);
+                }
+
+            })
+                // add an anchor to the node to align label to the top of the dot
+                .anchor("top")
+                // create a label
+                    .add(pv.Label)
+                        // change the font appearence
+                        .font(function(d) {
+                            return d.group == 1 ? "bold 16px sans-serif" : "bold 13px sans-serif";
+                        })
+                        // text color
+                        .textStyle("#432946")
+                        // centers the label
+                        .textAlign("center")
+                        // disables text decoration
+                        .textDecoration("none")
+                        // add the text content
+                        .text(function(d) {
+                            return d.label
+                        });
+
+        // do the visualization render
+        try {  
+            vis.render();
+        } catch(e) {  /* empty exception to clear an idiot IE alert  */ }
+    }
 }
+

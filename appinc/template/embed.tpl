@@ -49,8 +49,6 @@
             <script type="text/javascript" src="{$smarty.const.APP_URL}appinc/javascript/jquery.tmpl.min.js"></script>    
             <!-- Tooltips kit -->        
             <script type="text/javascript" src="{$smarty.const.APP_URL}appinc/javascript/jquery.tipsy.js"></script>         
-            <!-- library to do tree layouts -->
-            <script type="text/javascript" src="{$smarty.const.APP_URL}appinc/javascript/protovis-d3.2.js"></script>
             <!-- Modernizr -->
             <script type="text/javascript" src="{$smarty.const.APP_URL}appinc/javascript/modernizr-1.6.min.js"></script>
                                     
@@ -58,11 +56,20 @@
             <script type="text/javascript" src="{$smarty.const.APP_URL}appinc/javascript/relation-visualize-embed.js"></script>          
             
             
+            <!-- to make SGV better -->
+            <!--[if IE]>
+                <script type="text/javascript" src="{$smarty.const.APP_URL}appinc/javascript/SVGWEB/svg.js" data-path="{$smarty.const.APP_URL}appinc/javascript/SVGWEB/"></script>           
+            <![endif]-->
+            
+            <!-- library to do tree layouts -->
+            <script type="text/javascript" src="{$smarty.const.APP_URL}appinc/javascript/jlove-protovis-r3.3.js"></script>
+            <!--meta name="svg.render.forceflash" content="true" /-->
+            
             <script type="text/javascript">
                   // to know if the user is connected
                   var isConnected = {if $isConnected} true {else} false {/if};
                   // to display errors
-                  var err = {$err_json};                  
+                  var err = {$err_json};     
             </script>
 
       </head>
@@ -70,6 +77,7 @@
       <!-- IPAD loves this attribut to a better displaying -->
       <body onload="window.scrollTo(0, 1)">
             
+
             <h1>Influence Networks</h1>     
             
             <div id="workspace" class="classic-form">
@@ -89,7 +97,8 @@
                   </form>
                   
                   <div class="tooltips" title="{t}No relations yet between these entities.{/t} {if $isConnected}<a href='./?screen=relation-add'>{t}Contribute to the database.{/t}</a>{else}{t}Log in to contribute.{/t}{/if}">
-                        {t}Double click an entity to view its description.{/t}
+                        <p>{t}Click an entity to view its description.{/t}</p>
+                        <p class="browser-alert">{t}For a better rendering, please use a modern Web Browser such as{/t} <a href="http://www.mozilla-europe.org/" target="_blank">Mozilla Firefox</a> {t}or{/t} <a href="http://www.google.com/chrome" target="_blank">Google Chrome</a>.</p>
                   </div>
                   
                   <menu class="ctrl">
@@ -129,31 +138,34 @@
                               </div>
                         </div>
                   </div>
-                  
-                  <div id="visualize-layout">
-                        <script type="text/javascript+protovis">
-                              relationsRender();
-                        </script>
-                  </div>
-                  
+                
+                {literal}
+
+                      <div id="visualize-layout">
+                            <script type="text/javascript">                                    
+                                    relationsRender();                            	
+                            </script>                      
+                      </div>
+
+
+                      <script type="text/javascript">
+
+                            var _gaq = _gaq || [];
+                            _gaq.push(['_setAccount', '{/literal}{$smarty.const.GA_PROFILE}{literal}']);
+                            _gaq.push(['_trackPageview']);
+
+                            (function() {
+                              var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+                              ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                              var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+                            })();
+
+                      </script>
+                {/literal}
             </div>
             
-            
-            {literal}
-                  <script type="text/javascript">
-
-                    var _gaq = _gaq || [];
-                    _gaq.push(['_setAccount', '{/literal}{$smarty.const.GA_PROFILE}{literal}']);
-                    _gaq.push(['_trackPageview']);
-
-                    (function() {
-                      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-                      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-                      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-                    })();
-
-                  </script>
-            {/literal}
+                  
+                  
       </body>
 
 </html>

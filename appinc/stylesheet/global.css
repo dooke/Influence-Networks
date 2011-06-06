@@ -291,6 +291,7 @@ form.inscription {
       width:990px;
       position:absolute;
       top:155px;
+      left:230px;
 }
 
 .intro {
@@ -321,6 +322,7 @@ form.inscription {
 .main_menu li{
       display:inline-block !important;
       display:block;
+      float:left;
       width:163px;
       height:164px;
       margin:10px;
@@ -390,7 +392,9 @@ form.inscription {
 }
 
 .up_menu li{
-      display:inline-block;
+      display:inline-block !important;
+      display:block;
+      
       width:99px;
       height:99px;
       margin:5px;
@@ -909,6 +913,9 @@ input.half {
       margin-right:-80px;
       top:20px;
       display:none;
+      
+      background: rgb(55, 33, 55);
+      background: rgba(55, 33, 55, 0.8);
 }
 
 #node-informations h4 {
@@ -978,7 +985,8 @@ input.half {
 }
 
 #node-informations .relations tbody tr.odd{
-      background: rgba(221, 195, 223, 0.1)
+      background: rgb(65, 43, 65);
+      background: rgba(221, 195, 223, 0.1);
 }
 
 
@@ -1042,7 +1050,25 @@ input.half {
       z-index:1;
       color:#DAE9EA;
       text-shadow:0px 0px 10px black;
-      font-family: 'Vollkorn',arial,serif;
+      font-family: 'PT Sans', arial, serif;
+      font-weight:bold;
+}
+
+.tooltips a{
+      color:#DAE9EA;
+}
+
+.tooltips p {
+    display:none \9;
+}
+.tooltips p.browser-alert {
+    display:none;
+    display:block \9;
+    text-align: center;
+    position:absolute;
+    top:-300px;
+    width:400px;
+    margin-left:-100px;
 }
 
 .classic-form.visualize {
@@ -1076,8 +1102,6 @@ h3 .permalink {
       text-shadow:0px 0px 20px  #eee;
       display:none;
 }
-
-
 
 .embed-field input{
       margin-top:5px;

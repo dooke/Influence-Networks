@@ -3,6 +3,21 @@
  * @author Pirhoo <pierre@owni.fr>
  */  
  
+#workspace {
+      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#9ED2DD', endColorstr='#3C5C6B');
+      
+      background-image:url("../images/line.png"), -webkit-gradient(linear, left bottom, left top,
+          color-stop(0, rgb(60,92,107)),
+          color-stop(0.72, rgb(158,210,221))
+      );
+      background-image:url("../images/line.png"), -moz-linear-gradient(center bottom,
+          rgb(60,92,107) 0%,
+          rgb(158,210,221) 72%
+      );
+      
+      height:100%;
+      width:100%;
+ }
  
 h1 {
       display:none;   
@@ -39,7 +54,7 @@ h1 {
       padding:0px;
       border:0px;
       
-      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=rgb(60,92,107), endColorstr=rgb(158,210,221));
+      /* background-image:url("../images/line.png");
       background-image:url("../images/line.png"), -webkit-gradient(linear, left bottom, left top,
           color-stop(0, rgb(60,92,107)),
           color-stop(0.72, rgb(158,210,221))
@@ -47,7 +62,7 @@ h1 {
       background-image:url("../images/line.png"), -moz-linear-gradient(center bottom,
           rgb(60,92,107) 0%,
           rgb(158,210,221) 72%
-      );
+      ); */
 }
 
 #visualize-layout {
@@ -59,6 +74,7 @@ menu.ctrl {
       padding:0px;
       margin:0px;
 }
+
 
 menu.ctrl a {
       position:absolute;
@@ -78,14 +94,19 @@ menu.ctrl a {
       background: transparent;
 }
 
+
 menu.ctrl a.zoomIn {
       top:20px;
       background: url("../images/zoom-in.png") no-repeat center center;
+      /** HACK IE to hide the zoom button **/ 
+      display:none \9;
 }
 
 menu.ctrl a.zoomOut {
       top:60px;
       background: url("../images/zoom-out.png") no-repeat center center;
+      /** HACK IE to hide the zoom button **/ 
+      display:none \9;
 }
 
 a.backApp {
@@ -101,7 +122,7 @@ a.backApp {
       left:20px;
       z-index:9;
       font-size:16px;
-      font-family: 'Vollkorn',arial,serif;
+      font-family: 'PT Sans', arial, serif;
       color:#DAE9EA;
       text-shadow:0px 0px 10px black;
       
@@ -125,6 +146,7 @@ a.backApp {
 #node-informations {
       color:#F4F3E2;
 
+      background: rgb(55, 33, 55);
       background: rgba(55, 33, 55, 0.8);
 
       overflow:auto;
@@ -208,6 +230,7 @@ a.backApp {
 }
 
 #node-informations .relations tbody tr.odd{
+      background: rgb(65, 43, 65);
       background: rgba(221, 195, 223, 0.1)
 }
 
@@ -250,4 +273,16 @@ a.backApp {
       font-family: 'Vollkorn',arial,serif;
       color:white;
       text-shadow:0px 0px 5px black;
+}
+
+.browser-alert {
+    padding-top:10px;
+    font-weight: bold;
+    margin-right:200px;
+    display:none;
+    display:block \9; /** To Display this block only on Internet Explorer **/
+}
+
+.browser-alert a{
+      color:#DAE9EA;
 }

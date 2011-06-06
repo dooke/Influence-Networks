@@ -110,19 +110,17 @@
                               opacity:1
                         });
                         
-
-                        
-                        
                   });
             </script>
             {/literal}
                   
             <div class="tooltips" title="{t}No relations yet between these entities.{/t} {if $isConnected}<a href='./?screen=relation-add'>{t}Contribute to the database.{/t}</a>{else}{t}Log in to contribute.{/t}{/if}">
-                  {t}Double click an entity to view its description.{/t}
+                  <p>{t}Click an entity to view its description.{/t}</p>
+                  <p class="browser-alert">{t}Your Web Browser cannot display the graph. Please, use{/t} <a href="http://www.mozilla-europe.org/" target="_blank">Mozilla Firefox</a> {t}or{/t} <a href="http://www.google.com/chrome" target="_blank">Google Chrome</a>.</p>
             </div>
             <div id="visualize-layout">
                   <script type="text/javascript+protovis">
-                        relationsRender()
+                        relationsRender();
                   </script>
             </div>
       </form>

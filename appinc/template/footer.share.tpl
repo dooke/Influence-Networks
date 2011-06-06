@@ -34,7 +34,7 @@
                onclick="doEmbed()">
                 &lt;{t}embed{/t}&gt;
             </a>
-        </section-->
+        </section>
 
        <section class="share twitter" title="">
             <a href="http://twitter.com/share"
@@ -44,7 +44,7 @@
                data-count="horizontal"
                data-via="{$smarty.const.DOC_TWUSER}">Tweet</a>
             <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
-       </section>
+       </section-->
 
         <section>
             <a class="share facebook"

@@ -17,7 +17,7 @@ $(document).ready(function () {
             $.each(data, function (key, o) {
                   if(o.name == "password")
                         data[key].value = $.md5(data[key].value);                  
-            });
+            });            
             
             $.ajax({
                   data: data,

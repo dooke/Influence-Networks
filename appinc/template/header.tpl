@@ -63,15 +63,13 @@
             <script type="text/javascript" src="{$smarty.const.APP_URL}appinc/javascript/jquery.tipsy.js"></script>  
             <!-- Website tour -->
             <script type="text/javascript" src="{$smarty.const.APP_URL}appinc/javascript/jquery.website-tour.js"></script>         
-            <!-- library to do tree layouts -->
-            <script type="text/javascript" src="{$smarty.const.APP_URL}appinc/javascript/protovis-r3.2.js"></script>
             <!-- Modernizr -->
             <script type="text/javascript" src="{$smarty.const.APP_URL}appinc/javascript/modernizr-1.6.min.js"></script>
             <!-- Freebase suggest plugin --> 
             <script type="text/javascript" src="http://freebaselibs.com/static/suggest/1.3/suggest.min.js"></script>
                                     
-            <script type="text/javascript" src="{$smarty.const.APP_URL}appinc/javascript/app.js"></script>          
-            
+            <script type="text/javascript" src="{$smarty.const.APP_URL}appinc/javascript/app.js"></script>
+
 
             <!-- ###################################### -->
             <!-- #  Display script according to screen  -->
@@ -87,8 +85,17 @@
             
             {elseif $screen=="relation-visualize"}
                   
-                  <script type="text/javascript" src="{$smarty.const.APP_URL}appinc/javascript/relation-visualize.js"></script>                  
-            
+                    <script type="text/javascript" src="{$smarty.const.APP_URL}appinc/javascript/relation-visualize.js"></script>                  
+
+                    <!-- to make SGV better -->
+                        <!--[if IE]>
+                            <script type="text/javascript" src="{$smarty.const.APP_URL}appinc/javascript/SVGWEB/svg.js" data-path="{$smarty.const.APP_URL}appinc/javascript/SVGWEB/"></script>           
+                        <![endif]-->
+
+                    <!-- library to do tree layouts -->
+                    <script type="text/javascript" src="{$smarty.const.APP_URL}appinc/javascript/jlove-protovis-r3.3.js"></script>
+
+
             {elseif $isConnected}            
                   {literal}
                         <script type="text/javascript">
