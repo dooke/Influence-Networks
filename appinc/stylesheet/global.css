@@ -2,18 +2,7 @@
     Document   : global
     Created on : 11 oct. 2010, 15:47:54
     Author     : pirhoo
-    Description:
-        Purpose of the stylesheet follows.
 */
-
-/* 
-   TODO customize this sample style
-   Syntax recommendation http://www.w3.org/TR/REC-CSS3/
-*/
-
-root { 
-      display: block;
-}
 
 #app { 
       border:0px;
