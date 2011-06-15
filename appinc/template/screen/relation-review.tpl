@@ -79,7 +79,7 @@
                   <div id="rate-slider"></div>
 
                   <div style="clear:both; text-align:right; padding-top:10px; padding-right: 20px;">
-                        <input type="submit" class="submit light" value="Submit" />
+                        <input type="submit" class="submit  button light" value="Submit" />
                         <a class="button submit light" href="?screen=relation-review">I don't know</a>
                   </div>
             </form>

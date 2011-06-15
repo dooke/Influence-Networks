@@ -104,7 +104,7 @@
                   <menu class="ctrl">
                         <a class="zoomIn">{t}Zoom In{/t}</a>
                         <a class="zoomOut">{t}Zoom Out{/t}</a>
-                        <a class="backApp button" target="_parent" href="./?screen=relation-visualize&amp;rel={if $entity_left}{$entity_left->getFreebaseId()}|{/if}{if $entity_right}{$entity_right->getFreebaseId()}{/if}&amp;trust_rank={$trust_rank}">{t}Back to the application{/t}</a>
+                        <a class="backApp button violet" target="_parent" href="./?screen=relation-visualize&amp;rel={if $entity_left}{$entity_left->getFreebaseId()}|{/if}{if $entity_right}{$entity_right->getFreebaseId()}{/if}&amp;trust_rank={$trust_rank}">{t}Back to the application{/t}</a>
                   </menu>
                   
                   

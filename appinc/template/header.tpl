@@ -37,6 +37,7 @@
             <link rel="stylesheet" type="text/css" href="{$smarty.const.APP_URL}appinc/stylesheet/tipsy.css" /> 
 
 
+            
             <!-- ###################################### -->
             <!-- #  javascript                          -->
             <!-- ###################################### -->
@@ -174,7 +175,7 @@
                                                 <input type="hidden" name="action" value="signin" />
                                                 <label>{t}Email{/t}: <input type="text" name="email" class="text" /></label>
                                                 <label>{t}Password{/t}: <input type="password" name="password" class="text" /></label>
-                                                <input type="submit" class="submit violet" value="{t}Submit{/t}" /> {t}or{/t} <a href="#" onclick="signUp()">{t}Sign up{/t}</a>
+                                                <input type="submit" class="submit button violet" value="{t}Submit{/t}" /> {t}or{/t} <a href="#" onclick="signUp()">{t}Sign up{/t}</a>
 
                                                 <!-- ERROR MESSAGES -->
                                                 <div class="form_error">
@@ -190,7 +191,7 @@
                                                 <label>{t}Email{/t}: <input type="text" name="email" class="text" /></label>
                                                 <label>{t}Password{/t}: <input type="password" name="password_1" class="text" /></label>
                                                 <label>{t}Confirm password{/t}: <input type="password" name="password_2" class="text" /></label>
-                                                <input type="submit" class="submit violet" value="{t}Submit{/t}" /> {t}or{/t} <a href="#" onclick="signUp()">{t}Come back{/t}</a>
+                                                <input type="submit" class="submit button violet" value="{t}Submit{/t}" /> {t}or{/t} <a href="#" onclick="signUp()">{t}Come back{/t}</a>
 
                                                 <!-- ERROR MESSAGES -->
                                                 <div class="form_error">

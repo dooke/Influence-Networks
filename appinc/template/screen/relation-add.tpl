@@ -61,7 +61,7 @@
             </div>               
 
             <div style="clear:both; text-align:right; padding-top:10px; padding-right: 20px;">
-                  <input type="submit" class="submit light" value="Submit" />
+                  <input type="submit" class="submit button light" value="Submit" />
             </div>
             
       </form>

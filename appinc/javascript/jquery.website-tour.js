@@ -117,7 +117,7 @@ function makeWebsiteTour(config, start_step) {
             var $elem			= $(step_config.selector);															
             var $tooltip		= $('<div>',{
                                                       id		: 'tour_tooltip',
-                                                      className 	: 'tooltip radiusLight simpleShadow',
+                                                      "class"          	: 'tooltip radiusLight simpleShadow',
                                                       html		: '<p>'+step_config.text+'</p><span class="tooltip_arrow"></span>'
                                                 }).hide();
 					

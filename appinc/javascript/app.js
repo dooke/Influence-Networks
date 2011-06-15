@@ -27,7 +27,7 @@ $(document).ready(function () {
                   success: function (data) {
                         
                         // unlock input
-                        $(":input", form).attr("disabled", "");
+                        $(":input", form).attr("disabled", false);
 
                         if(data.statut == false) {                         
                               $(":input[type=password]", form).val("");             
@@ -38,7 +38,7 @@ $(document).ready(function () {
             });
 
             // lock input
-            $(":input", form).attr("disabled", "disabled");        
+            $(":input", form).attr("disabled", true);        
 
             return false;
         
@@ -101,7 +101,7 @@ $(document).ready(function () {
                                     success: function (data) {
 
                                           // unlock input
-                                          $(":input", form).attr("disabled", "");
+                                          $(":input", form).attr("disabled", false);
 
                                           if(data.statut == false) {                                  
                                                 showFormError(form, data.message);
@@ -112,7 +112,7 @@ $(document).ready(function () {
                               });
 
                               // lock input
-                              $(":input", form).attr("disabled", "disabled");                        
+                              $(":input", form).attr("disabled", true);                        
                      
                         } else
                               // Form is incomplete.
