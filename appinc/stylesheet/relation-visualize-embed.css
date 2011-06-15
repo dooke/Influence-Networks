@@ -75,11 +75,15 @@ menu.ctrl {
       margin:0px;
 }
 
-
 menu.ctrl a {
+    
       position:absolute;
       right:20px;
       z-index:9;
+}
+
+menu.ctrl a.zoomIn,
+menu.ctrl a.zoomOut {
       
       display:block;
       

@@ -272,6 +272,8 @@ form.inscription {
 
 .main_menu li.hp {
       display:none;
+      text-indent:-999px;
+      overflow: hidden;
 }
 
 .main_menu {
