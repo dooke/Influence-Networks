@@ -290,7 +290,7 @@ class UserManager extends Manager {
         // assign User variable
         $this->smarty->assign("user", Array("id" => $user->getId(), "code" => $user->getConfirmationCode() ) ) ;        
         // fetch the template
-       echo $emailContent = $this->smarty->fetch("email-user-confirmation.tpl");
+        $emailContent = $this->smarty->fetch("email-user-confirmation.tpl");
         
         // set sender
         $email->setFrom("Influence Networks <contact@influencenetworks.org>");
@@ -300,6 +300,9 @@ class UserManager extends Manager {
         
         // set priority
         $email->setPriority("high");
+        
+        // add logo
+        $mail->addEmbeddedImage(new fileEmbeddedImage(BASE_DIR."/appinc/images/logo.png"));
         
         // set the text content
         $email->setText( strip_tags($emailContent) );
