@@ -3,7 +3,7 @@
  * Node class extends Record class
  * 
  * This class represents entities (person and organization). The Freebase ID is used to find the entity in Freebase
- * .
+ * 
  * 
  * @author Pirhoo <pierre@owni.fr>
  * @version 1.0
