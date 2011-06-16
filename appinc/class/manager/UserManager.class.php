@@ -279,7 +279,14 @@ class UserManager extends Manager {
             
         // user already confirmed
         if(! $user->getPending() ) 
-                return false;                
+                return false; 
+        
+        // confirmation code
+        $code = $user->getConfirmationCode();
+        
+        // if the user has no code, we generate it
+        if( empty( $code ) )
+            $code = $this->generateConfirmationCode();
         
         
         // we have an user
@@ -288,7 +295,7 @@ class UserManager extends Manager {
         $email = new Rmail();             
         
         // assign User variable
-        $this->smarty->assign("user", Array("id" => $user->getId(), "code" => $user->getConfirmationCode() ) ) ;        
+        $this->smarty->assign("user", Array("id" => $user->getId(), "code" => $code ) ) ;        
         // fetch the template
         $emailContent = $this->smarty->fetch("email-user-confirmation.tpl");
         
@@ -315,6 +322,34 @@ class UserManager extends Manager {
         
     }
             
+    
+    /**
+     * Generate a new user confirmation code and return it.
+     * 
+     * @param integer $user_id 
+     * @return string
+     */
+    public function generateConfirmationCode($user_id) {
+    
+        // generate a random code
+        $code = "";
+        
+        // code caracters
+        $case = "abcdefghijklmnpqrstuvwxyABCDEFGHIJKLMNOPQRSTUBWXYZ1234567890";        
+        // init the random engine
+        srand((double)microtime()*1000000);
+        
+        for($i=0; $i < 50; $i++)
+            $code .= $case[rand()%strlen($case)];
+        
+        
+        $query = "UPDATE ".TABLE_PREFIX."user SET confirmation_code = '{$code}' WHERE id = {$user_id}";
+        $this->db->query($query) or die(  _("Database error. Sorry, try again.") );
+        
+        return $code;
+        
+    }
+    
 }
 
 ?>
