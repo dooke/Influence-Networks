@@ -342,7 +342,7 @@ class UserManager extends Manager {
         // init the random engine
         srand((double)microtime()*1000000);
         
-        for($i=0; $i < 50; $i++)
+        for($i=0; $i < 15; $i++)
             $code .= $case[rand()%strlen($case)];
         
         
