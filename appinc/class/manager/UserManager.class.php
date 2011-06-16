@@ -254,6 +254,48 @@ class UserManager extends Manager {
     }
     
     
+    /**
+     * Send an email to the user to confirm its account. 
+     * Return false if the user doesn't exist or has already confirm its account.
+     * Return true if the mail has been send.
+     * @param <integer or User> $p_user Polymorph parameter
+     * @return boolean
+     */    
+    public function sendUserConfirmationEmail($p_user = null) {
+                
+        // if the paramater is an integer
+        if( $p_user == null && is_numeric($_GET["user_id"]) ) {
+            
+            /* @var $user User */
+            $user = $this->getUser($_GET["user_id"]);
+            
+            // user doesn't exist
+            if(! $user instanceof User) 
+                return false;
+            
+        // or stop if it's not an User instance
+        } elseif(! $user instanceof User)
+            return false;
+            
+        // user already confirmed
+        if(! $user->getPending() ) 
+                return false;                
+        
+        
+        // we have an user
+        // we know he didn't confirmed
+        // we can create and send the mail                
+        
+        // assign User variable
+        $this->smarty->assign("user", $user);
+        
+        // fetch the template
+        echo $emailContent = $this->smarty->fetch("email-user-confirmation.tpl");
+        die;
+        
+        
+    }
+            
 }
 
 ?>
