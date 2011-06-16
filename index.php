@@ -33,6 +33,7 @@
       // Define current language
       // -----------------------
       require_once(BASE_DIR . '/appinc/librarie/functions.language.php');
+      require_once(BASE_DIR . '/appinc/librarie/Rmail/Rmail.php');
       /* @TODO: make the following function better... */
       initLanguage();
 
@@ -135,7 +136,7 @@
                         break;
                     
                   case "sendUserConfirmationEmail":
-                        echo $managers["user"]->sendUserConfirmationEmail();
+                        $managers["user"]->sendUserConfirmationEmail();
                         exit;
                         break;
 
