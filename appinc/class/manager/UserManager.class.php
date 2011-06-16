@@ -302,7 +302,7 @@ class UserManager extends Manager {
         $email->setPriority("high");
         
         // add logo
-        $mail->addEmbeddedImage(new fileEmbeddedImage(BASE_DIR."/appinc/images/logo.png"));
+        $email->addEmbeddedImage(new fileEmbeddedImage(BASE_DIR."/appinc/images/logo.png"));
         
         // set the text content
         $email->setText( strip_tags($emailContent) );
