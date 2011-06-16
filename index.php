@@ -133,6 +133,11 @@
                         echo $managers["node"]->updateNodeInfo();
                         exit;
                         break;
+                    
+                  case "sendUserConfirmationEmail":
+                        echo $managers["user"]->sendUserConfirmationEmail();
+                        exit;
+                        break;
 
                   default:break;
             }
