@@ -286,7 +286,7 @@ class UserManager extends Manager {
         
         // if the user has no code, we generate it
         if( empty( $code ) )
-            $code = $this->generateConfirmationCode();
+            $code = $this->generateConfirmationCode( $user->getId() );
         
         
         // we have an user
@@ -331,6 +331,8 @@ class UserManager extends Manager {
      */
     public function generateConfirmationCode($user_id) {
     
+        if(! is_numeric($user_id) ) return false;
+        
         // generate a random code
         $code = "";
         
