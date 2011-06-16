@@ -132,10 +132,10 @@ class UserManager extends Manager {
                              $this->db->query($query) or die( json_encode( Array("statut" => false, "message" => _("Database error. Sorry, try again.") ) ) );
                              
                              // send email confirmation
-                             sendUserConfirmationEmail( $this->db->lastid() );
+                             $this->sendUserConfirmationEmail( $this->db->lastid() );
 
                              // every things is all right
-                             return json_encode( Array("statut" => true ) ); 
+                             return json_encode( Array("statut" => true, "message" => _("Registration taken into account! You will receive a confirmation by email soon.") ) ); 
                              
                        } else
                              // Form is incomplete.              

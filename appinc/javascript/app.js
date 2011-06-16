@@ -26,12 +26,14 @@ $(document).ready(function () {
                   url: "./",
                   success: function (data) {
                         
+                        var $form  = $(".connexion");
+                                          
                         // unlock input
-                        $(":input", form).attr("disabled", false);
+                        $(":input", $form).attr("disabled", false);
 
                         if(data.statut == false) {                         
-                              $(":input[type=password]", form).val("");             
-                              showFormError(form, 1);
+                              $(":input[type=password]", $form).val("");             
+                              showFormError($form, 1);
                         } else
                               window.location = "index.php";
                   }
@@ -46,8 +48,8 @@ $(document).ready(function () {
     
         
       /***********
-     * Templates
-     ***/
+       * Templates
+       ***/
       // error
       $.get("./appinc/template/tmpl/error-tooltip.tmpl", {}, function(tmpl) {
             $.template( "error-tooltip", tmpl);
@@ -64,22 +66,23 @@ $(document).ready(function () {
 
                 showErrorTooltip(0);
             }
+            
       } );
      
    
 
     
       /**************************
-     * INSCRIPTION SUBMIT EVENT
-     ***/    
+       * INSCRIPTION SUBMIT EVENT
+       ***/    
       $(".inscription").submit(function () {
         
             var form = $(this);
             $(".form_error", form).hide();
         
             if( $(":input[name=email]", form).val() != "" 
-                  &&  $(":input[name=password_1]", form).val() != "" 
-                  &&  $(":input[name=password_2]", form).val() != "" ) {
+            &&  $(":input[name=password_1]", form).val() != "" 
+            &&  $(":input[name=password_2]", form).val() != "" ) {
        
           
                   if( $(":input[name=password_1]", form).val() == $(":input[name=password_2]", form).val() ) {
@@ -100,13 +103,25 @@ $(document).ready(function () {
                                     url: "./",
                                     success: function (data) {
 
+                                          var $form  = $(".inscription");
+                                          
                                           // unlock input
-                                          $(":input", form).attr("disabled", false);
+                                          $(":input", $form).attr("disabled", false);
 
                                           if(data.statut == false) {                                  
-                                                showFormError(form, data.message);
-                                          } else
-                                                window.location = "index.php"
+                                                showFormError($form, data.message);
+                                          } else {
+                                              
+                                                // empty the fields
+                                                $(":input", $form).empty();
+                                                
+                                                // remove the formulaire
+                                                $form.removeClass("hidden");
+                                                signUp();  
+                                                
+                                                showErrorTooltip(data.message);
+                                                                                                
+                                          }
 
                                     }
                               });
@@ -253,6 +268,9 @@ $(document).ready(function () {
       }
     
       
+      $("#errors .tooltip .close").live("click", function () {
+            $(this).parent().hide();
+      });
     
 });
 
@@ -330,24 +348,39 @@ function showFormError(form, err) {
 
 function showErrorTooltip(i) {
       
-      if(i < err.length) {
-          $("#errors .tooltip:eq("+i+")").css({
-                display:"block",
-                position: "relative",
-                top: -20 - $("#errors .tooltip:eq("+i+")").outerHeight()
-          }).animate({
-                top:0
-          }, 
-          1200, 
-          'easeOutElastic', 
-          function () {                  
-                if($("#errors .tooltip:eq("+(i+1)+")").length > 0)
-                      showErrorTooltip(i+1); 
-          });
+      // i is a number
+      if( !isNaN(i) ) {
+          
+          if(i < err.length) {
+              $("#errors .tooltip:eq("+i+")").css({
+                    display:"block",
+                    position: "relative",
+                    top: -20 - $("#errors .tooltip:eq("+i+")").outerHeight()
+              }).animate({
+                    top:0
+              }, 
+              1200, 
+              'easeOutElastic', 
+              function () {                  
+                    if($("#errors .tooltip:eq("+(i+1)+")").length > 0)
+                          showErrorTooltip(i+1); 
+              });
 
-          $("#errors .tooltip:eq("+i+") .close").click(function () {
-                $(this).parent().hide();
-          });
+          }
+          
+      // i is a message
+      } else if(typeof i == "string") {
+
+          $.tmpl("error-tooltip", {msg : i} ).appendTo( $("#errors") );
+         
+          $("#errors .tooltip:last").css({
+                                            
+                                            display:"block",
+                                            position: "relative",
+                                            top: -200                                           
+                                            
+                                         }).animate({top:0}, 1200, 'easeOutElastic');
+          
       }
 }
 
