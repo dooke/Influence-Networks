@@ -18,6 +18,6 @@
 <p style="color:#9E95AC">
     The Influence Networks Team.<br/>
     <a href="http://influencenetworks.org" target="_blank" title="Influence Networks">
-        <img alt="Influence Networks" src="" />
+        <img alt="Influence Networks" src="logo.png" />
     </a>
 </p>
