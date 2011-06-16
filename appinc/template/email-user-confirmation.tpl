@@ -10,7 +10,7 @@
 
 <p>
     Please, to confirm your user registration, you have to <strong>visit the following link</strong>:<br />
-    <a target="_blank" href="{$smarty.const.APP_URL}?action=confirmAccount&amp;user_id={$user.id}&amp;code={$user.code}=">{$smarty.const.APP_URL}?action=confirmAccount&amp;user_id={$user.id}&amp;code={$user.code}</a>
+    <a target="_blank" href="{$smarty.const.APP_URL}?action=confirmAccount&amp;user_id={$user.id}&amp;code={$user.code}">{$smarty.const.APP_URL}?action=confirmAccount&amp;user_id={$user.id}&amp;code={$user.code}</a>
 </p>
 
 <p>
