@@ -284,15 +284,31 @@ class UserManager extends Manager {
         
         // we have an user
         // we know he didn't confirmed
-        // we can create and send the mail                
+        // we can create and send the mail   
+        $email = new Rmail();             
         
         // assign User variable
-        $this->smarty->assign("user", $user);
-        
+        $this->smarty->assign("user", $user);        
         // fetch the template
-        echo $emailContent = $this->smarty->fetch("email-user-confirmation.tpl");
-        die;
+        $emailContent = $this->smarty->fetch("email-user-confirmation.tpl");
         
+        // set sender
+        $email->setFrom("Influence Networks <contact@influencenetworks.org>");
+        
+        // set subject
+        $email->setSubject( _("Influence Networks: please, confirm your account") );
+        
+        // set priority
+        $email->setPriority("high");
+        
+        // set the text content
+        $email->setText( strip_tags($emailContent) );
+        
+        // set the html content
+        $email->setHTML( $emailContent );         
+        
+        // send the email
+        return $email->send( array( $user->getEmail() ) );
         
     }
             
