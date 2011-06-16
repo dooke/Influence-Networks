@@ -1,15 +1,21 @@
 <?php
-
 /**
- * Description of User
- *
- * @author pirhoo
+ * User class extends Record class
+ * 
+ * This class represents user.
+ * 
+ * @author Pirhoo <pierre@owni.fr>
+ * @version 1.0
+ * @package Record
+ * @subpackage User
  */
 class User extends Record{
     
     private $email;
     private $password;
     private $trust_level;    
+    private $pending;
+    private $confirmationCode;
     
     public function getId() {
         return $this->id;
@@ -42,7 +48,23 @@ class User extends Record{
     public function setTrustLevel($trust_level) {
         $this->trust_level = $trust_level;
     }
-        
+    
+    public function getPending() {
+        return $this->pending;
+    }
+
+    public function setPending($pending) {
+        $this->pending = $pending;
+    }
+
+    public function getConfirmationCode() {
+        return $this->confirmationCode;
+    }
+
+    public function setConfirmationCode($confirmationCode) {
+        $this->confirmationCode = $confirmationCode;
+    }
+
 }
 
 ?>
