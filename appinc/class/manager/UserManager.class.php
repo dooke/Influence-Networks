@@ -265,7 +265,7 @@ class UserManager extends Manager {
     public function sendUserConfirmationEmail($p_user = null) {
                 
         // if the paramater is an integer
-        if( is_integer($p_user) && is_numeric($_GET["user_id"]) ) {
+        if( is_integer($p_user) || is_numeric($_GET["user_id"]) ) {
             
             /* @var $user User */
             $user = $this->getUser(is_numeric($_GET["user_id"]) ? $_GET["user_id"] : $p_user);
