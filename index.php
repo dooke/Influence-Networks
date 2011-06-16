@@ -139,14 +139,19 @@
                         $managers["user"]->sendUserConfirmationEmail();
                         exit;
                         break;
+                    
+                  case "confirmAccount":
+                        $managers["user"]->confirmAccount();
+                        break;
 
+                    
                   default:break;
             }
       }
             
 
 
-      // -------------------------------------
+        // -------------------------------------
 	// Include files
 	// see config.init.php for include pages
 	// -------------------------------------

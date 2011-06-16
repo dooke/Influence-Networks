@@ -43,7 +43,8 @@ class UserManager extends Manager {
             $query = "SELECT *
                         FROM ".TABLE_PREFIX."user
                        WHERE email='".$_SESSION["user_email"]."' 
-                         AND password='".$_SESSION["user_password"]."'";
+                         AND password='".$_SESSION["user_password"]."'
+                         AND pending=0";
             
             $this->db->query($query) or die(  _("Database error. Sorry, try again.") );
 
@@ -73,7 +74,8 @@ class UserManager extends Manager {
             $query = "SELECT *
                         FROM ".TABLE_PREFIX."user
                        WHERE  email='".$_POST["email"]."' 
-                         AND  password='".$_POST["password"]."'";
+                         AND  password='".$_POST["password"]."'
+                         AND  pending=0";
             
             $this->db->query($query) or die(  _("Database error. Sorry, try again.") );
 
@@ -128,25 +130,24 @@ class UserManager extends Manager {
 
                              // process MySql query (or die if error)
                              $this->db->query($query) or die( json_encode( Array("statut" => false, "message" => _("Database error. Sorry, try again.") ) ) );
-
-                             // save SESSION data
-                             $_SESSION["user_email"] = $_POST["email"];
-                             $_SESSION["user_password"] = $_POST["password_1"];
+                             
+                             // send email confirmation
+                             sendUserConfirmationEmail( $this->db->lastid() );
 
                              // every things is all right
                              return json_encode( Array("statut" => true ) ); 
                              
                        } else
                              // Form is incomplete.              
-                             return jjson_encode( Array("statut" => false, "message" => _("Email address already exist.") ) );
+                             return json_encode( Array("statut" => false, "message" => _("Email address already exist.") ) );
                      
                  } else
                        // Form is incomplete.              
-                       return jjson_encode( Array("statut" => false, "message" => _("Email address is not valid.") ) );
+                       return json_encode( Array("statut" => false, "message" => _("Email address is not valid.") ) );
                                  
           }else
                // Passwords are not matching.
-              return jjson_encode( Array("statut" => false, "message" => _("Passwords are not matching.") ) );
+              return json_encode( Array("statut" => false, "message" => _("Passwords are not matching.") ) );
           
 
        } else
@@ -325,7 +326,7 @@ class UserManager extends Manager {
     
     /**
      * Generate a new user confirmation code and return it.
-     * 
+     * @access public
      * @param integer $user_id 
      * @return string
      */
@@ -350,6 +351,50 @@ class UserManager extends Manager {
         
         return $code;
         
+    }
+    
+    
+    /**
+     * Check the user confirmation.
+     * @access public
+     * @return boolean
+     */
+    public function confirmAccount() {
+        
+        $user_id = $_GET["user_id"];
+        $code    = stripcslashes($_GET["code"]);
+        
+        if( !is_numeric($user_id) ) return false;
+        
+        $query = "SELECT id FROM ".TABLE_PREFIX."user WHERE pending = 1 AND id={$user_id} AND confirmation_code='{$code}'";
+        $this->db->query($query) or die(  _("Database error. Sorry, try again.") );
+        
+        // check successfull
+        if( $this->db->fetch() ) {
+            
+            // throw an alert message
+            $this->err[] = Array("time" => time(), "msg" => _("Your account has been confirmed.") );
+            
+            // remove account pending
+            return $this->removeAccountPending( $user_id );
+            
+        } else $this->err[] = Array("time" => time(), "msg" => _("Error confirmation process.") );
+        
+    }
+    
+    /**
+     * Remove the pending state to an user account 
+     * 
+     * @access public
+     * @param integer $user_id
+     * @return boolean
+     */
+    public function removeAccountPending($user_id) {
+        
+        if( !is_numeric($user_id) ) return false;
+        
+        $query = "UPDATE ".TABLE_PREFIX."user SET pending = 0 WHERE id={$user_id}";
+        return $this->db->query($query) or die(  _("Database error. Sorry, try again.") );
     }
     
 }
