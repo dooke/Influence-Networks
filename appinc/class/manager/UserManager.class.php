@@ -288,9 +288,9 @@ class UserManager extends Manager {
         $email = new Rmail();             
         
         // assign User variable
-        $this->smarty->assign("user", $user);        
+        $this->smarty->assign("user", Array("id" => $user->getId(), "code" => $user->getConfirmationCode() ) ) ;        
         // fetch the template
-        $emailContent = $this->smarty->fetch("email-user-confirmation.tpl");
+       echo $emailContent = $this->smarty->fetch("email-user-confirmation.tpl");
         
         // set sender
         $email->setFrom("Influence Networks <contact@influencenetworks.org>");
