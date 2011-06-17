@@ -140,7 +140,7 @@ form.connexion {
 }
 
 form.connexion input.text, form.inscription input.text{
-      margin-left:10px;
+      margin-left:10px;      
 }
 
 
@@ -149,7 +149,8 @@ form.connexion label, form.inscription label {
       color:#311c31;
       font-size:13px;
       display:block; 
-      margin-bottom:10px;   
+      margin-bottom:10px;  
+      white-space: nowrap;
 }
 
 form.inscription {
