@@ -15,7 +15,7 @@
 	* @param	$baseFolder	: string ; under the document root ; it's the folder that contain sth like "fr_FR/LC_MESSAGES/*.[pm]o"
 	* @return	zilch, it just gets the job done
 	*/
-	function setLanguage($lang, $domain = "traductions", $baseFolder = "./locale") {
+	function setLanguage($lang, $domain = "traductions", $baseFolder = "./config/locale") {
 
 		$_SESSION[LANG_SESSION_VAR] = $lang;
 
@@ -67,7 +67,7 @@
                 elseif( isset($_SESSION[LANG_SESSION_VAR]) )
                      setLanguage($_SESSION[LANG_SESSION_VAR]);
 
-                else setLanguage("fr_FR");
+                else setLanguage("en_US");
 
             }
         }
