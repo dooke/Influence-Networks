@@ -49,6 +49,10 @@
     define("DOC_TITLE", "[APP] Influence Networks lets you see how public figures know each other");
     define("DOC_TWUSER", "owni");
     define("GA_PROFILE", "UA-18463169-5");
+    
     define("FREEBASE_USERNAME", "InfluenceNetworks");
     define("FREEBASE_PASSWORD", "");
+    define("FREEBASE_KEY", "");
+    define("FREEBASE_SECRET", "");
+    
 ?>
