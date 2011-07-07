@@ -98,10 +98,9 @@ class Node extends Record {
             "type" => $this->type
         );
 
-
         return $r;
     }
-
+    
 }
 
 

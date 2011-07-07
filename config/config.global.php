@@ -16,6 +16,7 @@
          error_reporting(null);         
      }
 
+    
     // le dossier à la racine du site    
     define("BASE_DIR", preg_replace("#/config$#i", "", dirname(__FILE__)));
     define("APP_URL", "http://".$_SERVER["SERVER_NAME"].str_replace("index.php", "", $_SERVER["SCRIPT_NAME"]) );

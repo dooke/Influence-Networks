@@ -1,6 +1,6 @@
 <?php
 
-      header("Content-type: text/html; charset=UTF-8");
+      // header("Content-type: text/html; charset=UTF-8");
 
       // Load the current configuration 
       // ------------------------------
@@ -34,6 +34,7 @@
       // -----------------------
       require_once(BASE_DIR . '/appinc/librarie/functions.language.php');
       require_once(BASE_DIR . '/appinc/librarie/Rmail/Rmail.php');
+       
       /* @TODO: make the following function better... */
       initLanguage();
 
@@ -52,7 +53,7 @@
       $s = new Smarty();
 
       // Smarty settings
-      $s->register_block('t', 'smarty_translate');
+      @$s->register_block('t', 'smarty_translate');
       $s->template_dir = BASE_DIR . '/appinc/template';
       $s->compile_dir = BASE_DIR . '/appinc/template/_compiled';
       $s->cache_dir = BASE_DIR . '/appinc/template/_cache';
@@ -155,7 +156,7 @@
 	// Include files
 	// see config.init.php for include pages
 	// -------------------------------------
-	$screen = strip_tags(trim($_GET['screen']));
+	$screen = isset($_GET["screen"]) ? strip_tags(trim($_GET['screen'])) : "";
 	if ( empty($screen) == FALSE && array_key_exists($screen, $arrScreen) ) {
 		if ( !file_exists( $arrScreen[$screen] ) ) {
 			$_require	= $arrScreen['404'];

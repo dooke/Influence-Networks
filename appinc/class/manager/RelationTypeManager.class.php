@@ -57,4 +57,3 @@ class RelationTypeManager extends Manager {
 }
 
 ?>
-            
