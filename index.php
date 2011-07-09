@@ -38,7 +38,6 @@
       /* @TODO: make the following function better... */
       initLanguage();
 
-
       // Launch MySQL Connection
       // -----------------------
       require_once(BASE_DIR . '/appinc/librarie/class.DbMysql.php');
@@ -152,7 +151,7 @@
             
 
 
-        // -------------------------------------
+      // -------------------------------------
 	// Include files
 	// see config.init.php for include pages
 	// -------------------------------------
