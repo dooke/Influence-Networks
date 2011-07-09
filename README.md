@@ -20,7 +20,7 @@ As of today, right after launch, the database contains only a few ‘relationshi
 
 ## How to install it ##
 
-1. Download the last stable version of [Influence Networks from Github](https://github.com/Pirhoo/Influence-Networks/zipball/master);
+1. Download the last stable version of [Influence Networks from Github](https://github.com/Pirhoo/Influence-Networks/zipball/v1.0) (v1.0);
 2. Extract your archive in the execution directory;
 3. Check _PATH/appinc/template/\_compiled_ and _PATH/appinc/template/\_common_ are allowed for reading and writing:
 4. Import the two SQL dumps from _PATH/config/_ directory in your MySQL database (_CREATE-*.sql_  then _INSERT-*.sql_);
