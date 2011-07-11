@@ -1078,7 +1078,6 @@ h3 .permalink {
 }
 
 .embed-field {
-      z-index:888;
       position:absolute;
       width:990px;
       height:100px;
@@ -1086,12 +1085,12 @@ h3 .permalink {
       margin-top:-50px;
       
       font-size:20px;
-      color:#372137;
+      color:#fff;
       font-family: 'Vollkorn',arial,serif;
       
       text-align:center;
       
-      text-shadow:0px 0px 20px  #eee;
+      z-index:999999;
       display:none;
 }
 
