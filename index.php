@@ -1,4 +1,4 @@
-<?php
+    <?php
 
       // header("Content-type: text/html; charset=UTF-8");
 
@@ -79,7 +79,16 @@
       /* @var $managers['user'] UserManager */
       $managers['user'] = new UserManager($s, $db, $managers, $err);
 
-
+      
+      // API calls
+      // ---------
+      if( isset($_GET["api"]) ) {
+                    
+            require_once(BASE_DIR . "/appinc/class/API.class.php");            
+            $api = new API($db, $managers, $err);
+      }
+      
+      
 
       // XHR Actions
       // -----------
