@@ -94,7 +94,7 @@ class NodeManager extends Manager {
       }
       
       
-      public function getNodes($offset, $limit) {
+      public function getNodesList($offset, $limit) {
           
           $query  = "SELECT * ";          
           $query .= "FROM ".TABLE_PREFIX."node ";
@@ -105,7 +105,7 @@ class NodeManager extends Manager {
           
           while( $row = $this->db->fetch() ){
                 $node = new Node($row);
-                $node = $node->getArray();
+                $node = $node->getArray(true);
                 $nodes[] =  $node;
           }
           

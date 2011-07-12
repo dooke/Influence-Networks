@@ -54,6 +54,24 @@ class Relation_value extends Record {
         $this->value = $value;
     }
 
+    
+
+    /**
+     * Return an array with all value of this object
+     * @return array
+     * @access public
+     */
+    public function getArray($native = false) {
+
+        $r = Array(
+            "id" => $this->id,
+            "property" => $this->property,
+            "property_label" => $this->property_label,
+            "value" => $this->value
+        );            
+
+        return $r;
+    }
 }
 
 ?>

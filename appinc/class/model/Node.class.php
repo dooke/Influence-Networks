@@ -92,7 +92,7 @@ class Node extends Record {
     public function getArray() {
 
         $r = Array(
-            "id" => $this->id,
+            "id" => (int)$this->id,
             "freebase_id" => $this->freebase_id,
             "label" => $this->label,
             "type" => $this->type

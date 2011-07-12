@@ -106,6 +106,26 @@ class RelationManager extends Manager {
                   }
             }
       }
+      
+      
+      
+      public function getRelationsList($offset, $limit) {
+          
+          $query  = "SELECT * ";          
+          $query .= "FROM ".TABLE_PREFIX."relation ";
+          $query .= "LIMIT {$limit} OFFSET {$offset}";
+                    
+          $this->db->query($query) or die( _("Database error. Sorry, try again.") );
+          $relations = array();
+          
+          while( $row = $this->db->fetch() ){
+                $relation = new Relation($row);
+                $relation = $relation->getArray(true);
+                $relations[] =  $relation;
+          }
+          
+          return $relations;
+      }
 
       public function getRelations($node_left, $node_right) {
 
@@ -187,6 +207,7 @@ class RelationManager extends Manager {
             if (isset($this->relations[$key])) {
 
                   return $this->relations[$key];
+                  
             } elseif (is_numeric($key)) {
 
                   $query = "SELECT * FROM " . TABLE_PREFIX . "relation ";
@@ -197,8 +218,7 @@ class RelationManager extends Manager {
 
                   $row = $row ? new Relation($row) : false;
 
-                  if (!!$row)
-                        $this->relations[$key] = $row;
+                  if (!!$row) $this->relations[$key] = $row;
 
                   return $row;
             } else

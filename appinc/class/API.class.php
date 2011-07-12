@@ -9,13 +9,22 @@
  *      # JSONP (use the "callback" parameter)
  * 
  * QUERY:
- *      # GET Entities list :
+ *      # GET Entities list:
  *          /api/entity/
  *              @param <optional> page  [1-*]  default: 1
  *              @param <optional> limit [1-15] default: 5
  * 
- *      # GET Entity with id
+ *      # GET Entity with id:
  *          /api/entity/ID/
+ * 
+ * 
+ *      # GET Relation list:
+ *          /api/relation/
+ *              @param <optional> page  [1-*]  default: 1
+ *              @param <optional> limit [1-15] default: 5
+ * 
+ *      # GET Relation with id:
+ *          /api/relation/ID/
  * 
  * STATUS MESSAGE: 
  *      # 200: OK
@@ -76,8 +85,8 @@ class API {
         
         // check the resource
         if(!$this->isGoodResource($resource) ) {
-            // wrong parameter    
-            $this->result(405);
+            // unknown resource    
+            $this->result(601);
         }
         
         // control the quota
@@ -113,7 +122,7 @@ class API {
                 $this->result(200, $result);
                 
             // or user just want a list of resources    
-            } else {                               
+            } else {            
                 
                 // take the page number from parameter
                 $page = isset($param["page"]) && is_numeric($param["page"]) ? $param["page"] : 1;
@@ -216,6 +225,7 @@ class API {
         
         // 6XX CUSTOM ERROR
         $error[600] = "API Quota Exceeded";
+        $error[601] = "Unknown resource";
 
         
         // if no callback function specified
@@ -333,7 +343,6 @@ class API {
     
     
     /**
-     * 
      * Get a resource
      *
      * @param string $resource
@@ -351,7 +360,10 @@ class API {
                 // it's an entity
                 case "entity": 
                     // we use "entity" to select "node", it seems more user-friendly
-                    $node = $this->managers['node']->getNode($id)->getArray();
+                    $node = $this->managers['node']->getNode($id);
+                    
+                    // array conversion
+                    $node = $node instanceof Node ? $node->getArray() : false;
                     
                     // if the result is OK
                     if(is_array($node))
@@ -363,12 +375,66 @@ class API {
                     return $node; break;
                 
                 // it's a relation
-                case "relation": break;
+                case "relation": 
+                    
+                    // relation
+                    $relation = $this->managers["relation"]->getRelation($id);                                        
+                    
+                    // array conversion
+                    $relation = $relation instanceof Relation ? $relation->getArray(true) : false;
+                                        
+                    
+                    // if the result is OK
+                    if(is_array($relation)) {
+                        
+                        // Get the true node                        
+                        /* $relation["node_right"] = $this->managers['node']->getNode($relation["node_right"]);                        
+                        // if result it's ok
+                        if($relation["node_right"] instanceof Node)
+                            // convert Object to array
+                            $relation["node_right"] = $relation["node_right"]->getArray(true);
+                        
+                        $relation["node_left"]  = $this->managers['node']->getNode($relation["node_left"]);                 
+                        // if result it's ok
+                        if($relation["node_left"] instanceof Node)
+                            // convert Object to array
+                            $relation["node_left"] = $relation["node_left"]->getArray(true); */
+                        
+                        // Get the complete type
+                        $relation["type"] = $this->managers['relation_type']->getType($relation["type"]);
+                        
+                        // if the result is OK
+                        if($relation["type"] instanceof Relation_type) {
+                            
+                            // convert Object to array
+                            $relation["type"] = $relation["type"]->getArray();
+                        }
+                        
+                        
+                        // Get relation properties
+                        $relation["properties"] = $this->managers["relation_value"]->getRelationValues($id);
+                        
+                        // convert properties to array
+                        if( is_array($relation["properties"]) ) {
+                            
+                            // for each property
+                            foreach($relation["properties"] as & $prop)
+                                
+                                // convert Object to Array
+                                $prop = $prop->getArray();
+                        }
+                        
+                    }
+                        
+                    // return the result
+                    return $relation; break;
                 
             }
         }
         
     }
+    
+    
     /**
      * 
      * Get a list of resources
@@ -394,7 +460,7 @@ class API {
                 case "entity":
                     
                     // get the node list
-                    $nodes = $this->managers["node"]->getNodes($offset, $limit);
+                    $nodes = $this->managers["node"]->getNodesList($offset, $limit);
                     
                     // if the result is an array
                     if( is_array($nodes) )
@@ -407,7 +473,14 @@ class API {
                     return $nodes; break;
                 
                 // it's a relation
-                case "relation": break;
+                case "relation": 
+                    
+                    // get the relation list
+                    $relations = $this->managers["relation"]->getRelationsList($offset, $limit);
+                    
+                    // return the result
+                    return $relations; break;
+                
                 
             }
         }
@@ -435,7 +508,7 @@ class API {
                 break;
             
             // update with POST
-            case self::POST: 
+            case self::POST:
                 // not implemented yet
                 $this->result(501);
                 break;

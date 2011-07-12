@@ -44,6 +44,23 @@ class Relation_type extends Record {
     }
 
 
+    /**
+     * Return an array with all value of this object
+     * @return array
+     * @access public
+     */
+    public function getArray($native = false) {
+
+        $r = Array(
+            "id" => $this->id,
+            "freebase_id" => $this->freebase_id,
+            "label" => $this->label,
+            "direction" => $this->direction,
+            "hint" => $this->hint
+        );            
+
+        return $r;
+    }
 
 }
 

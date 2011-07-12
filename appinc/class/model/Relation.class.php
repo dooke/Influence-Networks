@@ -319,26 +319,44 @@ class Relation extends Record {
     /**
      * Return an array with all value of this object
      * @return array
+     * @param boolean $native
      * @access public
      */
-    public function getArray() {
+    public function getArray($native = false) {
 
-        $r = Array(
-            "id" => $this->id,
-            "node_left" => $this->node_left,
-            "node_right" => $this->node_right,
-            "creator" => $this->creator,
-            "type" => $this->type,
-            "trust_level" => $this->trust_level,
-            "type_label" => $this->type_label,
-            "node_left_label" => $this->node_left_label,
-            "node_right_label" => $this->node_right_label,
-            "node_left_freebase_id" => $this->node_left_freebase_id,
-            "node_right_freebase_id" => $this->node_right_freebase_id,
-            "node_left_type" => $this->node_left_type,
-            "node_right_type" => $this->node_right_type
-        );
-
+        // non-native information
+        if(!$native) {
+            
+            $r = Array(
+                "id" => $this->id,
+                "node_left" => (int)$this->node_left,
+                "node_right" => (int)$this->node_right,
+                "creator" => (int)$this->creator,
+                "type" => (int)$this->type,
+                "trust_level" => (float)$this->trust_level,
+                "type_label" => $this->type_label,
+                "node_left_label" => $this->node_left_label,
+                "node_right_label" => $this->node_right_label,
+                "node_left_freebase_id" => $this->node_left_freebase_id,
+                "node_right_freebase_id" => $this->node_right_freebase_id,
+                "node_left_type" => $this->node_left_type,
+                "node_right_type" => $this->node_right_type
+            );              
+            
+        // native information    
+        } else {
+            
+            $r = Array(
+                "id" => $this->id,
+                "node_left" => (int)$this->node_left,
+                "node_right" => (int)$this->node_right,
+                "creator" => (int)$this->creator,
+                "type" => (int)$this->type,
+                "trust_level" => (float)$this->trust_level
+            );         
+            
+        }
+        
 
         return $r;
     }

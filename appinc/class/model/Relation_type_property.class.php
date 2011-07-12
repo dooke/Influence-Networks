@@ -43,6 +43,24 @@ class Relation_type_property extends Record {
         $this->literal = $literal;
     }
  
+    
+
+    /**
+     * Return an array with all value of this object
+     * @return array
+     * @access public
+     */
+    public function getArray($native = false) {
+
+        $r = Array(
+            "id" => $this->id,
+            "type" => $this->type,
+            "freebase_id" => $this->freebase_id,
+            "literal" => $this->literal
+        );            
+
+        return $r;
+    }
 
 }
 
