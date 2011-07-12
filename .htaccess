@@ -4,9 +4,11 @@ RewriteEngine On
 RewriteBase /
 
 
-# one resource
-RewriteRule ^api/([a-z]+)/([a-z0-9]+)/?$ /index.php?api&resource=$1&id=$2 [L,NC,QSA]
+# one resource with number ID
+RewriteRule ^api/([a-z]+)/([0-9]+)/?$ /index.php?api&resource=$1&id=$2 [L,NC,QSA]
 
+# one resource with MID
+RewriteRule ^api/([a-z]+)(/[a-z0-9_-]+/[a-z0-9_-]+)/?$ /index.php?api&resource=$1&id=$2 [L,NC,QSA]
 
 # resources
 RewriteRule ^api/([a-z]+)/?$ /index.php?api&resource=$1&$2 [L,NC,QSA]

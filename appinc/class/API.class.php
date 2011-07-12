@@ -14,7 +14,7 @@
  *              @param <optional> page  [1-*]  default: 1
  *              @param <optional> limit [1-15] default: 5
  * 
- *      # GET Entity with id:
+ *      # GET Entity with id (or MID):
  *          /api/entity/ID/
  * 
  * 
@@ -98,8 +98,8 @@ class API {
             
         }else {
             
-            // if the user ask an id, it must be a number
-            if(isset($param["id"]) && !is_numeric($param["id"]) ) {
+            // if the user ask an id, it must be a number or mid
+            if(isset($param["id"]) && !(is_numeric($param["id"]) || preg_match("#^/[a-z0-9_-]+/[a-z0-9_-]+$#i", $param["id"])) ) {
                 
                 // wrong parameter
                 $this->result(405);
