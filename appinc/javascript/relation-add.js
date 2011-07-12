@@ -1,21 +1,21 @@
 
 $(document).ready(function () {  
       
+    var createFreebaseEntity = new window.CreateFreebaseEntity();
+    
+    
     /*************************
       * Pre-load template files
       ***/
     $.get("./appinc/template/tmpl/node-property.tmpl", {}, function(tmpl) {
         $.template( "node-property", tmpl);
     } );
+    
+    
     $.get("./appinc/template/tmpl/form-type-property.tmpl", {}, function(tmpl) {
         $.template( "form-type-property", tmpl);
     } );
      
-      
-    /*************
-       * Put event *
-       *************/
-      
       
     /*********************
       * Autocomplete module
@@ -43,13 +43,11 @@ $(document).ready(function () {
         type_strict: "any",
         all_types: true,
         // selection is required
-        required: true
+        required: true,
+        soft:false
         
         
     }).bind("fb-select", function(e, data) { // select event
-        
-        // hide tooltips when we select an entity
-       $(this).tipsy("hide"); 
         
         // load data from freebase
         loadFreebaseData(data, $(this) );
@@ -57,11 +55,11 @@ $(document).ready(function () {
     }).bind("fb-required", function () { // fail event
         
        // Hack to hide every tipsy tooltips
-       $(".node_search").each(function(i, n) {$(n).tipsy("hide");});
+       $(".node_search").each(function(i, n) {$(n).tipsy("hide");});              
        
-       // show the right tooltips
-       if( $(this).val() != "" && $(this).val() != $(this).attr("placeholder") )
-            $(this).tipsy("show"); 
+       if( $(this).val() != $(this).attr("placeholder") )
+           // Show the form to 
+           createFreebaseEntity.open(this);
        
     });
       
@@ -236,13 +234,6 @@ function loadFreebaseData(data, input) {
     // * Load Data from Freebase
     // ***
 
-    // cross domain query
-    document.createElement("script");
-
-    var header = document.getElementsByTagName("head")[0];         
-    var script = document.createElement('script');
-    script.type = 'text/javascript';
-
     // if we know the mid (freebase id) of the target node
     // we can do a request to freebase.
 
@@ -253,19 +244,18 @@ function loadFreebaseData(data, input) {
     // this one does a JSONP request from freebase api.
     // The callback function was "completeInfoFromFreebase".
 
-    script.src  = "http://www.freebase.com/api/service/mqlread?callback=completeInfoFromFreebase&query=";
+    var src  = "http://www.freebase.com/api/service/mqlread?query=";
 
 
     // for a /people/person we have a particular kind of data set
     if(type == "/people/person")
-        script.src  += '{ "query"%3A [{ "id"%3A "' + data.id + '"%2C "type"%3A "/people/person"%2C "name"%3A null%2C "profession"%3A []%2C "date_of_birth"%3A null%2C "gender"%3A null%2C "nationality"%3A []%2C "place_of_birth"%3A []%2C "places_lived"%3A [] }] }';
+        src  += '{ "query"%3A [{ "id"%3A "' + data.id + '"%2C "type"%3A "/people/person"%2C "name"%3A null%2C "profession"%3A []%2C "date_of_birth"%3A null%2C "gender"%3A null%2C "nationality"%3A []%2C "place_of_birth"%3A []%2C "places_lived"%3A [] }] }';
     // for organization we have an other kind of data set...
     else if(type == "/organization/organization")
-        script.src  += '{ "query"%3A [{ "id"%3A "' + data.id + '"%2C "name"%3A null%2C "type"%3A "%2Forganization%2Forganization"%2C "headquarters"%3A [{ "*"%3A {} }] }] }';
+        src  += '{ "query"%3A [{ "id"%3A "' + data.id + '"%2C "name"%3A null%2C "type"%3A "%2Forganization%2Forganization"%2C "headquarters"%3A [{ "*"%3A {} }] }] }';
 
-
-    header.appendChild(script);
-
+    $.getJSON(src+"&callback=?", completeInfoFromFreebase);
+    
     setview.addClass("loading");
     setview.removeClass("default");
          

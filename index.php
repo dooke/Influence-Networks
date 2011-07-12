@@ -82,7 +82,7 @@
       
       // API calls
       // ---------
-      if( isset($_GET["api"]) ) {
+      if( isset($_REQUEST["api"]) ) {
                     
             require_once(BASE_DIR . "/appinc/class/API.class.php");            
             $api = new API($db, $managers, $err);

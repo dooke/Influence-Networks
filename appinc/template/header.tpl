@@ -78,6 +78,7 @@
             
             {if $screen=="relation-add"}
             
+                  <script type="text/javascript" src="{$smarty.const.APP_URL}appinc/javascript/CreateFreebaseEntity.class.js"></script>                  
                   <script type="text/javascript" src="{$smarty.const.APP_URL}appinc/javascript/relation-add.js"></script>                  
             
             {elseif $screen=="relation-review"}

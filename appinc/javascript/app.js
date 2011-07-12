@@ -1,9 +1,6 @@
 
 
 $(document).ready(function () {
-      
-    
-     // put events
     
     /************************
      * CONNEXION SUBMIT EVENT
@@ -141,8 +138,6 @@ $(document).ready(function () {
             } else
                   // Form is incomplete
                   showFormError(form, 1);
-       
-        
         
         
             return false;

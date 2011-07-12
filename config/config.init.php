@@ -50,16 +50,16 @@
     define("DOC_TWUSER", "owni");
     define("GA_PROFILE", "UA-18463169-5");
     
-    define("FREEBASE_USERNAME", "@@FREEBASE_USER@@");
-    define("FREEBASE_PASSWORD", "@@FREEBASE_PASS@@");
+    define("FREEBASE_USERNAME", "InfluenceNetworksTest");
+    define("FREEBASE_PASSWORD", "infnets");
     
-    define("FREEBASE_API_LOGIN",    "https://api.freebase.com/api/account/login");
-    define("FREEBASE_API_MQLWRITE", "https://api.freebase.com/api/service/mqlwrite");
-    define("FREEBASE_API_MQLREAD",  "http://www.freebase.com/api/service/mqlread");
+//    define("FREEBASE_API_LOGIN",    "https://api.freebase.com/api/account/login");
+//    define("FREEBASE_API_MQLWRITE", "https://api.freebase.com/api/service/mqlwrite");
+//    define("FREEBASE_API_MQLREAD",  "http://www.freebase.com/api/service/mqlread");
     
-    // define("FREEBASE_API_LOGIN",    "https://api.sandbox-freebase.com/api/account/login");
-    // define("FREEBASE_API_MQLWRITE", "https://api.sandbox-freebase.com/api/service/mqlwrite");
-    // define("FREEBASE_API_MQLREAD",  "http://www.sandbox-freebase.com/api/service/mqlread");
+    define("FREEBASE_API_LOGIN",    "https://api.sandbox-freebase.com/api/account/login");
+    define("FREEBASE_API_MQLWRITE", "https://api.sandbox-freebase.com/api/service/mqlwrite");
+    define("FREEBASE_API_MQLREAD",  "http://www.sandbox-freebase.com/api/service/mqlread");
     
 
 ?>

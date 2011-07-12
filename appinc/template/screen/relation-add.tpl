@@ -2,7 +2,6 @@
       {include file="menu.tpl"}      
 </ul>
 
-
 <h2>{t}Add a relation{/t}</h2>
 
 <section class="classic-form">
@@ -66,3 +65,11 @@
             
       </form>
 </section>
+                                                
+<form class="createFreebaseEntity simpleShadow radiusLight hidden">
+    <h3>{t}Create an entity{/t}</h3>
+    <p class="text">{t}We don't know %1 yet and we are going to add it. Are we talking of:{/t}</p>
+    <label class="button light"><input type="radio" value="/people/person"  name="entity_type" />{t}A person{/t}</label>
+    <label class="button light"><input type="radio" value="/organization/organization" name="entity_type" />{t}An organization (company, NGO, school...){/t}</label>
+    <input type="button" value="{t}Back{/t}" class="cancel button light" />
+</form>
