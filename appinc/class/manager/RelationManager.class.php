@@ -17,8 +17,7 @@ class RelationManager extends Manager {
 
       public function addRelation() {
 
-
-            $node_left_id = stripslashes($_POST["entity-left-mid"]);
+            $node_left_id  = stripslashes($_POST["entity-left-mid"]);
             $node_right_id = stripslashes($_POST["entity-right-mid"]);
             $relation_type = stripslashes($_POST["relation_type"]);
 
@@ -340,18 +339,27 @@ class RelationManager extends Manager {
                   return false;
       }
 
-      public function getNodeRelationJSON() {
+      public function getNodeRelationArray($id) {
 
-            if (is_numeric($_GET["id"])) {
+            if (is_numeric($id) ) {
 
-                  $relations = $this->getNodeRelation($_GET["id"]);
+                  $relations = $this->getNodeRelation($id);
                   $relations_array = array();
 
                   foreach ($relations as $r)
                         $relations_array[] = $r->getArray();
 
-                  return json_encode($relations_array);
+                  return $relations_array;
             } else
+                  return false;
+      }
+
+
+      public function getNodeRelationJSON() {
+
+            if (is_numeric($_GET["id"]))
+                  return json_encode( $this->getNodeRelationArray($_GET["id"]) );
+            else
                   return false;
       }
 

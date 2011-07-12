@@ -93,6 +93,25 @@ class NodeManager extends Manager {
             return ( isset($this->nodes[$key]) ) ? $this->nodes[$key] : false;
       }
       
+      
+      public function getNodes($offset, $limit) {
+          
+          $query  = "SELECT * ";          
+          $query .= "FROM ".TABLE_PREFIX."node ";
+          $query .= "LIMIT {$limit} OFFSET {$offset}";
+                    
+          $this->db->query($query) or die( _("Database error. Sorry, try again.") );
+          $nodes = array();
+          
+          while( $row = $this->db->fetch() ){
+                $node = new Node($row);
+                $node = $node->getArray();
+                $nodes[] =  $node;
+          }
+          
+          return $nodes;
+      }
+      
       public function addFreebaseNode($freebase_id) {
             
             // if node doesn't exist

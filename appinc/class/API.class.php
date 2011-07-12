@@ -3,9 +3,39 @@
  * Receive API calls to process it. 
  * 
  * 
+ * 
+ * OUTPUT FORMAT:
+ *      # JSON
+ *      # JSONP (use the "callback" parameter)
+ * 
+ * QUERY:
+ *      # GET Entities list :
+ *          /api/entity/
+ *              @param <optional> page  [1-*]  default: 1
+ *              @param <optional> limit [1-15] default: 5
+ * 
+ *      # GET Entity with id
+ *          /api/entity/ID/
+ * 
+ * STATUS MESSAGE: 
+ *      # 200: OK
+ *      # 204: Empty content
+ *      # 405: Wrong parameter(s)
+ *      # 412: Method not allowed
+ *      # 501: Method not emplemented
+ *      # 600: Quota exceeted
+ * 
+ * QUOTA LIMITS:
+ *      # GET   : 120 query by hour
+ *      # PUT   : 120 query by hour
+ *      # POST  : 120 query by hour
+ *      # DELETE: 120 query by hour
+ *      # HEAD  : 120 query by hour
+ * 
  * @author Pirhoo <pierre@owni.fr>
  * @version 1.0
  * @package API
+ * 
  */
 class API {
         
@@ -33,56 +63,6 @@ class API {
      */
     protected $err;
     
-
-    /**
-     * Constructor
-     * @access public 
-     */
-    public function __construct(& $db, & $managers, & $err) {
-        
-        // reference to the base
-        $this->db = & $db;
-        
-        // reference to the managers
-        $this->managers = & $managers;
-        
-        // reference to the error manager
-        $this->err = & $err;
-        
-        // switch an action following the GET paramater
-        $this->switchAction();
-        
-    }
-    
-    
-    /**
-     * Switch an action following the GET paramater
-     * @access public
-     */
-    public function switchAction() {
-        
-        switch($_SERVER['REQUEST_METHOD']) {
-            
-            // consult with GET
-            case self::GET:
-                $this->get($_GET);
-                break;
-                    
-            // delete with DELETE
-            case self::DELETE:break;
-            
-            // update with POST
-            case self::POST:break;
-            
-            // insert with PUT
-            case self::PUT:break;
-            
-            // query not allowed
-            default :  $this->result(412);
-                
-        }
-        
-    }
     
     /**
      * GET action (to consult)
@@ -95,7 +75,10 @@ class API {
         $resource = $param["resource"];
         
         // check the resource
-        if(!$this->isGoodResource($resource) ) $this->result(405);
+        if(!$this->isGoodResource($resource) ) {
+            // wrong parameter    
+            $this->result(405);
+        }
         
         // control the quota
         if(! $this->isUnderQuota(self::GET) ) {
@@ -106,11 +89,52 @@ class API {
             
         }else {
             
-            // insert the query in the database to limit quota
-            $this->saveQuery(self::GET);
+            // if the user ask an id, it must be a number
+            if(isset($param["id"]) && !is_numeric($param["id"]) ) {
+                
+                // wrong parameter
+                $this->result(405);
+                
+            // or id is all right    
+            } elseif( isset($param["id"]) ) {
+                
+                // get the resource
+                $result = $this->getResource($resource, $param["id"]); 
+                
+                // if the resource doesn't exist
+                if(!$result)
+                    // no content header
+                    $this->result (204);
+                
+                // insert the query in the database to limit quota
+                $this->saveQuery(self::GET);
 
-            // send the result
-            $this->result(200, array());
+                // send the result
+                $this->result(200, $result);
+                
+            // or user just want a list of resources    
+            } else {                               
+                
+                // take the page number from parameter
+                $page = isset($param["page"]) && is_numeric($param["page"]) ? $param["page"] : 1;
+                
+                // take number of resources by page from parameter
+                $limit = isset($param["limit"]) && is_numeric($param["limit"])  ? $param["limit"] : 5;
+                
+                // get the resources
+                $result = $this->getResources($resource, $page, $limit);
+                
+                // if the resource doesn't exist
+                if(!$result)
+                    // no content header
+                    $this->result (204);
+                
+                // insert the query in the database to limit quota
+                $this->saveQuery(self::GET);
+
+                // send the result
+                $this->result(200, $result);
+            }
             
         }
     }
@@ -194,18 +218,38 @@ class API {
         $error[600] = "API Quota Exceeded";
 
         
-        // here following the error code
-        header('HTTP/1.0 '.$code.' '.$error[$code]);
-        header('Content-Type: application/json', true, $code);
-        
-        // result with status and status code
-        $result = array("status" => $code.' '.$error[$code], "status_code" => $code);
-        
-        // add the content, if content there is
-        if($content !== null) $result["content"] = $content;
-        
-        // JSON encode and show the result
-        echo json_encode($result);
+        // if no callback function specified
+        if(! isset($_REQUEST["callback"]) ) {
+            
+            // here following the error code
+            header('HTTP/1.0 '.$code.' '.$error[$code]);
+            header('Content-Type: application/json', true, $code);
+
+            // result with status and status code
+            $result = array("status" => $code.' '.$error[$code], "status_code" => $code);
+
+            // add the content, if  there is a content
+            if($content !== null) $result["content"] = $content;
+
+            // JSON encode and show the result
+            echo json_encode($result);
+
+        // if callback function is specified
+        } else {
+            
+            // here following the error code
+            header('HTTP/1.0 200 '.$error[200]);
+            header('Content-Type: text/javascript', true, 200);
+
+            // result with status and status code
+            $result = array("status" => $code.' '.$error[$code], "status_code" => $code);
+
+            // add the content, if  there is a content
+            if($content !== null) $result["content"] = $content;
+
+            // JSON encode and show the result
+            echo $_REQUEST["callback"]."(".json_encode($result).");";
+        }
         
         // it's done !
         exit;
@@ -234,17 +278,16 @@ class API {
      */
     protected function saveQuery($method) {
                
-        $GET = $_GET;
+        $param = $_REQUEST;
         // useless variable
-        unset($GET["api"]);
+        unset($param["api"]);
         
         // escape quotes
-        foreach($GET as $key => $val)        
-            $GET[$key] = htmlentities($val, ENT_QUOTES);        
+        foreach($param as $key => $val)        
+            $param[$key] = htmlentities($val, ENT_QUOTES);        
         
-            
         // query to insert
-        $api_query = str_replace("\\\\", "\\", json_encode($GET) );
+        $api_query = str_replace("\\\\", "\\", json_encode($param) );
         // ip to insert
         $IP        = $_SERVER["REMOTE_ADDR"];
         
@@ -277,13 +320,136 @@ class API {
             $query .= "IP = '{$IP}' ";
             $query .= "AND method = '{$method}' "; 
             // every line older than 1 hour
-            $query .= "AND DATE_SUB(CURDATE(), INTERVAL 1 HOUR) <= date";
+            $query .= "AND date > (NOW() - INTERVAL 60 MINUTE)";
           
         // ask the database    
         $this->db->query($query);
         list($count) = $this->db->fetch();                    
+                
         
         return $count < $this->getMethodQuota($method);
+        
+    }
+    
+    
+    /**
+     * 
+     * Get a resource
+     *
+     * @param string $resource
+     * @param number $id
+     *
+     * @access protected
+     * @return array
+     */
+    protected function getResource($resource = null, $id = null) {
+        
+        // if parameters are fine
+        if( $resource !== null && $id !== null ) {
+            // select the resource
+            switch ($resource) {
+                // it's an entity
+                case "entity": 
+                    // we use "entity" to select "node", it seems more user-friendly
+                    $node = $this->managers['node']->getNode($id)->getArray();
+                    
+                    // if the result is OK
+                    if(is_array($node))
+                        
+                        // get the relations of the node
+                        $node["relations"] = $this->managers['relation']->getNodeRelationArray($id);
+                    
+                    // return the result
+                    return $node; break;
+                
+                // it's a relation
+                case "relation": break;
+                
+            }
+        }
+        
+    }
+    /**
+     * 
+     * Get a list of resources
+     *
+     * @param string $resource
+     * @param int $page
+     * @param int $limit
+     * 
+     * @access protected
+     * @return array
+     */
+    protected function getResources($resource = null, $page = 1, $limit = 5) {
+                
+        // minimum and maximun value for limit
+        $limit = $limit > 15 || $limit < 1 ? 5 : $limit;
+        $offset = ($page - 1) * $limit;
+        
+        // if parameters are fine
+        if( $resource !== null ) {
+            // select the resource
+            switch ($resource) {
+                // it's an entity
+                case "entity":
+                    
+                    // get the node list
+                    $nodes = $this->managers["node"]->getNodes($offset, $limit);
+                    
+                    // if the result is an array
+                    if( is_array($nodes) )
+                        // for each node
+                        foreach($nodes as $key => & $node)
+                            // get relations
+                            $node["relations"] = $this->managers["relation"]->getNodeRelationArray($node["id"]);
+                    
+                    // return the result
+                    return $nodes; break;
+                
+                // it's a relation
+                case "relation": break;
+                
+            }
+        }
+        
+    }
+    
+    
+    /**
+     * Switch an action following the GET paramater
+     * @access public
+     */
+    public function switchAction() {
+        
+        switch($_SERVER['REQUEST_METHOD']) {
+            
+            // consult with GET
+            case self::GET:                
+                $this->get($_GET);
+                break;
+                    
+            // delete with DELETE
+            case self::DELETE:
+                // not implemented yet
+                $this->result(501);
+                break;
+            
+            // update with POST
+            case self::POST: 
+                // not implemented yet
+                $this->result(501);
+                break;
+            
+            // insert with PUT
+            case self::PUT:     
+                // not implemented yet
+                $this->result(501);
+                break;
+            
+            // query not allowed
+            default : $this->result(412);
+                
+        }
         
     }
     
@@ -304,6 +470,28 @@ class API {
         
         return $quota[$method];
     }
+    
+    
+    /**
+     * Constructor
+     * @access public 
+     */
+    public function __construct(& $db, & $managers, & $err) {
+        
+        // reference to the base
+        $this->db = & $db;
+        
+        // reference to the managers
+        $this->managers = & $managers;
+        
+        // reference to the error manager
+        $this->err = & $err;
+        
+        // switch an action following the GET paramater
+        $this->switchAction();
+        
+    }
+    
 }
 
 ?>
