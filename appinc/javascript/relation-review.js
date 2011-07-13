@@ -1,7 +1,7 @@
 (function(window, $, undefined) {
     
     // CURRENT APP INSTANCE
-    var page = this;
+    var page = {};
     
     /**
      * Init the page

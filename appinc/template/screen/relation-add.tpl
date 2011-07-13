@@ -14,14 +14,9 @@
             </div>
             
             <section>
-                  <div class="entity-desc loading default" id="entity-left">
+                  <div class="entity-desc" id="entity-left">
                         <input type="hidden" name="entity-left-mid" class="required" value="" />
                         <h4></h4>
-                        <div class="hiddable">
-                              <ul></ul>
-                              <span class="freebase-label">{t}Information provided by Freebase{/t}</span>
-                              <div class="wait">{t}Loading information.{/t}</div>
-                        </div>
                   </div>
             </section>
                   
@@ -29,15 +24,8 @@
                   <div class="entity-desc loading default" id="entity-right">
                         <input type="hidden" name="entity-right-mid" class="required" value="" />
                         <h4></h4>
-                        <div class="hiddable">
-                              <ul></ul>
-                              <span class="freebase-label">{t}Information provided by Freebase{/t}</span>
-                              <div class="wait">{t}Loading information.{/t}</div>
-                        </div>
                   </div>
-            </section>
-            
-            <div class="deroule open" title="{t}Hide/Show entities details{/t}"></div>
+            </section>            
 
             <div class="select-type">
                   <label>

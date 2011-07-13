@@ -1,7 +1,7 @@
 (function(window, $, undefined) {
     
     // CURRENT APP INSTANCE
-    var app = this;
+    var app = {};
     
     /**
      * Init the page
@@ -34,7 +34,7 @@
         
         // CLOSE ERROR MESSAGE
         $("#errors .tooltip .close").live("click", function () {
-              $(this).parent().hide();
+            $(this).parent().hide();
         });      
         
         // EXPLORE FREEBASE TOPIC

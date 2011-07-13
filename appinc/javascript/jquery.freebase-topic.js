@@ -119,9 +119,13 @@
               $this.live("click", function(e) {
                   
                   e.preventDefault();
-                                    
+                  
+                  // if has href
                   if( $(this).attr("href") && $(this).attr("href") != "" )
-                      window.open($(this).attr("href"));
+                      // if is a link or a button
+                      if( $(this).is("a") || $(this).is("button") || $(this).is("input[type=button]") )
+                        // open the link
+                        window.open($(this).attr("href"));
               });
           };
           
@@ -134,9 +138,8 @@
               
               var $topic = $(this);
               
-              
               // hover class
-              $topic.addClass("fb-topic-hover").tipsy("show");
+              $topic.addClass("fb-topic-hover");
               
               // we already loaded the topic description
               if( $topic.data("description") ) {
