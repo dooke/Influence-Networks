@@ -31,29 +31,18 @@ header h2 {
     display:none;
 }
 
-#app {
-    width:990px;
-    height:667px;
-    border:1px solid #aaa;
-    padding:0px;
-    margin:0px;
+h1, h2 {
+      display:none;
 }
 
-#workspace {
-    background:#dcdcdb;
-    height:666px;
-    border:1px solid #fff;
-}
-
-#overflow {
-    height:667px;
-    width:990px;
-    overflow:hidden;
+a {
+      color:#8F436B;
+      text-decoration: underline;
 }
 
 #mask {
-    height:667px;
-    width:990px;
+    height:100%;
+    width:100%;
     background: rgba(0,0,0,0.6);    
 
     position:absolute;
@@ -71,11 +60,14 @@ header h2 {
 }
 
 footer {
+    
+    
     height:36px;
     margin:0px 1px;
     padding:10px;
     background: url('../images/share.png') repeat-x #8d8d8d;
     display:block;
+    display:none; 
     clear:both;
 
     position:relative;

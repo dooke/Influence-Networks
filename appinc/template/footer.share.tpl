@@ -1,6 +1,36 @@
 
 <footer>
 
+
+    <div id="partenaires" class="radiusLight">
+        <h3>{t}Partners{/t}</h3>
+        <ul>
+            <li>
+                <a href="http://www.zeit.de/" target="_blank" title="Zeit Online">
+                    <img src="./appinc/images/zeit.png" alt="Zeit Online" />
+                </a>
+            </li>
+            <li>
+                <a href="http://www.transparency.org/" target="_blank" title="Transparency International">
+                    <img src="./appinc/images/transparency.png" alt="Transparency International" />
+                </a>
+            </li>
+            <li>
+                <a href="http://obsweb.net/" target="_blank" title="Observatoire du WebJournalisme">
+                    <img src="./appinc/images/obs.png" alt="Observatoire du WebJournalisme" />
+                </a>
+            </li>
+            <li>
+                <a href="http://owni.fr/" target="_blank" class="owni" title="OWNI">
+                    <img src="./appinc/images/owni.png" alt="OWNI.fr" />
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Ligne qui contient un déclencheur pour afficher la barre de partage -->
+    <div class="showFooter"><img src="./appinc/images/share.png" alt="" class="trigger" /></div>
+
     <!--ection class="like incrusted">
         <h3>{t}share_fan_tooltips{/t}</h3>
         <span class="share"  title="">

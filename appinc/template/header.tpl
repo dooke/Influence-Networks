@@ -68,6 +68,8 @@
             <script type="text/javascript" src="{$smarty.const.APP_URL}appinc/javascript/modernizr-1.6.min.js"></script>
             <!-- Freebase suggest plugin --> 
             <script type="text/javascript" src="http://freebaselibs.com/static/suggest/1.3/suggest.min.js"></script>
+            <!-- Explore Freebase Topic -->
+            <script type="text/javascript" src="{$smarty.const.APP_URL}appinc/javascript/jquery.freebase-topic.js"></script>
                                     
             <script type="text/javascript" src="{$smarty.const.APP_URL}appinc/javascript/app.js"></script>
 
@@ -119,9 +121,9 @@
             
             <script type="text/javascript">
                   // to know if the user is connected
-                  var isConnected = {if $isConnected} true {else} false {/if};
+                  window.isConnected = {if $isConnected} true {else} false {/if};
                   // to display errors
-                  var err = {$err_json};                  
+                  window.err = {$err_json};                  
             </script>
 
 
@@ -133,80 +135,76 @@
             <h1>Influence Networks</h1>            
             
             <!-- The APP himlself, 990 by 667 pixels -->
-            <div id="app" class="simple center simpleShadow radiusLight">
+            <div id="app" class="simple">
 
-                  <div id="overflow">
+                  <div id="errors"></div>
 
-                        <div id="workspace">
+                  <div id="user-menu">
+                        {if $isConnected}
+                              <div class="user_corner">
 
-                              <div id="errors"></div>
-                              
-                              <div id="user-menu">
-                                    {if $isConnected}
-                                          <div class="user_corner">
+                                    <div class="user_status">
+                                          <span class="label">{t}See your{/t}<br />{t}activity{/t}</span>
+                                          <span class="trust_level" title="{t}This is a measure of your trustworthiness. The more your contributions are deemed trustworthy by the community, the higher it goes.{/t}">{$user.trust_level}</span>
+                                    </div>
+                                    <div class="user_activity">
+                                          <div class="headband">
+                                                {t}Your activity:{/t} 
 
-                                                <div class="user_status">
-                                                      <span class="label">{t}See your{/t}<br />{t}activity{/t}</span>
-                                                      <span class="trust_level" title="{t}This is a measure of your trustworthiness. The more your contributions are deemed trustworthy by the community, the higher it goes.{/t}">{$user.trust_level}</span>
-                                                </div>
-                                                <div class="user_activity">
-                                                      <div class="headband">
-                                                            {t}Your activity:{/t} 
+                                                {if $user.count_relation <= 1}  
+                                                      {$user.count_relation} {t}relationship added and{/t}
+                                                {else}
+                                                      {$user.count_relation} {t}relationships added and{/t}
+                                                {/if}
 
-                                                            {if $user.count_relation <= 1}  
-                                                                  {$user.count_relation} {t}relationship added and{/t}
-                                                            {else}
-                                                                  {$user.count_relation} {t}relationships added and{/t}
-                                                            {/if}
-
-                                                            {if $user.count_relation_trust_level <= 1} 
-                                                                  {$user.count_relation_trust_level} {t}relationship verified{/t}
-                                                            {else}
-                                                                  {$user.count_relation_trust_level} {t}relationships verified{/t}                                                      
-                                                            {/if}
-                                                      </div>
-                                                </div>
-                                                <div class="signOut">
-                                                      <span style="font-weight:bold">{t}Logged as {/t}{$user.email}</span>&nbsp;|&nbsp;<a href="?action=signout">{t}Sign out{/t}</a>
-                                                </div>
-
+                                                {if $user.count_relation_trust_level <= 1} 
+                                                      {$user.count_relation_trust_level} {t}relationship verified{/t}
+                                                {else}
+                                                      {$user.count_relation_trust_level} {t}relationships verified{/t}                                                      
+                                                {/if}
                                           </div>
-                                    {else}
-                                          <form action="index.php" method="post" class="connexion radiusLight simpleShadow" >
-                                                <input type="hidden" name="action" value="signin" />
-                                                <label>{t}Email{/t}: <input type="text" name="email" class="text" /></label>
-                                                <label>{t}Password{/t}: <input type="password" name="password" class="text" /></label>
-                                                <input type="submit" class="submit button violet" value="{t}Submit{/t}" /> {t}or{/t} <a href="#" onclick="signUp()">{t}Sign up{/t}</a>
+                                    </div>
+                                    <div class="signOut">
+                                          <span style="font-weight:bold">{t}Logged as {/t}{$user.email}</span>&nbsp;|&nbsp;<a href="?action=signout">{t}Sign out{/t}</a>
+                                    </div>
 
-                                                <!-- ERROR MESSAGES -->
-                                                <div class="form_error">
-                                                      <!-- for free message -->
-                                                </div>
-                                                <div class="form_error">
-                                                      {t}The username or password is incorrect.{/t}
-                                                </div>
-                                          </form>
-
-                                          <form action="index.php" method="post" class="inscription radiusLight simpleShadow hidden" >
-                                                <input type="hidden" name="action" value="signup" />
-                                                <label>{t}Email{/t}: <input type="text" name="email" class="text" /></label>
-                                                <label>{t}Password{/t}: <input type="password" name="password_1" class="text" /></label>
-                                                <label>{t}Confirm password{/t}: <input type="password" name="password_2" class="text" /></label>
-                                                <input type="submit" class="submit button violet" value="{t}Submit{/t}" /> {t}or{/t} <a href="#" onclick="signUp()">{t}Come back{/t}</a>
-
-                                                <!-- ERROR MESSAGES -->
-                                                <div class="form_error">
-                                                      <!-- for free message -->
-                                                </div>
-                                                <div class="form_error">
-                                                      {t}Form is incomplete.{/t}
-                                                </div>
-                                                <div class="form_error">
-                                                      {t}Passwords are not matching.{/t}
-                                                </div>
-                                                <div class="form_error">
-                                                      {t}Email address is not valid.{/t}
-                                                </div>
-                                          </form>
-                                    {/if}
                               </div>
+                        {else}
+                              <form action="index.php" method="post" class="connexion radiusLight simpleShadow" >
+                                    <input type="hidden" name="action" value="signin" />
+                                    <label>{t}Email{/t}: <input type="text" name="email" class="text" /></label>
+                                    <label>{t}Password{/t}: <input type="password" name="password" class="text" /></label>
+                                    <input type="submit" class="submit button violet" value="{t}Submit{/t}" /> {t}or{/t} <a href="#" onclick="signUp()">{t}Sign up{/t}</a>
+
+                                    <!-- ERROR MESSAGES -->
+                                    <div class="form_error">
+                                          <!-- for free message -->
+                                    </div>
+                                    <div class="form_error">
+                                          {t}The username or password is incorrect.{/t}
+                                    </div>
+                              </form>
+
+                              <form action="index.php" method="post" class="inscription radiusLight simpleShadow hidden" >
+                                    <input type="hidden" name="action" value="signup" />
+                                    <label>{t}Email{/t}: <input type="text" name="email" class="text" /></label>
+                                    <label>{t}Password{/t}: <input type="password" name="password_1" class="text" /></label>
+                                    <label>{t}Confirm password{/t}: <input type="password" name="password_2" class="text" /></label>
+                                    <input type="submit" class="submit button violet" value="{t}Submit{/t}" /> {t}or{/t} <a href="#" onclick="signUp()">{t}Come back{/t}</a>
+
+                                    <!-- ERROR MESSAGES -->
+                                    <div class="form_error">
+                                          <!-- for free message -->
+                                    </div>
+                                    <div class="form_error">
+                                          {t}Form is incomplete.{/t}
+                                    </div>
+                                    <div class="form_error">
+                                          {t}Passwords are not matching.{/t}
+                                    </div>
+                                    <div class="form_error">
+                                          {t}Email address is not valid.{/t}
+                                    </div>
+                              </form>
+                        {/if}
+                  </div>
