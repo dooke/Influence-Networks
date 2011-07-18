@@ -42,13 +42,13 @@
             <!-- Usefull functions -->
             <script type="text/javascript" src="{$smarty.const.APP_URL}appinc/javascript/functions.utils.js"></script>
             <!-- JQuery library -->
-            <script type="text/javascript" src="{$smarty.const.APP_URL}appinc/javascript/jquery-last.min.js"></script>
+            <script type="text/javascript" src="{$smarty.const.APP_URL}appinc/javascript/jquery/jquery-last.min.js"></script>
             <!-- JQuery UI library -->
-            <script type="text/javascript" src="{$smarty.const.APP_URL}appinc/javascript/jquery-ui-1.8.5.custom.min.js"></script>  
+            <script type="text/javascript" src="{$smarty.const.APP_URL}appinc/javascript/jquery/jquery-ui-1.8.5.custom.min.js"></script>  
             <!-- Templates with jQuery -->
-            <script type="text/javascript" src="{$smarty.const.APP_URL}appinc/javascript/jquery.tmpl.min.js"></script>    
+            <script type="text/javascript" src="{$smarty.const.APP_URL}appinc/javascript/jquery/jquery.tmpl.min.js"></script>    
             <!-- Tooltips kit -->        
-            <script type="text/javascript" src="{$smarty.const.APP_URL}appinc/javascript/jquery.tipsy.js"></script>         
+            <script type="text/javascript" src="{$smarty.const.APP_URL}appinc/javascript/jquery/jquery.tipsy.js"></script>         
             <!-- Modernizr -->
             <script type="text/javascript" src="{$smarty.const.APP_URL}appinc/javascript/modernizr-1.6.min.js"></script>
                                     
@@ -66,10 +66,10 @@
             <!--meta name="svg.render.forceflash" content="true" /-->
             
             <script type="text/javascript">
-                  // to know if the user is connected
-                  var isConnected = {if $isConnected} true {else} false {/if};
-                  // to display errors
-                  var err = {$err_json};     
+                // to know if the user is connected
+                window.isConnected = {if $isConnected} true {else} false {/if};
+                // to display errors
+                window.err = {$err_json};     
             </script>
 
       </head>
