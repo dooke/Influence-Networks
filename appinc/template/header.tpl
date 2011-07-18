@@ -49,27 +49,27 @@
         <!-- Usefull functions -->
         <script type="text/javascript" src="{$smarty.const.APP_URL}appinc/javascript/functions.utils.js"></script>
         <!-- JQuery library -->
-        <script type="text/javascript" src="{$smarty.const.APP_URL}appinc/javascript/jquery-last.min.js"></script>
+        <script type="text/javascript" src="{$smarty.const.APP_URL}appinc/javascript/jquery/jquery-last.min.js"></script>
         <!-- JQuery extend to center any object -->
-        <script type="text/javascript" src="{$smarty.const.APP_URL}appinc/javascript/jquery-extend-center.js"></script>
+        <script type="text/javascript" src="{$smarty.const.APP_URL}appinc/javascript/jquery/jquery-extend-center.js"></script>
         <!-- JQuery UI library -->
-        <script type="text/javascript" src="{$smarty.const.APP_URL}appinc/javascript/jquery-ui-1.8.5.custom.min.js"></script>   
+        <script type="text/javascript" src="{$smarty.const.APP_URL}appinc/javascript/jquery/jquery-ui-1.8.5.custom.min.js"></script>   
         <!-- Templates with jQuery -->
-        <script type="text/javascript" src="{$smarty.const.APP_URL}appinc/javascript/jquery.tmpl.min.js"></script>    
+        <script type="text/javascript" src="{$smarty.const.APP_URL}appinc/javascript/jquery/jquery.tmpl.min.js"></script>    
         <!-- Cookie plugin-->
-        <script type="text/javascript" src="{$smarty.const.APP_URL}appinc/javascript/jquery.cookies.2.2.0.min.js"></script>  
+        <script type="text/javascript" src="{$smarty.const.APP_URL}appinc/javascript/jquery/jquery.cookies.2.2.0.min.js"></script>  
         <!-- Md5 plugin -->
-        <script type="text/javascript" src="{$smarty.const.APP_URL}appinc/javascript/jquery.md5.js"></script>     
+        <script type="text/javascript" src="{$smarty.const.APP_URL}appinc/javascript/jquery/jquery.md5.js"></script>     
         <!-- Tooltips kit -->        
-        <script type="text/javascript" src="{$smarty.const.APP_URL}appinc/javascript/jquery.tipsy.js"></script>  
+        <script type="text/javascript" src="{$smarty.const.APP_URL}appinc/javascript/jquery/jquery.tipsy.js"></script>  
         <!-- Website tour -->
-        <script type="text/javascript" src="{$smarty.const.APP_URL}appinc/javascript/jquery.website-tour.js"></script>         
+        <script type="text/javascript" src="{$smarty.const.APP_URL}appinc/javascript/jquery/jquery.website-tour.js"></script>         
         <!-- Modernizr -->
         <script type="text/javascript" src="{$smarty.const.APP_URL}appinc/javascript/modernizr-1.6.min.js"></script>
         <!-- Freebase suggest plugin --> 
         <script type="text/javascript" src="http://freebaselibs.com/static/suggest/1.3/suggest.min.js"></script>
         <!-- Explore Freebase Topic -->
-        <script type="text/javascript" src="{$smarty.const.APP_URL}appinc/javascript/jquery.freebase-topic.js"></script>
+        <script type="text/javascript" src="{$smarty.const.APP_URL}appinc/javascript/jquery/jquery.freebase-topic.js"></script>
         <!-- Google +1 button -->
         <script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
         
