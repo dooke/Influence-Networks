@@ -58,6 +58,10 @@
                 
                 $tip.css(tp).addClass('tipsy-' + gravity);
                 
+                // add class
+                if(this.options.addClass != null)
+                    $tip.addClass(this.options.addClass);
+                
                 if (this.options.fade) {
                     $tip.stop().css({opacity: 0, display: 'block', visibility: 'visible'}).animate({opacity: this.options.opacity});
                 } else {
@@ -180,7 +184,8 @@
         offset: 0,
         opacity: 0.8,
         title: 'title',
-        trigger: 'hover'
+        trigger: 'hover',
+        addClass: null
     };
     
     // Overwrite this method to provide options on a per-element basis.
