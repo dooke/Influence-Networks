@@ -1,6 +1,3 @@
-<ul class="up_menu">
-      {include file="menu.tpl"}
-</ul>
 
 
 <h2>{t}Review a relation{/t}</h2>

@@ -1,6 +1,4 @@
-<ul class="up_menu">      
-      {include file="menu.tpl"}      
-</ul>
+
 
 <h2>{t}Add a relation{/t}</h2>
 

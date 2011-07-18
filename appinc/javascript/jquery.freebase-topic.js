@@ -176,41 +176,42 @@
               
               var $topic = $(this), data;
               
-              
-              
               // data to import
               data = freebaseTopic.typeQuery[$topic.data("type")];
 
-              // add the id
-              data[0].id = $topic.data("mid");
+              if(data != undefined) {
+                  
+                  // add the id
+                  data[0].id = $topic.data("mid");
 
-              // freebase query
-              data = JSON.stringify( {"query" : data} );
+                  // freebase query
+                  data = JSON.stringify( {"query" : data} );
 
-              // freeze description
-              $topic.data("description", true);
+                  // freeze description
+                  $topic.data("description", true);
 
-              // call the api
-              $.ajax({
-                    // url customized for JSONP callback
-                    url: freebase_read+"?callback=?", 
-                    // data in a query parameter
-                    data: {query:data}, 
-                    // context to retrieve the $topic
-                    context: $topic,
-                    // cross domain json
-                    dataType: "jsonp",
-                    // when the query is done
-                    success :function(data,textStatus, jqXHR) {
-                        // if the query is OK
-                        if(data.code == "/api/status/ok") {
-                            // save the topic's data
-                            $topic.data("description", data.result[0]);                            
-                            // show the description
-                            showTopic.call(this);
+                  // call the api
+                  $.ajax({
+                        // url customized for JSONP callback
+                        url: freebase_read+"?callback=?", 
+                        // data in a query parameter
+                        data: {query:data}, 
+                        // context to retrieve the $topic
+                        context: $topic,
+                        // cross domain json
+                        dataType: "jsonp",
+                        // when the query is done
+                        success :function(data,textStatus, jqXHR) {
+                            // if the query is OK
+                            if(data.code == "/api/status/ok") {
+                                // save the topic's data
+                                $topic.data("description", data.result[0]);                            
+                                // show the description
+                                showTopic.call(this);
+                            }
                         }
-                    }
-              });
+                  });
+              }
                   
           }
           

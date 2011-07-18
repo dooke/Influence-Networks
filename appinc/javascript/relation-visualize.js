@@ -1,3 +1,36 @@
+(function(window, $, undefined) {
+    
+    // CURRENT APP INSTANCE
+    var page = this;
+    
+    /**
+     * Init the page
+     * @function
+     * @public
+     */
+    page.init = function() {      
+        
+    };
+    
+
+    /**
+     * Load template files
+     * @function
+     * @public
+     */
+    page.loadTemplate = function() {
+    
+    };
+    
+    
+    // WHEN THE DOCUMENT IS READY, INIT THE APP
+    $(document).ready(page.init);
+    
+})(window, jQuery);
+
+
+
+
 var data_rel;
                                    
 var treeData = {

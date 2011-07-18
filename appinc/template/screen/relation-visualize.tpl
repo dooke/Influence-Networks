@@ -1,7 +1,3 @@
-<ul class="up_menu">
-      {include file="menu.tpl"}
-</ul>
-
 
 <h2>{t}Visualize relations{/t}</h2>
 

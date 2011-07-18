@@ -11,6 +11,9 @@
 
       // assing the screen
       $s->assign('screen', 'relation-add');
+      
+      // page title
+      $s->assign('pageTitle', _('Contribute') );
 
       if(!$managers["user"]->isConnected() )
             $err[] = Array("time" => time(), "msg" => _("You must be connected to add a relation."));

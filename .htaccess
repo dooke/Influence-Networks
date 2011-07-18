@@ -13,4 +13,12 @@ RewriteRule ^api/([a-z]+)(/[a-z0-9_-]+/[a-z0-9_-]+)/?$ /index.php?api&resource=$
 # resources
 RewriteRule ^api/([a-z]+)/?$ /index.php?api&resource=$1&$2 [L,NC,QSA]
 
+# redirection to the root
 RewriteRule ^api/?$ / [R,NC]
+
+# main pages
+RewriteRule ^contribute/?$ /index.php?screen=relation-add [L,NC,QSA]
+RewriteRule ^review/?$     /index.php?screen=relation-review [L,NC,QSA]
+RewriteRule ^explore/?$    /index.php?screen=relation-visualize [L,NC,QSA]
+
+

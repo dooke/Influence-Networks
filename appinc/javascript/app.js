@@ -40,6 +40,9 @@
         // EXPLORE FREEBASE TOPIC
         $(".fb-topic").freebaseTopic();
         
+        // SIGN UP FORM
+        $(".signUp").live("click", app.signUp);
+        
     };
     
     /**
@@ -293,11 +296,8 @@
             offset: 20
         });
 
-        $(".review,.add,.visualise", ".main_menu").tipsy({
-            gravity:'s', 
-            opacity:1
-        });
-        $(".review,.add,.visualise", ".up_menu").tipsy({
+
+        $(".item-button,.visualise a", ".up_menu").tipsy({
             gravity:'n', 
             opacity:1
         });    
@@ -361,7 +361,7 @@
 
               $.tmpl("error-tooltip", {msg : i} ).appendTo( $("#errors") );
 
-              $("#errors .tooltip:last").css({ display:"block",
+              $("#errors .tooltip:last").css({display:"block",
                                                position: "relative",
                                                top: -200                                           
                                              }).animate({top:0}, 1200, 'easeOutElastic');

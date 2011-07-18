@@ -11,7 +11,10 @@
 
       // assing the screen
       $s->assign('screen', 'relation-review');
-
+      
+      // page title
+      $s->assign('pageTitle', _('Review') );
+      
       if (!$managers["user"]->isConnected())
             $err[] = Array("time" => time(), "msg" => _("You must be connected to review a relation."));
       else {

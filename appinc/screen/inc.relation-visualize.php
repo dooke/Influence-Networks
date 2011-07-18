@@ -12,6 +12,9 @@
       // assing the screen
       $s->assign('screen', 'relation-visualize');
 
+      // page title
+      $s->assign('pageTitle', _('Explore') );
+      
       $node_left = null;
       $node_right = null;
 

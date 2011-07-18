@@ -41,6 +41,22 @@
                // Show the form to 
                createFreebaseEntity.open(this);
 
+        }).keyup(function() {
+            
+            $(this).tipsy("hide");
+
+            // if the entity changes
+            if( $(this).data("description") != undefined && $(this).val() != $(this).data("description").name ) {
+                
+                console.log(1);
+                
+                // remove data
+                $(this).data("description", "")
+                       .data("mid", "")
+                       .data("type", "");
+            }
+                
+            
         });
         
         // type changes        
@@ -48,6 +64,9 @@
      
         // submit the form
         $(".classic-form form").submit(page.submitForm);
+        
+        // load template
+        page.loadTemplate();
       
     };
     
@@ -189,9 +208,7 @@
      * @function
      * @public
      */
-    page.tipsy = function() {
-        
-    };
+    page.tipsy = function() { };
     
     
     /**

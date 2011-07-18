@@ -9,8 +9,12 @@
      * @author pirhoo <pierre@owni.fr>
      * 
      */
+    
     // assing the screen
     $s->assign('screen', 'homepage');
+    // page title
+    $s->assign('pageTitle', _('Home') );
+    
     $s->assign("countRelation", $managers["relation"]->getRelationCount());
     $s->assign("countRelationReview", $managers["relation_trust_level"]->getRelationTrustLevelCount());
     $s->assign("countUser", $managers["user"]->getUserCount());
