@@ -129,30 +129,30 @@ class UserManager extends Manager {
                              $query = "INSERT INTO ".TABLE_PREFIX."user (email, password, trust_level) VALUES ('{$_POST["email"]}', '{$_POST["password_1"]}', {$trustLevel})";
 
                              // process MySql query (or die if error)
-                             $this->db->query($query) or die( json_encode( Array("statut" => false, "message" => _("Database error. Sorry, try again.") ) ) );
+                             $this->db->query($query) or die( json_encode( Array("status" => false, "message" => _("Database error. Sorry, try again.") ) ) );
                              
                              // send email confirmation
                              $this->sendUserConfirmationEmail( $this->db->lastid() );
 
                              // every things is all right
-                             return json_encode( Array("statut" => true, "message" => _("Registration taken into account! You will receive a confirmation by email soon.") ) ); 
+                             return json_encode( Array("status" => true, "message" => _("Registration taken into account! You will receive a confirmation by email soon.") ) ); 
                              
                        } else
                              // Form is incomplete.              
-                             return json_encode( Array("statut" => false, "message" => _("Email address already exist.") ) );
+                             return json_encode( Array("status" => false, "message" => _("Email address already exist.") ) );
                      
                  } else
                        // Form is incomplete.              
-                       return json_encode( Array("statut" => false, "message" => _("Email address is not valid.") ) );
+                       return json_encode( Array("status" => false, "message" => _("Email address is not valid.") ) );
                                  
           }else
                // Passwords are not matching.
-              return json_encode( Array("statut" => false, "message" => _("Passwords are not matching.") ) );
+              return json_encode( Array("status" => false, "message" => _("Passwords are not matching.") ) );
           
 
        } else
            // Form is incomplete
-            return json_encode( Array("statut" => false, "message" => _("Form is incomplete.") ) );
+            return json_encode( Array("status" => false, "message" => _("Form is incomplete.") ) );
           
     }
     
