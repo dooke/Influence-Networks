@@ -31,7 +31,7 @@ class Action {
         $this->managers = & $managers;
         
         // if an action is requested
-        if($_REQUEST["action"]) {
+        if( isset($_REQUEST["action"]) ){
             
             // action
             $this->action = $_REQUEST["action"];
@@ -50,6 +50,7 @@ class Action {
     /**
      * Switch between deferents action handler
      * 
+     * @TODO Put each case in a dedicated method 
      * @access public
      */
     public function switchHandler() {
@@ -57,7 +58,7 @@ class Action {
         switch($this->action) {
 
               case "signin":
-                    echo json_encode(Array("statut" => $this->$managers['user']->isConnected()));
+                    echo json_encode(Array("statut" => $this->managers['user']->isConnected()));
                     exit;
                     break;
 
@@ -111,7 +112,7 @@ class Action {
                     break;
 
               case "createTopic":
-                    //$this->managers["entity"]->createTopic();
+                    $this->createTopic();
                     break;
 
 
@@ -120,9 +121,15 @@ class Action {
         
     }
     
-    
-    
-    
+    /**
+     * Create a topic
+     * 
+     * @access public
+     */
+    public function createTopic() {
+        
+        exit;
+    }
     
     
 }
