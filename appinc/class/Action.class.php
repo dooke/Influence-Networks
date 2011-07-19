@@ -40,8 +40,20 @@ class Action {
             $this->GET = $_GET;
             $this->POST = $_POST;
             
-            // switch between deferents action handler
-            $this->switchHandler();
+            try{
+                
+                // switch between deferents action handler
+                $this->switchHandler();
+                
+            // if an exception is thrown
+            } catch(Exception $e) {
+                // if exception throws a string message 
+                if( is_string($e->getMessage()) ) {
+                    // false status
+                    echo json_encode(Array("status" => false, "message" => $e->getMessage()));
+                    exit;
+                }
+            }
             
         } else throw new Exception("Any action received.");
         
@@ -58,7 +70,7 @@ class Action {
         switch($this->action) {
 
               case "signin":
-                    echo json_encode(Array("statut" => $this->managers['user']->isConnected()));
+                    echo json_encode(Array("status" => $this->managers['user']->isConnected()));
                     exit;
                     break;
 
@@ -128,7 +140,23 @@ class Action {
      */
     public function createTopic() {
         
-        exit;
+        // check the data
+        if(isset($this->GET['name']) && isset($this->GET['type']) ) {
+            
+            // create the topic in Freebase
+            $node = $this->managers["node"]->createFreebaseNode($this->GET['name'], $this->GET['type']);
+            // if the node was created
+            if($node) {
+                
+                // json encode the result
+                echo json_encode(array("status" => true, "node" => $node->getArray() ));
+                exit;
+                
+            // throw exception    
+            } else throw( new Exception("Topic creation in Freebase failed.") );
+            
+        }
+        
     }
     
     
