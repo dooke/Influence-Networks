@@ -1,7 +1,7 @@
 (function(window, $, undefined) {
     
     // CURRENT APP INSTANCE
-    var app = {};
+    window.app = {};
     
     /**
      * Init the page
@@ -43,6 +43,8 @@
         // SIGN UP FORM
         $(".signUp").live("click", app.signUp);
         
+        // WINDOW SCROLL
+        $(window).scroll(app.windowScroll);
     };
     
     /**
@@ -67,6 +69,20 @@
     }
     
      
+    
+    /**
+     *
+     * @function
+     * @public
+     */
+    app.windowScroll = function() {
+        
+        if($(window).scrollTop() > $("header").outerHeight())
+            $(".header-share:not(.fixed)").addClass("fixed");
+        else
+            $(".header-share.fixed").removeClass("fixed");        
+        
+    }
       
     /**
      * Hide user activity
@@ -126,7 +142,7 @@
                             // unlock input
                             $(":input", $form).attr("disabled", false);
 
-                            if(data.statut == false) {                                  
+                            if(data.status == false) {                                  
                                 app.showFormError($form, data.message);
                             } else {
 
@@ -192,7 +208,7 @@
                     // unlock input
                     $(":input", $form).attr("disabled", false);
 
-                    if(data.statut == false) {                         
+                    if(data.status == false) {                         
                           $(":input[type=password]", $form).val("");             
                           app.showFormError($form, 1);
                     } else
@@ -297,8 +313,8 @@
         });
 
 
-        $(".item-button,.visualise a", ".up_menu").tipsy({
-            gravity:'n', 
+        $(".item-button, .visualise a", ".up_menu").tipsy({
+            gravity:'s', 
             opacity:1
         });    
       
