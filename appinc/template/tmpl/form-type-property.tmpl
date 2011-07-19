@@ -6,13 +6,12 @@
             From: <input type="text" name="property_1" class="chk_date half" placeholder="Date" />
       </label>
 
-      <label>
-            Comment:   <input type="text" name="property_2" placeholder="Text" />
+      <label class="full">
+            Care to comment?
+            <textarea cols="10" rows="5" name="property_2" placeholder="Text"></textarea>
       </label>
 
-      <label>
-            Source:   <input type="text" name="property_3" placeholder="URL" class="required chk_URL" />
-      </label>
+      <input type="hidden" value="3" class="source-id" />  
 
 {{/if}}
 
@@ -24,13 +23,12 @@
             From: <input type="text" name="property_4" class="chk_date half" placeholder="Date" />
       </label>
 
-      <label>
-            Comment:   <input type="text" name="property_5" placeholder="Text" />
+      <label class="full">
+            Care to comment?
+            <textarea cols="10" rows="5" name="property_5" placeholder="Text"></textarea>
       </label>
 
-      <label>
-            Source:   <input type="text" name="property_6" placeholder="URL" class="required chk_URL" />
-      </label>
+      <input type="hidden" value="6" class="source-id" />  
 
 {{/if}}
 
@@ -54,13 +52,12 @@
             City:   <input type="text" name="property_10" placeholder="City" class="chk_city" />
       </label>
 
-      <label>
-            Comment:   <input type="text" name="property_11" placeholder="Text" />
+      <label class="full">
+            Care to comment?
+            <textarea cols="10" rows="5" name="property_11" placeholder="Text"></textarea>
       </label>
 
-      <label>
-            Source:   <input type="text" name="property_"12 placeholder="URL" class="required chk_URL" />
-      </label>
+      <input type="hidden" value="12" class="source-id" />  
 
 {{/if}}
 
@@ -80,13 +77,12 @@
             Work description:   <input type="text" name="property_15" placeholder="Text" />
       </label>
 
-      <label>
-            Comment:   <input type="text" name="property_16" placeholder="Text" />
+      <label class="full">
+            Care to comment?
+            <textarea cols="10" rows="5" name="property_16" placeholder="Text"></textarea>
       </label>
 
-      <label>
-            Source:   <input type="text" name="property_17" placeholder="URL" class="required chk_URL" />
-      </label>
+      <input type="hidden" value="17" class="source-id" />  
 {{/if}}
 
 
@@ -105,13 +101,12 @@
             Transaction amount in EUR:   <input type="text" name="property_20" placeholder="Number" class="half" />
       </label>
 
-      <label>
-            Comment:   <input type="text" name="property_21" placeholder="Text" />
+      <label class="full">
+            Care to comment?
+            <textarea cols="10" rows="5" name="property_21" placeholder="Text"></textarea>
       </label>
 
-      <label>
-            Source:   <input type="text" name="property_22" placeholder="URL" class="required chk_URL" />
-      </label>
+      <input type="hidden" value="22" class="source-id" />  
 {{/if}}
 
 
@@ -134,13 +129,12 @@
             City:   <input type="text" name="property_26" placeholder="City" class="chk_city" />
       </label>
 
-      <label>
-            Comment:   <input type="text" name="property_27" placeholder="Text" />
+      <label class="full">
+            Care to comment?
+            <textarea cols="10" rows="5" name="property_27" placeholder="Text"></textarea>
       </label>
 
-      <label>
-            Source:   <input type="text" name="property_28" placeholder="URL" class="required chk_URL" />
-      </label>
+      <input type="hidden" value="28" class="source-id" />  
 {{/if}}
 
 
@@ -160,13 +154,12 @@
             Wedding venue:   <input type="text" name="property_31" placeholder="Location" class="chk_location" />
       </label>
 
-      <label>
-            Comment:   <input type="text" name="property_32" placeholder="Text" />
+      <label class="full">
+            Care to comment?
+            <textarea cols="10" rows="5" name="property_32" placeholder="Text"></textarea>
       </label>
 
-      <label>
-            Source:   <input type="text" name="property_33" placeholder="URL" class="required chk_URL" />
-      </label>
+      <input type="hidden" value="33" class="source-id" />  
 {{/if}}
 
 {{if relation_type == 8}}
@@ -181,13 +174,12 @@
             To:   <input type="text" name="property_35" class="chk_date half" placeholder="Date" />
       </label>
 
-      <label>
-            Comment:   <input type="text" name="property_36" placeholder="Text" />
+      <label class="full">
+            Care to comment?
+            <textarea cols="10" rows="5" name="property_36" placeholder="Text"></textarea>
       </label>
 
-      <label>
-            Source:   <input type="text" name="property_37" placeholder="URL" class="required chk_URL" />
-      </label>
+      <input type="hidden" value="37" class="source-id" />  
 {{/if}}
 
 
@@ -203,14 +195,12 @@
             </select>
       </label>
 
-
-      <label>
-            Comment:   <input type="text" name="property_39" placeholder="Text" />
+      <label class="full">
+            Care to comment?
+            <textarea cols="10" rows="5" name="property_39" placeholder="Text"></textarea>
       </label>
 
-      <label>
-            Source:   <input type="text" name="property_40" placeholder="URL" class="required chk_URL" />
-      </label>
+      <input type="hidden" value="40" class="source-id" />  
 {{/if}}
 
 
@@ -229,26 +219,24 @@
             Organization:   <input type="text" name="property_46" placeholder="Organization" class="chk_organization" />
       </label>
 
-      <label>
-            Comment:   <input type="text" name="property_41" placeholder="Text" />
+      <label class="full">
+            Care to comment?
+            <textarea cols="10" rows="5" name="property_41" placeholder="Text"></textarea>
       </label>
 
-      <label>
-            Source:   <input type="text" name="property_42" placeholder="URL" class="required chk_URL" />
-      </label>
+      <input type="hidden" value="42" class="source-id" />  
 {{/if}}
 
 
 {{if relation_type == 11}}
       <!-- Other relatioship -->
 
-      <label>
-            Comment:   <input type="text" name="property_54" placeholder="Text" />
+      <label class="full">
+            Care to comment?
+            <textarea cols="10" rows="5" name="property_54" placeholder="Text"></textarea>
       </label>
 
-      <label>
-            Source:   <input type="text" name="property_55" placeholder="URL" class="required chk_URL" />
-      </label>
+      <input type="hidden" value="55" class="source-id" />  
 {{/if}}
 
 
@@ -268,11 +256,10 @@
             City:   <input type="text" name="property_53" placeholder="City" class="chk_city" />
       </label>
 
-      <label>
-            Comment:   <input type="text" name="property_49" placeholder="Text" />
+      <label class="full">
+            Care to comment?
+            <textarea cols="10" rows="5" name="property_49" placeholder="Text"></textarea>
       </label>
 
-      <label>
-            Source:   <input type="text" name="property_50" placeholder="URL" class="required chk_URL" />
-      </label>
+     <input type="hidden" value="50" class="source-id" />  
 {{/if}}

@@ -139,23 +139,38 @@ class Action {
      * @access public
      */
     public function createTopic() {
+         
         
         // check the data
-        if(isset($this->GET['name']) && isset($this->GET['type']) ) {
+        if(isset($this->GET['name']) && isset($this->GET['type']) && $this->managers["user"]->isConnected()) {
             
-            // create the topic in Freebase
-            $node = $this->managers["node"]->createFreebaseNode($this->GET['name'], $this->GET['type']);
-            // if the node was created
-            if($node) {
-                
+            // check first if the the node exist
+            $node = $this->managers["node"]->getFreebaseNodeByName($this->GET['name']);
+
+            // node exists, we shouldn't to add it
+            if($node) {            
                 // json encode the result
                 echo json_encode(array("status" => true, "node" => $node->getArray() ));
                 exit;
                 
-            // throw exception    
-            } else throw( new Exception("Topic creation in Freebase failed.") );
+            // or doesn't exist and add it
+            } else { 
+
+                // create the topic in Freebase
+                $node = $this->managers["node"]->createFreebaseNode($this->GET['name'], $this->GET['type']);
+                // if the node was created
+                if($node) {
+
+                    // json encode the result
+                    echo json_encode(array("status" => true, "node" => $node->getArray() ));
+                    exit;
+
+                // throw exception    
+                } else throw( new Exception("Topic creation in Freebase failed.") );
+            }
             
-        }
+        // throw exception    
+        } else throw( new Exception("Topic creation in Freebase failed.") );
         
     }
     

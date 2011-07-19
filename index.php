@@ -92,9 +92,9 @@
         // XHR Actions
         // -----------
         if (isset($_REQUEST["action"])) {
-            
             require_once(BASE_DIR . "/appinc/class/Action.class.php");
-            $actions = new Action($managers);
+            // try process Action
+            $actions = new Action($managers);       
         }
 
 

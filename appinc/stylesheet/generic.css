@@ -146,7 +146,7 @@ a {
 
 .button.light {
     background:#f4f3e2;
-    color:#362138;   
+    color:#163d59;   
 }
 
 .button.violet {
@@ -164,10 +164,15 @@ a {
     -moz-box-shadow:3px 3px 0 0 #487591
 }
 
+input, input:focus {
+    outline: none;
+}
+
 input[type=text],
 input[type=password],
 input.text,
 textarea {
+    
     background-color: #f4f6f7 !important;
     box-shadow:1px 1px 3px 0px rgb(0,0,0) inset; 
     -moz-box-shadow:1px 1px 3px 0px rgb(0,0,0) inset; 

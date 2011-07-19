@@ -295,14 +295,19 @@ class NodeManager extends Manager {
             // execute the query
             $data = curl_exec($curl); 
             // close curl
-            curl_close($curl);       
+            curl_close($curl);
+            
             // json encode the result
             $data = json_decode($data, true);
             
-            // create Node with the result or return false
-            return !!$data ? new Node( array("freebase_id" => $data["result"]["id"], 
-                                             "label"       => $data["result"]["name"], 
-                                             "type"        => $data["result"]["type"]) ) : false;
+            // if status is OK return...
+            return !!$data && $data["code"] == "/api/status/ok" ? 
+                   // the node
+                   new Node( array("freebase_id" => $data["result"]["id"], 
+                                   "label"       => $data["result"]["name"], 
+                                   "type"        => $data["result"]["type"]) ) 
+                   // or false 
+                   : false;
             
         }else return false;
         

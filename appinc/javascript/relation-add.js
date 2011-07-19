@@ -1,61 +1,66 @@
 (function(window, $, undefined) {
     
     // CURRENT APP INSTANCE
-    var page = {};
+    window.page = {};
+    // small object to count step, by step.
+    window.step = {
+            val:3,
+            get value() {
+                return this.val;
+            },
+            set value(step) {
+                if(step >= 0) {
+                    this.val = step;
+                    page.updateSteps();
+                }
+            }
+        };
+    // form to create freebase entity
+    window.createFreebaseEntity = new window.CreateFreebaseEntity();
+        
         
     /**
      * Init the page
+     * 
      * @function
      * @public
      */
     page.init = function() {      
         
-        // form to create freebase entity
-        var createFreebaseEntity = new window.CreateFreebaseEntity()
     
         // initialize tipsy
         page.tipsy();
         
         // auto complete
         $(".node_search").suggest({
-
             // looking for person or organization
             type: ["/people/person", "/organization/organization"],
             // result must be strict
             type_strict: "any",
+            // all type allowed
             all_types: true,
             // selection is required
-            required: true,
+            required: "always",
+            // selection behavior
             soft:false
-
+            
         // select success
         }).bind("fb-select", page.selectEntity)
-        
         // select failled
-        .bind("fb-required", function () { 
-
-           // Hack to hide every tipsy tooltips
-           $(".node_search").each(function(i, n) {$(n).tipsy("hide");});              
-
-           if( $(this).val() != $(this).attr("placeholder") )
-               // Show the form to 
-               createFreebaseEntity.open(this);
-
-        }).keyup(function() {
+        .bind("fb-required", page.selectRequired)
+        // keyup hide tipsy
+        .keyup(function() {
             
             $(this).tipsy("hide");
 
             // if the entity changes
             if( $(this).data("description") != undefined && $(this).val() != $(this).data("description").name ) {
                 
-                console.log(1);
-                
                 // remove data
                 $(this).data("description", "")
                        .data("mid", "")
                        .data("type", "");
             }
-                
             
         });
         
@@ -67,7 +72,199 @@
         
         // load template
         page.loadTemplate();
-      
+        
+        // initialize steps
+        page.updateSteps();
+        
+        // source step
+        $(":input[type=text].source").keyup(page.checkSource);
+        
+        // look up an entity
+        $(".lookup:input").click(page.lookUpEntity);
+    };
+    
+    
+    /**
+     *
+     * @function
+     * @public
+     */
+    page.selectRequired = function() {
+        
+        // find the input
+        var $input = $(this),
+            $mid   = $(":input").filter("[name="+$input.data("input")+"]");
+            
+        // to update the step
+        if( $input.val() == "" || $input.val() == $input.attr("placeholder") || $input.val() != $input.data("label") ) {            
+            
+            // empty the field
+            $mid.val("");
+            
+            // hidde the information trigger
+            page.$thisTopicInformation($input).freebaseTopic("reset").addClass("hidden");
+        
+            // change the step
+            if( $input.is("#to-entity-left") )
+                step.value = 0;
+            else
+                step.value = 1;
+
+        }
+    };
+    
+    
+    /**
+     *
+     * @function
+     * @public
+     */
+    page.lookUpEntity = function() {               
+        
+        // find the input
+        var $input = $(this).parents(".step").find(".node_search"),
+            $mid   = $(":input").filter("[name="+$input.data("input")+"]"),
+            $informationTrigger = $(".fb-topic-information[rel="+$input.attr("id")+"]");
+
+        // change the step
+        if( $input.is("#to-entity-left") )
+            step.value = 0;
+        else
+            step.value = 1;
+
+       // Hide information trigger
+       page.$thisTopicInformation($input).freebaseTopic("reset").addClass("hidden");
+
+       // Hide every tipsy tooltips
+       $(".node_search").each(function(i, n) {$(n).tipsy("hide");});              
+
+       if( $input.val() != $input.attr("placeholder") && $input.val() != "" )
+           // Show the form to create topic             
+           $input.tipsy("show");
+        
+    };
+    
+    
+    /**
+     * User select an entity
+     * 
+     * @public
+     * @function
+     */
+    page.selectEntity = function(event, data) {
+        
+        // hide tipsy if visible
+        $(this).tipsy("hide");
+        
+        // change the step
+        if( $(this).is("#to-entity-left") )
+            step.value = 1;
+        else
+            step.value = 2;
+        
+        // complete the input hidden
+        $(":input").filter("[name="+$(this).data("input")+"]").val(data.id);
+        
+        // determine the type
+        var type = null;        
+        // look for the type of the relation
+        $.each(data.type, function(i, val) {
+            // type must be an organization or a person
+            if(val.id == "/organization/organization" || val.id == "/people/person")
+                type = val.id;
+        });
+        
+        if(type != null) {
+            page.$thisTopicInformation(this).removeClass("hidden")
+                                            .addClass("fb-topic")
+                                            .data("mid",  data.id)
+                                            .data("type", type)
+                                            .data("description", null);
+        }
+        
+    };
+    
+    /**
+     *
+     * @function
+     * @public
+     */
+    page.updateSteps = function() {
+        
+        // change the step aspect
+        $(".step").removeClass("disabled").filter(":gt("+step.value+")").addClass("disabled");        
+                    
+        // change the input status
+        $(".step :input").prop("disabled", false);
+        $(".step.disabled :input").prop("disabled", true);
+        
+        if( page.checkStep(step.value) ) step.value++;
+        
+    };
+    
+    
+    
+    /**
+     * Check if the step is OK
+     * 
+     * @function
+     * @public
+     * @param number i step number
+     * @return boolean
+     */
+    page.checkStep = function(i) {
+        switch(i) {
+            
+                // first step
+                case 0:
+                    return $(":input[name=entity-left-mid]").val() != "";
+                    break;
+            
+                // second step
+                case 1:
+                    return $(":input[name=entity-right-mid]").val() != "";
+                    break;
+                    
+                // third step    
+                case 2:
+                    return  $(":input[name=relation_type]").val() != -1;
+                    break;
+                    
+                // fourth step    
+                case 3:
+                    return  page.checkSource.call($(":input[type=text].source"));
+                    break;
+                    
+                // fifth step    
+                case 4:
+                    return true; // not required
+                    break;
+        }
+    };
+    
+    
+    /**
+     * 
+     * @function
+     * @public
+     * @return boolean
+     */
+    page.checkSource = function() {
+
+        var mailPattern = /(((https?:\/\/[a-zA-Z0-9_-]*\.?)|(w{3}\.))[a-zA-Z0-9_-]+\.[a-z0-9]{2,5}[a-zA-Z0-9/_\.\?\#-]*)/;
+
+        if( mailPattern.test( $(this).val() ) ) {
+
+            if(step.value == 3) step.value = 4;
+            return true;
+
+        } else {
+            
+            if(step.value >= 4) step.value = 3;
+            return false;
+        }
+        
+
     };
     
 
@@ -89,28 +286,20 @@
      
     };
     
-    page.selectEntity = function(event, data) {
+    
+    /**
+     * Get the input "Information trigger"
+     * 
+     * @function
+     * @public
+     * @return jQuery
+     */
+    page.$thisTopicInformation = function(that) {
         
-        var type = null;
-        
-        // look for the type of the relation
-        $.each(data.type, function(i, val) {
-            // type must be an organization or a person
-            if(val.id == "/organization/organization" || val.id == "/people/person")
-                type = val.id;
-        });
-        
-        if(type != null) {
-        
-            // add Freebase tipsy data
-            $(this).data("mid",  data.id)
-                   .data("type", type)
-                   .attr("title", "")
-                   .addClass("fb-topic");
-                  
-        }
-            
-    };
+        // freebase information
+        var id = $(that).attr("id");
+        return $(".fb-topic-information[rel="+id+"]");
+    }
     
     
     /**
@@ -131,14 +320,21 @@
         var rel_type = $(this).val();
         $(".relation-property-input").html("");
            
-        if(rel_type != -1)
+        if(rel_type != -1) {
+            
             $.tmpl("form-type-property", {
                 relation_type : rel_type
             }).appendTo( $(".relation-property-input") );
-           
-        if( $(".classic-form").outerHeight() >= 467) $(".deroule").addClass("open").click();
-        initPlaceholder();
-               
+            
+        }
+        
+        // get the source id from the template
+        var sourceId = $(".source-id").val();
+        
+        // change the source input name
+        $(":input[type=text].source").attr("name", "property_"+sourceId);
+        
+        // bind new Freebase suggest on the new inputs
         $(".classic-form .chk_city").suggest({
             type: "/location/citytown"
         });
@@ -153,7 +349,18 @@
             
         $(".classic-form .chk_educational_institution").suggest({
             type: "/education/educational_institution"
-        });                      
+        });
+        
+        // next step
+        if(rel_type == -1) 
+            // don't go on
+            step.value = 2;
+        else
+            step.value = 3;
+        
+        // init placehold for new inputs
+        app.initPlaceholder();
+        
             
     }
     
@@ -164,7 +371,7 @@
      * @public
      */
     page.submitForm = function () {
-            
+        
         var dontForget = false;
         $(".required").each(function () {
             
@@ -208,7 +415,21 @@
      * @function
      * @public
      */
-    page.tipsy = function() { };
+    page.tipsy = function() {
+    
+        $(".node_search").tipsy({
+            html: true,
+            title: function() { return createFreebaseEntity.getHTML(this); },
+            opacity:1,
+            addClass:"tipsy-sky createTopic",
+            gravity:'s',
+            trigger:"manual"
+        });
+        
+    };
+    
+    
+    
     
     
     /**

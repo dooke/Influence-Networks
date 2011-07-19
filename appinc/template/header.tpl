@@ -241,6 +241,6 @@
         </header>
 
         <!-- The APP himlself, 990 by 667 pixels -->
-        <div id="app" class="simple">
+        <div id="app">
 
             <div id="errors"></div>

@@ -42,8 +42,9 @@
        * FreebaseTopic function to explore a topic description
        * @function
        * @public
+       * @param reset
        */
-      freebaseTopic : function() {
+      freebaseTopic : function(reset) {
           
           // this function instance
           var freebaseTopic = this,
@@ -106,13 +107,15 @@
               
               // tipsy              
               $this.tipsy({
-                  gravity: $.fn.tipsy.autoNS,
+                  gravity: "nw",
                   html: true,
                   fade: false,
                   live: true,
                   opacity:1,
                   trigger: "hover",
-                  title: getTopicDescription
+                  fallback: "No data available about this.",
+                  title: getTopicDescription,
+                  addClass: "fb-topic-tipsy"
               });
           
               // open link in a other window
@@ -127,6 +130,8 @@
                         // open the link
                         window.open($(this).attr("href"));
               });
+              
+              return $this;
           };
           
           
@@ -163,7 +168,6 @@
            * @private
            */
           function leaveTopic() {
-              
               // remove hover class
               $(this).removeClass("fb-topic-hover");
           }
@@ -189,6 +193,9 @@
 
                   // freeze description
                   $topic.data("description", true);
+                  
+                  // add class to loading
+                  $topic.addClass("fb-topic-loading");
 
                   // call the api
                   $.ajax({
@@ -205,7 +212,9 @@
                             // if the query is OK
                             if(data.code == "/api/status/ok") {
                                 // save the topic's data
-                                $topic.data("description", data.result[0]);                            
+                                $topic.data("description", data.result[0]);  
+                                // add class to loading
+                                $topic.removeClass("fb-topic-loading");
                                 // show the description
                                 showTopic.call(this);
                             }
@@ -322,7 +331,7 @@
                     // FOR ALL
                     
                     case "/common/topic/image":
-                        return "<p><img src='http://img.freebase.com/api/trans/image_thumb/" + value[0].id + "?maxheight=120&mode=fit&maxwidth=160' alt='' /></p>";
+                        return "<p class='image'><img src='http://img.freebase.com/api/trans/image_thumb/" + value[0].id + "?maxheight=120&mode=fit&maxwidth=160' alt='' /></p>";
                         break;
                         
                         
@@ -331,8 +340,26 @@
           }
           
           
+          freebaseTopic.reset = function() {
+              
+                // remove mid
+                $(this).data("mid", "")
+                // remove type
+                       .data("type", "")
+                // remove description
+                       .data("description", "");
+                       
+                // hide tipsy
+                $(this).tipsy("hide");
+                
+                return $(this);
+          };
+          
+          
+          // RESET TOOLTIPS
+          if(reset == "reset") return freebaseTopic.reset();
           // INIT THE CLASS
-          freebaseTopic.init();
+          else return freebaseTopic.init();
           
           
       }
