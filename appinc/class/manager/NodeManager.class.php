@@ -27,7 +27,7 @@ class NodeManager extends Manager {
                      WHERE label LIKE '%{$key}%'";
 
             // process query
-            $this->db->query($query) or die(json_encode(Array("statut" => false, "message" => _("Database error. Sorry, try again."))));
+            $this->db->query($query) or die(json_encode(Array("status" => false, "message" => _("Database error. Sorry, try again."))));
 
             $nodeList = Array();
             while ($row = $this->db->fetch()) {
@@ -60,7 +60,7 @@ class NodeManager extends Manager {
             } **/
 
             // return the json
-            return json_encode(Array("statut" => true, "key" => $key, "node" => $nodeList));
+            return json_encode(Array("status" => true, "key" => $key, "node" => $nodeList));
       }
 
       public function getNode($key) {
@@ -248,7 +248,7 @@ class NodeManager extends Manager {
      */
     public function createFreebaseNode($name, $type) {
         
-        $auth = $this->freebaseAuthenfication();        
+        $auth = $this->freebaseAuthenfication();  
         
         // if query and authentification succeed, and the cookie exists
         if(!!$auth && json_decode($auth["content"])->code == "/api/status/ok" && file_exists("/tmp/cookieInfNetsFreebase") ) {
@@ -281,7 +281,8 @@ class NodeManager extends Manager {
             // topic to create
             $queryCreate = array("create" => "unless_exists",
                                  "type"   => $type,
-                                 "name"   => $name);
+                                 "name"   => $name,
+                                 "id"     => null);
             
             // mql query
             $mqlquery = json_encode(array("query" => $queryCreate));
@@ -294,9 +295,14 @@ class NodeManager extends Manager {
             // execute the query
             $data = curl_exec($curl); 
             // close curl
-            curl_close($curl);
+            curl_close($curl);       
+            // json encode the result
+            $data = json_decode($data, true);
             
-            return !!$data ? $this->getFreebaseNodeByName($name) : false;
+            // create Node with the result or return false
+            return !!$data ? new Node( array("freebase_id" => $data["result"]["id"], 
+                                             "label"       => $data["result"]["name"], 
+                                             "type"        => $data["result"]["type"]) ) : false;
             
         }else return false;
         
