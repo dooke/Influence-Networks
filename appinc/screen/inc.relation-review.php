@@ -24,10 +24,14 @@
                   $managers['relation_trust_level']->addTrustLevel();
 
 
-            if (isset($_GET["id"]) && is_numeric($_GET["id"]))
-            /* @var $relation Relation */
-                  $relation = $managers["relation"]->getRelation($_GET["id"]);
-            else  // get random relation
+            if (isset($_GET["id"]) && is_numeric($_GET["id"])) {
+            /* @var $relation Relation */               
+                $relation = $managers["relation"]->getRelation($_GET["id"]);
+                if (!!$relation)
+                    // to load property from db
+                    $relation->setPropertyValues($managers["relation_value"]->getRelationValues($relation->getId())); // 
+
+            } else  // get random relation
             /* @var $relation Relation */
                   $relation = $managers["relation"]->getRandRelation();
 

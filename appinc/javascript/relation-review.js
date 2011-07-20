@@ -74,9 +74,7 @@
      */
     page.submitForm = function() {
            
-        return $("#to-entity-left").val() != $("#to-entity-left").attr("placeholder")
-               && $("#to-entity-right").val() != $("#to-entity-left").attr("placeholder")
-               && $(":input[name=relation_type]").val() != 0;
+        return true;
 
     };
     

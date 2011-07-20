@@ -4,7 +4,7 @@
     window.page = {};
     // small object to count step, by step.
     window.step = {
-            val:3,
+            val:0,
             get value() {
                 return this.val;
             },

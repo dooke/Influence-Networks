@@ -332,7 +332,7 @@ form.inscription.hidden {
 .up_menu li.visualise form {
     display:inline-block;
     position:absolute;
-    top:0;
+    top:0;  
     right:0;
     width:255px;
 }
@@ -362,8 +362,6 @@ form.inscription.hidden {
     
     background:url("../images/btn-search.png") rgb(109,199,216);
     background:url("../images/btn-search.png"), -moz-linear-gradient(top, rgba(109,199,216,1) 0%, rgba(34,125,144,1) 100%);
-    
-    
     background:url("../images/btn-search.png"), -o-linear-gradient(top, rgba(109,199,216,1) 0%,rgba(34,125,144,1) 100%);
     background:url("../images/btn-search.png"), -ms-linear-gradient(top, rgba(109,199,216,1) 0%,rgba(34,125,144,1) 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6dc7d8', endColorstr='#227d90',GradientType=0 );
@@ -395,6 +393,14 @@ form.inscription.hidden {
     -moz-box-shadow:0px 0px 3px 0px rgb(0,0,0) inset; 
     -webkit-box-shadow:0px 0px 3px 0px rgb(0,0,0) inset; 
     -o-box-shadow:0px 0px 3px 0px rgb(0,0,0) inset; 
+    
+    cursor:pointer;
+}
+
+.search-field input.submit.disabled {
+    opacity:0.6;
+    filter: alpha(opacity = 60);
+    cursor:default;
 }
 
 .up_menu li.disabled {
@@ -833,36 +839,135 @@ input.half {
 /** END CLASSIC FORM **/
 
 
+/** START REVIEW FORM **/
+
+.relation-review .main form {
+    margin-top:30px;
+    margin-bottom: 80px;
+    background-color: #e2e9eb;
+    color:#163d59;
+    font-size:16px;
+}
+
+.relation-review .main form h3 {
+    background-color:#70c8d4;
+    padding:7px 15px;
+    padding-bottom:5px;
+    margin-bottom:30px;
+    font-size:16px;
+    color:white;
+    text-transform: none;
+    border-bottom:#62acb6 1px solid;
+}
+
+.relation-review .main form .entities {
+    width:990px;
+    height:60px;
+    padding:0;
+    margin-bottom:20px;
+    background: url("../images/and.png") no-repeat center 4px;
+}
+
+.relation-review .main form .entities .entity{
+    width:375px;
+    display:block;
+    float:left;   
+    margin:20px 60px;
+    margin-top:2px;
+    font-family: 'Vollkorn',arial,serif;    
+    font-style: italic;
+    font-size:24px;
+}
+.relation-review .main form .entities .entity a{
+    text-decoration: none;
+    font-weight:bold;
+    font-style: italic;
+    padding:0 30px;
+    background: url("../images/fb-topic-information.png") no-repeat 0 center;
+}
+.relation-review form .entities .entity.left {
+    text-align:right;
+}
+
+.relation-review form .entities .entity.right a{
+    background-position: right center;
+}
+
+.relation-review form h4 {
+    color:#163d59;
+    padding-left:135px;
+    font-size:18px;
+    margin-bottom:20px;
+    margin-top:20px;
+    font-style: italic;
+}
+.relation-review form h4 strong{
+    color:#2ba0af;
+}
+
+.relation-review form .relation-type p {
+    padding-left:155px;
+    color:#163d59;
+    margin-bottom:5px;
+}
+.relation-review form .relation-type h4 {
+    margin-bottom:10px;
+}
+
+.relation-review form .buttons {
+    position:relative;
+    top:50px;
+    right:10px;
+    margin-top:10px;
+    display:block;
+    text-align: right;
+}
+
+
+.relation-review form .buttons .skip {
+    margin-left:20px;
+}
+
+/** END REVIEW FORM **/
+
+
 
 
 /** START RATE SLIDER **/
 .ui-slider-horizontal {
-    height: 5px;
+    height: 8px;
 }
 
 .ui-slider {
+    
     -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5) inset;
     -khtml-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5) inset;
     -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5) inset;
     -o-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5) inset;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5) inset;
-    background: none repeat scroll 0 0 #F4F3E2;
-    cursor: pointer;
+    
+    border-radius:0;
+    -webkit-border-radius:0;
+    -moz-border-radius:0;
+    -o-border-radius:0;
+    
+    background: #fff;
+    cursor: pointer;        
 }
 
 .ui-slider-horizontal .ui-slider-handle {
-    margin-left: -13px;
-    top: -8px;
+    margin-left: -16px;
+    top: -10px;
 }
 
 .ui-slider .ui-slider-handle {
-    background: url("../images/slider_bullet.png") no-repeat scroll 0 -23px transparent;
+    background: url("../images/slider_bullet.png") no-repeat scroll 0 0 transparent;
     border: medium none;    
     cursor: default;
-    height: 23px;
+    height: 33px;
     outline: medium none;
     position: absolute;
-    width: 23px;
+    width: 33px;
     z-index: 2;
 }
 
@@ -873,12 +978,12 @@ input.half {
 }
 
 .rate-legend {
-    width:100px;
+    width:205px;
     font-style: italic;
 }
 
 #rate-slider {
-    width:260px;     
+    width:550px;    
     margin:auto;
     position:relative;
     bottom:-7px;
@@ -955,22 +1060,7 @@ input.half {
     width:auto;
 }
 
-.relation-type a {
-    color: rgb(224, 223, 206);       
-}
 
-
-.deroule {
-    cursor:pointer;
-    margin-top:10px;
-    clear:both;
-    height:18px;
-    background:url("../images/deroule.png") no-repeat center -18px;
-}
-
-.deroule.open {
-    background:url("../images/deroule.png") no-repeat center top;
-}
 
 #node-informations {
     color:#F4F3E2;
@@ -1148,6 +1238,7 @@ input.half {
     top:145px;
 }
 
+h2 .permalink,
 h3 .permalink {
     text-transform: none;
     font-size:16px;
@@ -1206,7 +1297,7 @@ h3 .permalink {
 footer {
     
     min-width:990px;
-    min-height:90px;
+    height:90px;
     padding:10px;
     display:block;
     clear:both;
@@ -1217,6 +1308,17 @@ footer {
     z-index:500;
     font-size:12px;
 }
+
+body.absoluteFooter footer {
+    position: absolute;
+    bottom:0;    
+    width:98%;
+    padding:10px 1%;
+}
+body.absoluteFooter {
+    padding-bottom:110px;
+}
+
 footer h3 {
     display: none;
 }

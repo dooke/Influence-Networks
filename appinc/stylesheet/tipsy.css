@@ -20,11 +20,11 @@
       
       background-color: #fff;
       
-      box-shadow:0px 2px 5px rgba(0,0,0,0.5); 
-      -moz-box-shadow:0px 2px 5px rgba(0,0,0,0.5); 
-      -khtml-box-shadow:0px 2px 5px rgba(0,0,0,0.5); 
-      -webkit-box-shadow:0px 2px 5px rgba(0,0,0,0.5); 
-      -o-box-shadow:0px 2px 5px rgba(0,0,0,0.5);
+      box-shadow:0px  10px 15px 0 rgba(0,0,0,0.4);
+      -moz-box-shadow:0px 10px 15px 0 rgba(0,0,0,0.4);
+      -khtml-box-shadow:0px 10px 15px 0 rgba(0,0,0,0.4);
+      -webkit-box-shadow:0px 10px 15px 0 rgba(0,0,0,0.4); 
+      -o-box-shadow:0px 10px 15px 0 rgba(0,0,0,0.4);
 }
 .tipsy-sky .tipsy-inner { 
     color:#000;
