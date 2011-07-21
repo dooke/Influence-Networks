@@ -1,44 +1,64 @@
 
-<h2>{t}Visualize relations{/t}</h2>
-
-<section class="classic-form visualize">
-      <h3>{t}See the relationship between...{/t}</h3>
+<h2>{t}Explore the Networks{/t}</h2>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent rhoncus urna ut sem ornare aliquet. Class aptent taciti </p>
+   
+<section class="classic-form main">
       <form method="POST" action="">
 
-            <input type="hidden"  name="rate" value="{$trust_rank}" />
+            <input type="hidden" name="rate" value="{$trust_rank}" />
+            <input type="hidden" class="entity-left-mid"  name="entity-left-mid" data-input="#to-entity-left" value="{if $entity_left}{$entity_left->getFreebaseId()}{/if}" />
+            <input type="hidden" class="entity-right-mid" name="entity-right-mid" data-input="#to-entity-right" value="{if $entity_right}{$entity_right->getFreebaseId()}{/if}" />
             
-            <div class="visu-tool">
-                  <a href="./" class="permalink">{t}Permalink{/t}</a>
-                  <a href="./" class="embed">{t}Embed{/t}</a>
-            </div>
-            <div class="relation-form">
-                  <input type="text" name="node-left"  title="{t}You must choose an entity from Freebase. Please select one in the list below.{/t}"  id="to-entity-left" class="node_search required node_left" placeholder="Personality or institution" value="{if $entity_left}{$entity_left->getLabel()}{/if}" />
-                  <input type="text" name="node-right" title="{t}You must choose an entity from Freebase. Please select one in the list below.{/t}" id="to-entity-right" class="node_search required node_right" placeholder="Personality or institution" value="{if $entity_right}{$entity_right->getLabel()}{/if}" />
-            </div>
-
-            <section>
-                  <div class="entity-desc loading default" id="entity-left">
-                        <input type="hidden" class="entity-left-mid" name="entity-left-mid" class="required"  value="{if $entity_left}{$entity_left->getFreebaseId()}{/if}" />
-                  </div>
-            </section>
-
-            <section>
-                  <div class="entity-desc loading default" id="entity-right">
-                        <input type="hidden" class="entity-right-mid" name="entity-right-mid" class="required" value="{if $entity_right}{$entity_right->getFreebaseId()}{/if}" />
-                  </div>
+            <section class="step {if $entity_left}disabled{/if}">
+                <label>
+                    {t}Who are you curious about?{/t}
+                    <input type="text" name="node-left" data-preview=".first-entity"  data-entity=".entity-left-mid" id="to-entity-left" class="node_search required text" placeholder="Personality or institution" value="{if $entity_left}{$entity_left->getLabel()}{/if}" />
+                </label>
             </section>
             
-            <div id="node-informations" class="simpleShadow radiusLight">                  
-                  <div class="close">close</div>
+            <section class="first-entity entity {if !$entity_left}hidden{/if}" rel=".entity-left-mid">
+                <a class="cancel">{t}Cancel{/t}</a>
+                <p>{t}This is the influence Network of{/t} 
+                   
+                   {if $entity_left}
+                        <a data-type="{$entity_left->getType()}" 
+                           data-mid="{$entity_left->getFreebaseId()}" 
+                           class="topic fb-topic">
+                                {$entity_left->getLabel()}
+                        </a>
+                    {else}
+                        <a class="topic fb-topic"></a>
+                    {/if}
+                </p>
+            </section>                
+            
+            <section class="step {if $entity_right}disabled{/if}">  
+                <label>
+                    {t}Who else are you curious about?{/t}
+                    <input type="text" name="node-right" data-preview=".second-entity"  data-entity=".entity-right-mid" id="to-entity-right" class="node_search node_right text" placeholder="Personality or institution" value="{if $entity_right}{$entity_right->getLabel()}{/if}" />
+                </label>
+            </section>
+            
+            <section class="second-entity entity {if !$entity_right}hidden{/if}" rel=".entity-right-mid">
+                <a class="cancel">{t}Cancel{/t}</a>
+                <p>{t}This is the influence Network of{/t} 
+                    
+                   {if $entity_right}
+                        <a data-type="{$entity_right->getType()}" 
+                           data-mid="{$entity_right->getFreebaseId()}" 
+                           class="topic fb-topic">
+                                {$entity_right ->getLabel()}
+                        </a>
+                   {else}
+                        <a class="topic fb-topic"></a>
+                   {/if}
+                </p>
+            </section>       
+            
+            <div id="node-informations" class="">                  
+                  <a class="close">close</a>
                   <h4>An entity name</h4>
                   <div class="dynamique-content">
-                        <h5>{t}Informations{/t}</h5>
-                        <div class="freebase default loading">
-                              <ul></ul>
-                              <span class="freebase-label">{t}Information provided by Freebase{/t}</span>
-                        </div>
-                  </div>
-                  <div class="dynamique-content" style="width:395px">
                         <h5>{t}Relations{/t}</h5>
                         <div class="relations default loading">
                               <table>
@@ -57,74 +77,40 @@
                         </div>
                   </div>
             </div>
-
-            <div class="min-rate">
-                  <div class="rate-legend">
-                        {t}Established
-                        fact{/t}
-                  </div>
-                  <div id="rate-slider"></div>
-                  <div class="rate-legend">
-                        {t}Rumor{/t}
-                  </div>
-            </div>
-
-            {literal}
-            <script type="text/javascript">
-                  $(function() {
-                        
-                        $( "#rate-slider" ).slider({
-                              value: $( ":input[name=rate]" ).val(),
-                              min: 1,
-                              max: 5,
-                              step: 0.1,
-                              orientation: "vertical",
-                              slide: function( event, ui ) {
-                                    $( ":input[name=rate]" ).val( ui.value );
-                                    if(data_rel != undefined) resetDataVis();
-                                    
-                                    $("#rate-slider .ui-slider-handle").attr("title", "<span style='font-size:30px'>"+ui.value+"</span>/5");
-                                    
-                                    // to paralelle execution
-                                    setTimeout(function () { 
-                                          $("#rate-slider .ui-slider-handle").tipsy("show"); 
-                                    }, 0);
-                              },
-                              change: function() {            
-                                    $("#rate-slider .ui-slider-handle").tipsy("show");                          
-                              }
-                        });
-                        
-                        $("#rate-slider .ui-slider-handle").blur(function() {
-                              $("#rate-slider .ui-slider-handle").tipsy("hide");                                
-                        })
-
-                        $("#rate-slider .ui-slider-handle").attr("title", "<span style='font-size:30px'>"+$( ":input[name=rate]" ).val()+"</span>/5")
-                        .tipsy({
-                              gravity: 'e',
-                              html: true,
-                              opacity:1
-                        });
-                        
-                  });
-            </script>
-            {/literal}
-                  
-            <div class="tooltips" title="{t}No relations yet between these entities.{/t} {if $isConnected}<a href='./?screen=relation-add'>{t}Contribute to the database.{/t}</a>{else}{t}Log in to contribute.{/t}{/if}">
-                  <p>{t}Click an entity to view its description.{/t}</p>
-                  <p class="browser-alert">{t}Your Web Browser cannot display the graph. Please, use{/t} <a href="http://www.mozilla-europe.org/" target="_blank">Mozilla Firefox</a> {t}or{/t} <a href="http://www.google.com/chrome" target="_blank">Google Chrome</a>.</p>
-            </div>
+                                                
             <div id="visualize-layout">
                   <script type="text/javascript+protovis">
-                        relationsRender();
+                        window.page.relationsRender();
                   </script>
+            </div>  
+            <div class="visu-tool">
+                <ul>
+                    <li class="permalink"><a href="./">{t}Permalink{/t}</a></li>
+                    <li class="embed"><a href="./">{t}Embed{/t}</a></li>
+                    <li class="share"><a href="#">Share</a></li>
+                </ul>
             </div>
+
+            <section class="step rate">
+                <h3>{t}Filter relation by reliability{/t}</h3>
+                <div style="float:left; text-align: right;" class="rate-legend">
+                   {t}It's not true{/t}
+                </div>
+                <div style="float:right" class="rate-legend">
+                   {t}It's a fact{/t}
+                </div>
+                <div id="rate-slider"></div>
+            </section>
       </form>
 </section>
+            
       
-<div class="embed-field">
+                  
+<div class="tooltips" title="{t}No relations yet between these entities.{/t} {if $isConnected}<a href='./?screen=relation-add'>{t}Contribute to the database.{/t}</a>{else}{t}Log in to contribute.{/t}{/if}">
+      <p class="browser-alert">{t}Your Web Browser cannot display the graph. Please, use{/t} <a href="http://www.mozilla-europe.org/" target="_blank">Mozilla Firefox</a> {t}or{/t} <a href="http://www.google.com/chrome" target="_blank">Google Chrome</a>.</p>
+</div>
       
+<div class="embed-field">      
       <p>{t}Use this code to embed the current visualization on your website:{/t}</p>
       <input value='' data-code='<iframe src="@@URL@@" width="100%" height="400px"></iframe>' data-url='{$smarty.const.APP_URL}' readonly type="text" />
-
 </div>

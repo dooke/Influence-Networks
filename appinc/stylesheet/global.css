@@ -35,6 +35,9 @@ header {
     -o-box-shadow:-3px 2px 6px 0 rgb(0,0,0);
 }
 
+header a {
+    color:#432943;
+}
 
 
 form.connexion {
@@ -187,7 +190,7 @@ form.inscription.hidden {
     top:211px;
     left:50%;
     margin-left:-180px;
-    z-index:1000;
+    z-index:99999;
     
     border-radius:0 0 5px 5px;
     -moz-border-radius:0 0 5px 5px;
@@ -222,6 +225,7 @@ form.inscription.hidden {
     display:inline-block;
 }
 /** END HEADER SHARE **/
+
 
 
 /** START MENU **/
@@ -450,6 +454,7 @@ form.inscription.hidden {
 /** END MENU **/
 
 
+
 /** START HOME PAGE **/
 .homepage #app{ width:auto; }
 
@@ -626,6 +631,9 @@ form.inscription.hidden {
 
 /** END HOME PAGE **/
 
+
+
+
 /** START CLASSIC FORM (LIKE THE CONTRIBUTE PAGE) **/
 .classic-form { 
     margin-bottom:40px;
@@ -653,7 +661,6 @@ form.inscription.hidden {
 .classic-form .step {
     display:block;
     padding:15px;
-    padding-left:325px;
     margin-top:20px;
     background:#e2e9eb;
     position:relative;    
@@ -661,6 +668,10 @@ form.inscription.hidden {
     font-weight: bold;
     font-size:18px;
     font-style:italic;
+}
+
+.relation-add .classic-form .step {
+    padding-left:325px;    
 }
 .classic-form .step.last{
     margin-bottom:80px;
@@ -676,10 +687,10 @@ form.inscription.hidden {
 
 .classic-form .step.disabled {
     opacity:0.4;
-    filter: alpha(opacity = 40);
+    filter: alpha(opacity=40);
 }
 
-.classic-form .step:before{
+.relation-add .classic-form .step:before{
     
     counter-increment: step;
     content:counter(step);    
@@ -839,6 +850,32 @@ input.half {
 /** END CLASSIC FORM **/
 
 
+
+/** START CREATE ENTITY FORM **/
+
+.tipsy.createTopic .tipsy-inner {
+    max-width:300px;
+    width:300px;    
+    padding:10px;
+}
+.tipsy.createTopic .tipsy-inner p{
+    margin-bottom:10px;    
+}
+.tipsy.createTopic label input {
+    position:relative;
+    top:2px;
+    margin-right:5px;       
+}
+
+.tipsy.createTopic label {
+    margin-right:10px;
+}
+
+/** END CREATE ENTITY FORM **/
+
+
+
+
 /** START REVIEW FORM **/
 
 .relation-review .main form {
@@ -991,6 +1028,7 @@ input.half {
 /** END RATE SLIDER **/
 
 
+/** START ERROR **/
 
 #errors {
     position:absolute;
@@ -1032,79 +1070,169 @@ input.half {
     cursor: pointer;
 }
 
+/** END ERROR **/
+
+
+
+/** START VISUALIZE SCREEN **/
+.relation-visualize .classic-form .step label,
+.relation-visualize .classic-form .step h3 {
+    padding-left: 30px;
+    width:600px;
+    display: block;
+    text-transform: none;
+    color:#163d59;
+    font-size:18px;
+    font-family: 'PT Sans', arial, serif;
+}
+
+.relation-visualize .classic-form .step label input.text{
+    float:right;
+}
+
+.relation-visualize .classic-form .rate-legend{
+    width:180px;
+}
+
+.relation-visualize .classic-form .step.rate {
+    padding-bottom:40px;
+    clear:left;
+}
+
+.relation-visualize .classic-form .entity {
+    padding:10px 20px;
+    padding-left:45px;
+    background: #dbecf2;
+    margin-top:20px;
+    border:1px solid #c5d4d9;
+    border-width: 1px 0 1px 0;
+    color:#163d59;
+    font-size:16px;
+    
+    transition:0.6s;
+    -moz-transition:0.6s;
+    -webkit-transition:0.6s;
+    -o-transition:0.6s;
+}
+.relation-visualize .classic-form .entity .fb-topic {
+    font-weight: bold;
+    font-family: 'Vollkorn', arial, serif;
+    text-decoration: none;
+    padding-left:30px;
+    margin-left:10px;
+    background: url("../images/fb-topic-information.png") no-repeat 0 0;
+}
+
+.relation-visualize .classic-form .entity .cancel {
+    float:right;
+    text-decoration: none;
+    color:#163d59;
+    cursor: pointer;
+    
+    height:30px;
+    display:block;
+    padding-top:10px;
+    padding-left:35px;
+    padding-right:15px;
+    margin-top:-10px;
+    background: url("../images/cancel.png") no-repeat 0 center;
+}
+
+.relation-visualize .classic-form .entity.hidden {
+    height:0;
+    padding-top:0;
+    padding-bottom:0;
+    overflow:hidden;
+    margin-top:0;
+    border-width:0;
+}
 
 .visu-tool {
-    position:absolute;
-    top:26px;
-    left:480px;
-    font-size:12px;
-} 
-.visualize .min-rate {
-    position:absolute;
-    right:-160px;
-    top:70px;
-    width:auto;
+    width:160px;
+    height:80px;
+    padding:10px;
+    background: #e3eff3;
+    float:right;
+    z-index:3;
+    position:relative;
+    top:-107px;
+    margin-bottom:-107px;
+    right:5px;
+    border:1px solid white;
 }
 
-.visualize #rate-slider {
-    width:6px;
-    margin-bottom:20px;
-    height:240px;
+.visu-tool li {
+    padding:4px 0;
+    background: no-repeat 0 center;
+}
+.visu-tool li a {
+    padding-left:40px;
+    display:block;
+    font-size:16px;
+    font-style: italic;    
+    text-decoration: none;
 }
 
-.visualize #rate-slider a{
-    margin-left:-3px;
-}
-.visualize .min-rate .rate-legend {
-    text-align:center;
-    width:auto;
+.visu-tool li.permalink {
+    background-image: url("../images/link.png");
 }
 
+.visu-tool li.embed {    
+    background-image: url("../images/embed.png");
+}
+    
+.visu-tool li.share {
+    display:none;
+    background-image: url("../images/share.png");
+}
+    
 
+
+#visualize-layout {
+    z-index:2;
+    position:relative;
+    margin-left:-280px;
+    margin-top:10px;
+    width:980px; 
+    height:590px;
+    margin:auto;
+    margin-top:20px;
+
+    overflow:hidden;
+    border:#ccdee5 5px solid;
+}
 
 #node-informations {
-    color:#F4F3E2;
+    color:#000;
     float:right;
-    background: rgba(55, 33, 55, 0.8);
-    height:300px;
+    background:#fff;
+    
+    width:940px;
+    height:550px;
     overflow:hidden;
-    margin-bottom:-300px;
-    padding:10px;
+    
+    margin-bottom:-600px;
+    
+    border:#ccdee5 5px solid;
+    padding:20px;
+    
     position: relative;
-    z-index:555;
-    width:640px;
-    margin-right:-80px;
     top:20px;
+    
+    z-index:999;
     display:none;
-
-    background: rgb(55, 33, 55);
-    background: rgba(55, 33, 55, 0.8);
+    font-size:14px;
 }
 
 #node-informations h4 {
-    border-bottom:2px solid #0B090B;
-    font-size:18px;
     font-family: 'Vollkorn', arial, serif;
-
 }
 
 
 #node-informations .dynamique-content {
-    float:left;
-    border-top:1px solid #6E5671;     
-    height:270px;
-    width:220px;  
     padding-right:10px;
-    font-size:14px;
     overflow:auto;
 }
-
-#node-informations h5 {
-    color:#CAA8CF;
-    text-transform: uppercase;
-    padding:5px 0px;
-}
-
 
 #node-informations .close {
     float:right;
@@ -1120,38 +1248,31 @@ input.half {
 
 #node-informations .relations table {
     width:100%;
-    font-size:11px;
 }
 
 #node-informations .relations thead tr {
-    color:#F4F3E2;
-    background: rgb(55, 33, 55);
-    font-size:12px;
+    color:#fff;
+    background: #163d59;
 }
 #node-informations .relations thead tr td {
-    padding:2px 6px;
+    padding:5px 10px;
     font-weight:bold;
+    text-align: center;
+    font-size:16px;
 }
 
 #node-informations .relations tbody tr td {      
-    padding:2px 6px;
+    padding:4px 8px;
     cursor: pointer;
 }
 
-#node-informations .freebase-label {
-    font-style: italic;
-    font-size:12px;
-}
-
-#node-informations .relations td.review a {
-    color:#F4F3E2;
+#node-informations .relations tbody tr{
+    background-color: #b8d5df;
 }
 
 #node-informations .relations tbody tr.odd{
-    background: rgb(65, 43, 65);
-    background: rgba(221, 195, 223, 0.1);
+    background: #d7e7ed;
 }
-
 
 #node-informations .relations .arrow a {
     display:block;
@@ -1169,11 +1290,6 @@ input.half {
 
 #node-informations .relations tr.details .content {
     padding:10px;      
-    cursor:auto;
-}
-
-#node-informations .relations tr.details .content a{
-    color:#A86372;
 }
 
 .nograph {      
@@ -1182,29 +1298,9 @@ input.half {
     font-weight: bold;
 }
 
-.min-rate {
-    margin-top:15px;
-    margin-left:-10px;
-    width:500px;
-    position:relative;
-    z-index:444;
-}
 
-.rate-legend{
-    margin-top:0px;
-}
+/** END VISUALIZE SCREEN **/
 
-#visualize-layout {
-    z-index:2;
-    position:relative;
-    margin-left:-280px;
-    margin-top:10px;
-    width:950px; 
-    height:380px;
-    /*background:rgba(255,255,255,0.4);*/
-    overflow:hidden;
-    border-radius:3px;
-}
 
 .tooltips {
     position:absolute;
@@ -1270,26 +1366,6 @@ h3 .permalink {
     margin-top:5px;
     font-size:20px;
     width:600px;
-}
-
-/** CREATE ENTITY FORM **/
-
-.tipsy.createTopic .tipsy-inner {
-    max-width:300px;
-    width:300px;    
-    padding:10px;
-}
-.tipsy.createTopic .tipsy-inner p{
-    margin-bottom:10px;    
-}
-.tipsy.createTopic label input {
-    position:relative;
-    top:2px;
-    margin-right:5px;       
-}
-
-.tipsy.createTopic label {
-    margin-right:10px;
 }
 
 
