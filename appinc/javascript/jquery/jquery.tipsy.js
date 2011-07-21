@@ -27,10 +27,15 @@
                     height: this.$element[0].offsetHeight
                 });
                 
+                // add class
+                if(this.options.addClass != null)
+                    $tip.addClass(this.options.addClass);
+                
                 var actualWidth = $tip[0].offsetWidth, actualHeight = $tip[0].offsetHeight;
                 var gravity = (typeof this.options.gravity == 'function')
                                 ? this.options.gravity.call(this.$element[0])
                                 : this.options.gravity;
+                
                 
                 var tp;
                 switch (gravity.charAt(0)) {
@@ -57,10 +62,6 @@
                 }
                 
                 $tip.css(tp).addClass('tipsy-' + gravity);
-                
-                // add class
-                if(this.options.addClass != null)
-                    $tip.addClass(this.options.addClass);
                 
                 if (this.options.fade) {
                     $tip.stop().css({opacity: 0, display: 'block', visibility: 'visible'}).animate({opacity: this.options.opacity});
