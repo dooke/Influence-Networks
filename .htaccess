@@ -1,7 +1,7 @@
 Options +FollowSymlinks
 
 RewriteEngine On
-RewriteBase /
+RewriteBase / 
 
 
 # one resource with number ID
@@ -15,10 +15,12 @@ RewriteRule ^api/([a-z]+)/?$ /index.php?api&resource=$1&$2 [L,NC,QSA]
 
 # redirection to the root
 RewriteRule ^api/?$ / [R,NC]
+RewriteRule ^page/?$ / [R,NC]
 
 # main pages
 RewriteRule ^contribute/?$ /index.php?screen=relation-add [L,NC,QSA]
 RewriteRule ^review/?$     /index.php?screen=relation-review [L,NC,QSA]
 RewriteRule ^explore/?$    /index.php?screen=relation-visualize [L,NC,QSA]
+RewriteRule ^page/([a-z]+)/?$ /index.php?screen=page&id=$1 [L,NC,QSA]
 
 
