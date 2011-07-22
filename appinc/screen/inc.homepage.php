@@ -15,6 +15,14 @@
     // page title
     $s->assign('pageTitle', _('Home') );
     
+    // introduction
+    $s->assign('intro', getPage("introduction"));
+    
+    // influence networks for...
+    $s->assign('forJournalists', getPage("influence-networks-for-journalists"));
+    $s->assign('forDevelopers', getPage("influence-networks-for-developers"));
+    $s->assign('forCitizens', getPage("influence-networks-for-citizens"));
+    
     $s->assign("countRelation", $managers["relation"]->getRelationCount());
     $s->assign("countRelationReview", $managers["relation_trust_level"]->getRelationTrustLevelCount());
     $s->assign("countUser", $managers["user"]->getUserCount());

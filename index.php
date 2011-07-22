@@ -32,6 +32,7 @@
         // Define current language
         // -----------------------
         require_once(BASE_DIR . '/appinc/librarie/functions.language.php');
+        require_once(BASE_DIR . '/appinc/librarie/functions.page.php');
         require_once(BASE_DIR . '/appinc/librarie/Rmail/Rmail.php');
 
         /* @TODO: make the following function better... */
