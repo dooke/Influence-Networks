@@ -55,29 +55,31 @@
                 </p>
             </section>       
             
-            <div id="node-informations" class="">                  
+            <div id="node-informations" class="hidden">                  
                   <a class="close">close</a>
-                  <h4>An entity name</h4>
+                  <h4><a class="fb-topic">An entity name</a></h4>
+                  <h5>{t}Relations{/t}</h5>
                   <div class="dynamique-content">
-                        <h5>{t}Relations{/t}</h5>
                         <div class="relations default loading">
                               <table>
                                     <thead>
                                           <tr>
+                                                <td style="width:10px;"></td>
                                                 <td>{t}Entity{/t}</td>
                                                 <td style="min-width:80px">{t}Type of relation{/t}</td>
                                                 <td style=" text-align:center">{t}Trust rank{/t}</td>
                                                 <td></td>
-                                                <td style="width:10px;"></td>
                                           </tr>
                                     </thead>
-                                    <tbody>
-                                    </tbody>
+                                    <tbody></tbody>
                               </table>
                         </div>
                   </div>
             </div>
-                                                
+                        
+            <div id="explore-more" class="button blue">
+                <label><input type="checkbox" name="explore-more" />{t}Explore more{/t}</label>
+            </div>
             <div id="visualize-layout">
                   <script type="text/javascript+protovis">
                         window.page.relationsRender();
@@ -104,13 +106,7 @@
       </form>
 </section>
             
-      
                   
 <div class="tooltips" title="{t}No relations yet between these entities.{/t} {if $isConnected}<a href='./?screen=relation-add'>{t}Contribute to the database.{/t}</a>{else}{t}Log in to contribute.{/t}{/if}">
       <p class="browser-alert">{t}Your Web Browser cannot display the graph. Please, use{/t} <a href="http://www.mozilla-europe.org/" target="_blank">Mozilla Firefox</a> {t}or{/t} <a href="http://www.google.com/chrome" target="_blank">Google Chrome</a>.</p>
-</div>
-      
-<div class="embed-field">      
-      <p>{t}Use this code to embed the current visualization on your website:{/t}</p>
-      <input value='' data-code='<iframe src="@@URL@@" width="100%" height="400px"></iframe>' data-url='{$smarty.const.APP_URL}' readonly type="text" />
 </div>
