@@ -59,7 +59,7 @@
             {* Fourth input (source) *}
             <div class="step disabled">
                 <label>
-                    {t}What your source?{/t}
+                    {t}What is your source?{/t}
                     <input type="text"
                            class="source text required chk_URL"  
                            placeholder="Enter an URL"
