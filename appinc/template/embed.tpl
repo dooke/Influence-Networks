@@ -130,8 +130,10 @@
             </div>
 
 
-            {literal}
-
+                <div id="explore-more" class="button blue">
+                    <label><input type="checkbox" name="explore-more" />{t}Explore more{/t}</label>
+                </div>
+                
                 <div id="visualize-layout">
                     <script type="text/javascript">                                    
                             relationsRender();                            	
@@ -139,6 +141,8 @@
                 </div>
 
 
+
+            {literal}
                 <script type="text/javascript">
 
                       var _gaq = _gaq || [];

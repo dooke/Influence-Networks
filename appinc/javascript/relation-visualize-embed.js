@@ -46,6 +46,9 @@ $(function() {
 
     // if a default graph is called
     relationBetweenNodes();
+    
+    // explore more
+    $("#explore-more input").change(relationBetweenNodes);
 
 });
 
@@ -90,9 +93,11 @@ function loadFreebaseData(data) {
 function relationBetweenNodes() {
 
     if ($(".entity-left-mid").val() != "" || $(".entity-right-mid").val() != "") {
-
+      
+        var action = $("#explore-more input").prop("checked") ? "getMoreNodesRelations" : "getMergeNodesRelation";
+        
         $.ajax({
-            url : "./?action=getMergeRelationNodes",
+            url : "./?action="+action,
             data : $(".classic-form form").serialize(),
             dataType : "json",
             type : "post",

@@ -99,6 +99,7 @@
             e.preventDefault();
         });
         
+        // explore more
         $("#explore-more input").change(page.relationBetweenNodes);
     };
     
