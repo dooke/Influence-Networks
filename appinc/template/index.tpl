@@ -11,6 +11,10 @@
 {elseif $screen=="relation-visualize"}
 
       {include file="screen/relation-visualize.tpl"}
+
+{elseif $screen=="page"}
+
+      {include file="screen/page.tpl"}
       
 {else}
 
