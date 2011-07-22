@@ -89,11 +89,6 @@ class Action {
                     exit;
                     break;
 
-              case "getMergeRelationNodes":
-                    echo $this->managers['relation']->getMergeRelationNodes();
-                    exit;
-                    break;
-
               case "getNodeRelation":
                     echo $this->managers["relation"]->getNodeRelationJSON();
                     exit;
@@ -126,8 +121,15 @@ class Action {
               case "createTopic":
                     $this->createTopic();
                     break;
-
-
+              
+              case "getMergeNodesRelation":
+                    $this->getMergeNodesRelation();
+                    break;
+                
+              case "getMoreNodesRelations":
+                    $this->getMoreNodesRelations();
+                    break;
+                
               default:break;
         }
         
@@ -174,6 +176,48 @@ class Action {
         
     }
     
+    /**
+     * Get every nodes relations
+     * 
+     * @access public 
+     */
+    public function getMergeNodesRelation() {
+        
+        if(isset($_REQUEST["entity-left-mid"]) || isset($_REQUEST["entity-right-mid"])) {
+            
+            // get every relation
+            $relations = $this->managers["relation"]->getMergeNodesRelation($_REQUEST["entity-left-mid"], $_REQUEST["entity-right-mid"]);
+            
+            echo json_encode(array("status" => true, "nodes" => array(), "relations" => $relations ));
+            exit;
+            
+        // throw exception    
+        } else throw( new Exception("Missing paramters.") );
+            
+        
+    }
+    
+    
+    /**
+     * Get every nodes relations and its children's relations
+     * 
+     * @access public 
+     */
+    public function getMoreNodesRelations() {
+        
+        if(isset($_REQUEST["entity-left-mid"]) || isset($_REQUEST["entity-right-mid"])) {
+            
+            // get every relation
+            $relations = $this->managers["relation"]->getMoreNodesRelations($_REQUEST["entity-left-mid"], $_REQUEST["entity-right-mid"]);
+            
+            echo json_encode(array("status" => true, "nodes" => array(), "relations" => $relations ));
+            exit;
+            
+        // throw exception    
+        } else throw( new Exception("Missing paramters.") );
+            
+        
+    }
     
 }
 

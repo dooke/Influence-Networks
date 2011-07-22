@@ -86,7 +86,7 @@
      */
     page.checkWebsiteTour = function() {
         
-        if(! $.cookies.get("no-website-tour") && window.isConnected ) {
+        if(0 &&  ! $.cookies.get("no-website-tour") && window.isConnected ) {
 
             new makeWebsiteTour([
                 {

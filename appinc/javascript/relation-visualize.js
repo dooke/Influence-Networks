@@ -38,11 +38,6 @@
         });
 
 
-        $(".visu-tool .embed").click(function(event) {
-            page.showVisuEmbed(event);
-        });
-
-
         $(".node_search").suggest({
 
             // looking for person or organization
@@ -59,22 +54,15 @@
 
 
         $("#node-informations .close").click(function () {
-
-            $("#node-informations").animate({
-                  right: -990,
-                  display: 'none'
-            }, 1200, 'easeOutBounce', function() {
-                  $("#node-informations .dynamique-content ul").html("");
-            });
-
+            $("#node-informations").addClass("hidden");
         });
 
-        $("#node-informations .relations tbody tr:not(.details)").live("click", function () {
+        $("#node-informations .relations tbody tr:not(.details) .arrow").live("click", function () {
             page.showRelationDetails(this);
         } );
 
         $(".relations .arrow,.relations .review").tipsy({
-            gravity:"e", 
+            gravity: $.fn.tipsy.autoWE, 
             live:true, 
             opacity:1
         });
@@ -86,7 +74,32 @@
         $(".step.disabled :input").prop("disabled", true);
         
         // cancel entity selection
-        $(".entity .cancel").live("click", function() { page.cancelEntitySelection.call(this) });
+        $(".entity .cancel").live("click", function() {page.cancelEntitySelection.call(this)});
+        
+        // disable the link
+        $(".visu-tool li.embed a").live("click", function(e) {e.preventDefault();});
+        
+        // get embed        
+        $(".visu-tool li.embed a").tipsy({
+            title: page.getEmbed,
+            gravity: "e",
+            opacity:1,
+            html:true,
+            trigger:"manual",
+            addClass:"tipsy-embed"
+        }).toggle(function() {
+            $(this).tipsy("show");
+        }, function() {
+            $(this).tipsy("hide");
+        });
+        
+        // select text in embed input 
+        $(".tipsy-embed input").live("click",function(e) {
+            $(this).select();
+            e.preventDefault();
+        });
+        
+        $("#explore-more input").change(page.relationBetweenNodes);
     };
     
 
@@ -211,15 +224,21 @@
      */
     page.relationBetweenNodes = function() {
           
+          // hide the embed tooltips
+          $(".visu-tool li.embed a").tipsy("hide");
+            
+          var action = $("#explore-more input").prop("checked") ? "getMoreNodesRelations" : "getMergeNodesRelation";
+
           if( $(".entity-left-mid").val()  != "" 
           ||  $(".entity-right-mid").val() != "" ) {
 
                 $.ajax({
-                      url:      "./?action=getMergeRelationNodes",
+                      url:      "./?action=" + action,
                       data:     $(".classic-form form").serialize(),
                       dataType: "json",
                       type:     "post",
                       success:  function (data) {
+                            // reset the visualization
                             page.resetDataVis(data); 
                       }
                 });       
@@ -367,6 +386,8 @@
      */
     page.showRelationDetails = function(element) {
       
+        element = $(element).parents("tr");
+        
         if(! $(element).hasClass("open") ) {
 
             $("tr.open").removeClass("open");
@@ -386,7 +407,7 @@
             $(tr).insertAfter(element);
             $("tr.details .content").slideDown(300);
 
-            $.getJSON("./?action=getRelationValues&relation_id=" + $(element).data("relation-id"), function(data) {                  
+            $.getJSON("./?action=getRelationValues&relation_id=" + $(element).data("relation-id"),  function(data) {                  
 
                   var html = "";                  
                   $.each(data, function(key, d) {
@@ -419,6 +440,29 @@
 
     };
 
+
+    /**
+     * 
+     * @function
+     * @public
+     */
+    page.getEmbed = function() {
+        
+        // html
+        var iframe = "<input value='<iframe src=\"@@URL@@\" width=\"100%\"  style=\"border:0\" height=\"400px\"></iframe>' readonly type=\"text\" />";
+        
+        // permalink
+        var link = window.app_url + "?screen=relation-visualize-embed&rel=";
+        link    += $(".entity-left-mid").val()  != "" ? $(".entity-left-mid").val() + "|"  : "";
+        link    += $(".entity-right-mid").val() != "" ? $(".entity-right-mid").val()       : "";
+        link    += "&trust_rank=" + $( ":input[name=rate]" ).val();
+        
+        
+        return iframe.replace("@@URL@@", link);
+    };
+    
+    
+    
     /**
      * 
      * @function
@@ -458,26 +502,6 @@
     };
 
 
-    /**
-     * 
-     * @function
-     * @public
-     */
-    page.showVisuEmbed = function(event) {
-
-        event.preventDefault();
-
-        // show field
-        $(".embed-field").fadeIn(400);
-        // put the right code
-        $(".embed-field input").val(   $(".embed-field input").data("code").replace("@@URL@@", $(".embed-field input").data("url") + $("a.embed").attr("href")) );      
-        // show mask
-        $("#mask").hide().fadeIn(400).unbind("click").bind("click", function() {
-            $("#mask").fadeOut(400);
-            $(".embed-field").fadeOut(400);
-        });
-
-    };
 
 
     /**
@@ -599,14 +623,14 @@
     
     page.entityRelationDetails = function(data) {        
 
+        
         var setview = $("#node-informations .freebase");
-        $("#node-informations h4").html(data.label);
+        $("#node-informations h4 a").html(data.label).freebaseTopic("reset").data("mid", data.freebase_id).data("type", data.type);
         $("#node-informations .relations table tbody").html("");
-
-        // *************************
-        // * Load Data from database
-        // ***
-        $.getJSON("./", { action : 'getNodeRelation', id : data.id }, function (json) { 
+                
+        
+        // Load Data from database                        
+        $.getJSON("./", {action : "getNodeRelation", id : data.id}, function (json) { 
 
             for(var i in json) {
 
@@ -623,10 +647,7 @@
 
         });
 
-        if( $("#node-informations").css("display") == 'none' )
-            $("#node-informations").show().css({ right: -990 });
-
-        $("#node-informations").stop().animate({ right: 0 }, 700, 'easeOutBounce');
+        $("#node-informations").removeClass("hidden");
 
     };
 
@@ -661,33 +682,33 @@ $(function () {
       /********************
       * WEBSITE TOUR
       ***/          
-      if(! $.cookies.get("no-website-tour") && isConnected)
+      if( 0 &&  ! $.cookies.get("no-website-tour") && isConnected)
             new makeWebsiteTour([
-            {
-                  "selector"        : ".up_menu li.current",
-                  "position"        : "T",
-                  "text"            : "See entities relations."
-            },
-            {
-                  "selector" 		: ".node_search.node_left",
-                  "position"        : "BR",
-                  "text"		: "Example: Barack Obama"
-            }, {
-                  "selector" 		: ".node_search.node_right",
-                  "position"        : "BL",
-                  "text"		: "Example: Michelle Obama"
-            }, {
-                  "selector" 		: ".rate-legend:eq(0)",
-                  "position"        : "BR",
-                  "text"		: "Slide the cursor left to see more relations"
-            }, {
-                  "selector" 		: ".rate-legend:eq(1)",
-                  "position"        : "BL",
-                  "text"		: "Slide the cursor right to see only the most valid relations"
-            }, {
-                  "end"             : true,
-                  "url"             : "./"
-            }
+                {
+                      "selector"        : ".up_menu li.current",
+                      "position"        : "T",
+                      "text"            : "See entities relations."
+                },
+                {
+                      "selector" 		: ".node_search.node_left",
+                      "position"        : "BR",
+                      "text"		: "Example: Barack Obama"
+                }, {
+                      "selector" 		: ".node_search.node_right",
+                      "position"        : "BL",
+                      "text"		: "Example: Michelle Obama"
+                }, {
+                      "selector" 		: ".rate-legend:eq(0)",
+                      "position"        : "BR",
+                      "text"		: "Slide the cursor left to see more relations"
+                }, {
+                      "selector" 		: ".rate-legend:eq(1)",
+                      "position"        : "BL",
+                      "text"		: "Slide the cursor right to see only the most valid relations"
+                }, {
+                      "end"             : true,
+                      "url"             : "./"
+                }
             ], 0);   
 });
 

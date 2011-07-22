@@ -476,57 +476,108 @@ class RelationManager extends Manager {
             return $inter_arr;
       }
 
-      public function getMergeRelationNodes() {
+      
+      
+      public function getNodeRelationsArray($id) {
+            
+            $relations_array     = array(); 
+            $nodes_array         = array();
+            $relations_instances = $this->getNodeRelation($id);            
+            
+            foreach ($relations_instances as $key => & $rel )
+                $relations_array[$key] = $rel->getArray();
+                
+            return $relations_array;
+      }
+      
+      
+      public function getMergeNodesRelation($nodeMid1 = null, $nodeMid2 = null) {
 
             // an empty array who records every relation way
             // a relation way is an array of different relation
-            $relations = Array();
-            $nodes = Array();
-
-
-            // * First and second degre relations exist ?
-            // ********************************
+            $relations = array();
+            $nodes = array();
             
-
-            if (isset($_POST["entity-left-mid"])) {
+            if( $nodeMid1 != null ) {                
+                
+                  /* @var $node Node */
+                  $node = $this->managers["node"]->addFreebaseNode($nodeMid1);
                   
-
-                  /* @var $nodeLeft Node */
-                  $nodeLeft = $this->managers["node"]->addFreebaseNode($_POST["entity-left-mid"]);
-
-                  if($nodeLeft != false) {
-                        $relation_2d_left = $this->getNodeRelation($nodeLeft->getId());
-
-                        foreach ($relation_2d_left as $key => $rel)
-                              $relations[$key] = $rel->getArray();
-
-                        $nodes[ $nodeLeft->getId() ] = $nodeLeft->getArray();
-                        
-                  }
-                  
+                  if($node != false)
+                        $relations += (array) $this->getNodeRelationsArray( $node->getId() );
             }
-
-            // ---
-
-            if (isset($_POST["entity-right-mid"])) {
+            
+            
+            if( $nodeMid2 != null ) {
+                
+                  /* @var $node Node */
+                  $node = $this->managers["node"]->addFreebaseNode($nodeMid2);
                   
-                 
-
-                  /* @var $nodeRight Node */                  
-                  $nodeRight =  $this->managers["node"]->addFreebaseNode($_POST["entity-right-mid"]);
-                  if($nodeRight != false) {
-                        $relation_2d_right = $this->getNodeRelation($nodeRight->getId());
-
-                        foreach ($relation_2d_right as $key => $rel)
-                              $relations[$key] = $rel->getArray();
-
-                        $nodes[ $nodeRight->getId() ] = $nodeRight->getArray();
-                  }
-            }
+                  if($node != false)
+                        $relations += (array) $this->getNodeRelationsArray( $node->getId() );
+            }       
             
             // return results as json
-            return (json_encode(Array("nodes" => $nodes, "relations" => $relations)) );
+            return $relations;
       }
+      
+      
+      
+      public function getMoreNodesRelations($nodeMid1 = null, $nodeMid2 = null) {
+          
+            // an empty array who records every relation way
+            // a relation way is an array of different relation
+            $relations = array();
+            $nodes = array();
+            
+            if( $nodeMid1 != null ) {                
+                
+                  /* @var $node Node */
+                  $node = $this->managers["node"]->addFreebaseNode($nodeMid1);
+                  
+                  if($node != false)
+                        $relations += (array) $this->getNodeRelationsArray( $node->getId() );
+            }
+            
+            
+            if( $nodeMid2 != null ) {
+                
+                  /* @var $node Node */
+                  $node = $this->managers["node"]->addFreebaseNode($nodeMid2);
+                  
+                  if($node != false)
+                        $relations += (array) $this->getNodeRelationsArray( $node->getId() );
+            }       
+            
+            $firstRelations = $relations;
+            
+            /* @var $rel Array */
+            foreach($firstRelations as $key => & $rel) {
+
+                // if we didn't add the node relation
+                if(! in_array($rel["node_left"], $nodes) ) {
+                    
+                    $relations += (array) $this->getNodeRelationsArray( $rel["node_left"] );
+                    
+                    $nodes[] = $rel["node_left"];
+                }
+                
+                // if we didn't add the node relation
+                if(! in_array($rel["node_right"], $nodes) ) {
+                    
+                    $relations += (array) $this->getNodeRelationsArray( $rel["node_right"] );
+                    
+                    $nodes[] = $rel["node_right"];
+                }
+                
+            }
+            
+            
+            return $relations;
+            
+      }
+      
+      
       
       /**
        * Return the number of relations

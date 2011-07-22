@@ -45,7 +45,31 @@
         
         // WINDOW SCROLL
         $(window).scroll(app.windowScroll);
+        
+        // WINDOW RESIZE ALIGN THE FOOTER
+        $(window).resize(app.alignFooter);
+        // load align
+        app.alignFooter();
+        
+        // BIND AUTO-COMPLETE ON EXPLORE FIELD
+        app.bindExploreField();
+        
     };
+
+    
+    
+    /**
+     * 
+     * @function
+     * @public
+     */
+    app.alignFooter = function() {
+        if( $("body").outerHeight() - $(window).height() < -1 )
+            $("body").addClass("absoluteFooter");
+        else
+            $("body").removeClass("absoluteFooter");
+    };
+    
     
     /**
      * Show user activity
@@ -68,6 +92,66 @@
         }, 700, 'easeOutBounce');
     }
     
+    
+    /**
+     *
+     * @function
+     * @public
+     */
+     app.bindExploreField = function() {
+         
+         // disabled the submit button
+         $(".search-field .submit").prop("disabled", true).addClass("disabled");
+         
+         // block the submit event on the form
+         $(".search-field").submit(function(e) { 
+             e.preventDefault();
+             
+             var id = $(".search-field :input[name=search]").data("entity");
+             // if an id is found
+             if( id != undefined)
+                 // we go to the visualize screen
+                 window.location = "?screen=relation-visualize&rel="+id;
+             
+         });
+         
+         // suggest with Freebase suggest
+         $(".search-field :input[name=search]").suggest({
+            // looking for person or organization
+            type: ["/people/person", "/organization/organization"],
+            // result must be strict
+            type_strict: "any",
+            // all type allowed
+            all_types: true,
+            // selection behavior
+            soft:false,
+            // selection  required
+            required: true
+         // user select someone    
+         }).bind("fb-select", function(event, entity) {
+             
+             // enabled the submit button
+             $(".search-field .submit").prop("disabled", false).removeClass("disabled");
+         
+             // record the data
+             $(this).data("entity", entity.id);
+             
+             $(this).submit();
+             
+             
+         // select required    
+         }).bind("fb-required", function(event) {
+             
+             // enabled the submit button
+             $(".search-field .submit").prop("disabled", true).addClass("disabled");
+         
+             // record the data
+             $.removeData(this, "entity");
+             
+         });
+         
+         
+     };
      
     
     /**

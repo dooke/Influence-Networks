@@ -29,27 +29,17 @@ $(function() {
      * Put event *
      **************************************************************************/
     $("#node-informations .close").click(function() {
-		
-        $("#node-informations").animate({
-
-            left : "110%"
-
-        }, 1200, 'easeOutBounce', function() {
-			
-            $("#node-informations .dynamique-content ul").empty();
-
-        });
-
+        $("#node-informations").addClass("hidden");
     });
 
     
-    $("#node-informations .relations tbody tr:not(.details)").live("click", function() {
+    $("#node-informations .relations tbody tr:not(.details) .arrow").live("click", function() {
         showRelationDetails(this);
     });
     
 
     $(".relations .arrow,.relations .review").tipsy({
-        gravity : "e",
+        gravity : $.fn.tipsy.autoWE,
         live : true,
         opacity : 1
     });
@@ -60,11 +50,9 @@ $(function() {
 });
 
 function loadFreebaseData(data) {
-        
     
-    $("#node-informations h4").html(data.label);        
-    $("#node-informations .relations table tbody").empty();        
-        
+    $("#node-informations h4 a").html(data.label).freebaseTopic("reset").data("mid", data.freebase_id).data("type", data.type);
+    $("#node-informations .relations table tbody").html("");
         
     // * Load Data from database
     $.ajax({
@@ -92,117 +80,12 @@ function loadFreebaseData(data) {
 
         }
     });
-
-    // * Load Data from Freebase
-    // Like you can see, we have a CALLBACK FUNCTION in the url,
-    // this one does a JSONP request from freebase api.
-
-    var script = "http://www.freebase.com/api/service/mqlread?query=";
-
-    // for a /people/person we have a particular kind of data set
-    if (data.type == "/people/person")
-        script += '{ "query"%3A [{ "id"%3A "' + data.freebase_id + '"%2C "type"%3A "/people/person"%2C "name"%3A null%2C "profession"%3A []%2C "date_of_birth"%3A null%2C "gender"%3A null%2C "nationality"%3A []%2C "place_of_birth"%3A []%2C "places_lived"%3A [] }] }';
-    // for organization we have an other kind of data set...
-    else if (data.type == "/organization/organization")
-        script += '{ "query"%3A [{ "id"%3A "' + data.freebase_id + '"%2C "name"%3A null%2C "type"%3A "%2Forganization%2Forganization"%2C "headquarters"%3A [{ "optional"%3A true%2C "*"%3A {}%2C "limit"%3A 1 }] }] }';
-
-    $.getJSON(script + "&callback=?", function(data) { completeInfoFromFreebase(data) });
-
-
-    $("#node-informations .freebase").addClass("loading").removeClass("default");
+    
+    $("#node-informations").removeClass("hidden");
 
 }
 
-// ***********************************
-// * Complete information about a node
-// * in the right block
-// ***
-function completeInfoFromFreebase(data) {
 
-    var setview = $("#node-informations .freebase");
-
-    if ($("#node-informations").css("display") == 'none') {
-
-        $("#node-informations").show().css({
-            left : "110%"
-        });
-
-    }
-
-    $("#node-informations").animate({
-        left : "1%"
-    }, 700, 'easeOutBounce');
-	
-    if (data.status == "200 OK") {
-
-        if (data.result.length > 0) {
-
-            var node = data.result[0];
-
-            // change title
-            $("h4", setview).html(node.name);
-            $("ul", setview).html("");
-
-            if (node.type == "/people/person") {
-
-                var data = [ {
-                    type : "Type",
-                    values : [ "Person" ]
-                },
-
-                {
-                    type : "Occupation",
-                    values : node.profession
-                },
-
-                {
-                    type : "Date of Birth",
-                    values : [ node.date_of_birth ]
-                },
-
-                {
-                    type : "Gender",
-                    values : [ node.gender ]
-                },
-
-                {
-                    type : "Nationality",
-                    values : node.nationality
-                },
-
-                {
-                    type : "Place of Birth ",
-                    values : [ node.place_of_birth ]
-                } ];
-
-            } else {
-
-                var place = new Array();
-
-                if (typeof node.headquarters != "undefined")
-                    for ( var i in node.headquarters)
-                        if (typeof node.headquarters[i].state_province_region == "object")
-                            if (node.headquarters[i].state_province_region != null)
-                                place
-                                .push(node.headquarters[i].state_province_region.name);
-
-                var data = [ {
-                    type : "Type",
-                    values : [ "Organization" ]
-                }, {
-                    type : "Place",
-                    values : place
-                } ];
-
-            }
-
-            $.tmpl("node-property", data).appendTo( $("ul", setview) );
-            $(setview).removeClass("loading");
-
-        }
-
-    }
-}
 
 function relationBetweenNodes() {
 
@@ -334,6 +217,8 @@ function resetDataVis(data) {
 
 function showRelationDetails(element) {
 
+    element = $(element).parents("tr");
+        
     if (!$(element).hasClass("open")) {
 
         $("tr.open").removeClass("open");
@@ -347,7 +232,7 @@ function showRelationDetails(element) {
         + "'>\n\
                               <td colspan='5'>\n\
                                     <div class='content' style='display:none'>\n\
-                                          <div style='text-align:center; color:#A86372;' class='load'>Loading...</div>\n\
+                                          <div style='text-align:center;' class='load'>Loading...</div>\n\
                                     </div>\n\
                               </td>\n\
                       </tr>";
@@ -366,7 +251,7 @@ function showRelationDetails(element) {
                             if (d.label == "Source")
                                 html += "<li>"
                                 + d.label
-                                + ": <span style='color:#A86372'><a href='"
+                                + ": <span><a href='"
                                 + d.value
                                 + "' target='_blank'>"
                                 + d.value
@@ -374,7 +259,7 @@ function showRelationDetails(element) {
                             else
                                 html += "<li>"
                                 + d.label
-                                + ": <span style='color:#A86372'>"
+                                + ": <span>"
                                 + d.value
                                 + "</span></li>";
                         }
@@ -396,7 +281,7 @@ function showRelationDetails(element) {
                         } else {
                             $("tr.details .content")
                             .html(
-                                "<div style='text-align:center; color:#A86372;' class='load'>No data available</div>");
+                                "<div style='text-align:center;' class='load'>No data available</div>");
                         }
                     });
             });
@@ -478,17 +363,17 @@ function relationsRender() {
                 // line width
                 .lineWidth(2)
                 // line color
-                .strokeStyle("#DAE9EA");
+                .strokeStyle("#163d59");
 
     // creates dots for each nodes
     force.node.add(pv.Dot)
         // dot radius according to the link degree (number of links)
         .shapeRadius(function(d) {
-            return 5 + d.linkDegree / 10000
+            return 5 + (d.linkDegree*2)/10000
         })
         // change the border color according to the node type
         .fillStyle(function(d) {
-            return d.type == "/organization/organization" ? "#DAE9EA" : "#432946"
+            return d.type == "/organization/organization" ? "#4abcff" /* organization*/ : "#6f9fbb" /* person */
         })
         // border size according to the node type
         .lineWidth(function(d) {
@@ -496,7 +381,7 @@ function relationsRender() {
         })
         // border color according to the node type
         .strokeStyle(function(d) {
-            return d.type == "/organization/organization" ? "#432946" : "#DAE9EA"
+            return "#163d59"
         })
         // title of the node (on mouse hover) according to the node type
         .title(function(d) {
@@ -530,7 +415,7 @@ function relationsRender() {
                         return d.group == 1 ? "bold 16px sans-serif" : "bold 13px sans-serif";
                     })
                     // text color
-                    .textStyle("#432946")
+                    .textStyle("#163d59")
                     // centers the label
                     .textAlign("center")
                     // disables text decoration

@@ -107,7 +107,7 @@
               
               // tipsy              
               $this.tipsy({
-                  gravity: "nw",
+                  gravity: "n",
                   html: true,
                   fade: false,
                   live: true,
@@ -159,7 +159,6 @@
                   loadTopic.call(this);
                   
               }
-              
           }
           
           
@@ -171,6 +170,7 @@
               // remove hover class
               $(this).removeClass("fb-topic-hover");
           }
+          
           
           /**
            * Load topic's data from Freebase

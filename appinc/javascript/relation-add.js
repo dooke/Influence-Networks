@@ -81,6 +81,9 @@
         
         // look up an entity
         $(".lookup:input").click(page.lookUpEntity);
+        
+        // website tour
+        page.checkWebsiteTour();
     };
     
     
@@ -468,7 +471,7 @@
      */
     page.checkWebsiteTour = function() {
         
-        if(! $.cookies.get("no-website-tour") && window.isConnected ) {
+        if(0 && !$.cookies.get("no-website-tour") && window.isConnected ) {
             new makeWebsiteTour([{
                                     "selector": ".up_menu li.current",
                                     "position": "T",
@@ -488,8 +491,7 @@
                                     "text": "How are the two related?"
                                 }, {
                                     "url": "./?screen=relation-review"
-                                }
-                                ], 0);
+                                }], 0);
         }
     };
     
