@@ -35,7 +35,7 @@
       </form>
 </li>
 <li class="hp">
-    <a href="./">
+    <a href="{$smarty.const.APP_URL}">
         {t}Home{/t}
     </a>
 </li>
