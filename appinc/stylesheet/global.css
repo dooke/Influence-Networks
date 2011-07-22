@@ -8,6 +8,8 @@ body {
      counter-reset: step; 
 }
 
+.intro { display:none; }
+
 #app { 
     border:0px;
     font-size:15px;
@@ -886,6 +888,7 @@ input.half {
     font-size:16px;
 }
 
+
 .relation-review .main form h3 {
     background-color:#70c8d4;
     padding:7px 15px;
@@ -895,6 +898,17 @@ input.half {
     color:white;
     text-transform: none;
     border-bottom:#62acb6 1px solid;
+}
+
+
+.relation-review h2 .permalink {
+    font-size:14px;
+    margin-left:10px;
+    
+}
+.relation-review h2 .permalink img {
+    margin-left:5px;
+    height:10px;
 }
 
 .relation-review .main form .entities {
@@ -1213,6 +1227,15 @@ input.half {
 
     overflow:hidden;
     border:#ccdee5 5px solid;
+}
+
+#visualize-layout .browser-alert {
+    position:absolute;
+    top:50%;
+    left:0;
+    width:100%;
+    text-align:center;
+    display:none;
 }
 
 #node-informations {
