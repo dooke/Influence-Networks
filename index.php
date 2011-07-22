@@ -57,7 +57,7 @@
         $s->compile_dir  = BASE_DIR . '/appinc/template/_compiled';
         $s->cache_dir    = BASE_DIR . '/appinc/template/_cache';
         $s->config_dir   = BASE_DIR . '/configs';
-
+        
         // Error Array
         /* @TODO: Use an error manager may be more convenient */
         $err = Array();

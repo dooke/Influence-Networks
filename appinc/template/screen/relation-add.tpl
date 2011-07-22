@@ -1,7 +1,7 @@
 
 
 <h2>{t}Contribute to Influence Networks{/t}</h2>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent rhoncus urna ut sem ornare aliquet. Class aptent taciti </p>
+<p class="intro">Add relationships using publicly available information and help expand the database.</p>
 
 <section class="classic-form main">
       <form method="POST" action="index.php?screen=relation-add">

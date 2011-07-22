@@ -8,8 +8,6 @@ body {
      counter-reset: step; 
 }
 
-.intro { display:none; }
-
 #app { 
     border:0px;
     font-size:15px;

@@ -1,7 +1,7 @@
 
 
-<h2>{t}Review a relation{/t} - <a href="./?screen=relation-review&id={$relation->getId()}" class="permalink">{t}Permalink{/t}</a></h2>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent rhoncus urna ut sem ornare aliquet. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent rhoncus urna ut sem ornare aliquet. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+<h2>{t}Review a relation{/t} <a href="./?screen=relation-review&id={$relation->getId()}" class="permalink">permalink<img src="{$smarty.const.APP_URL}appinc/images/embed.png" title="{t}Permalink{/t}" /></a></h2>
+<p class="intro">Help us make sure that the information we collect is trustworthy.</p>
 
 <section class="classic-form main">
       {*if there is a relation *}

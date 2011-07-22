@@ -1,6 +1,6 @@
 
 <h2>{t}Explore the Networks{/t}</h2>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent rhoncus urna ut sem ornare aliquet. Class aptent taciti </p>
+<p class="intro">Type in the name of a person or an organization and browse through his or her connections.</p>
    
 <section class="classic-form main">
       <form method="POST" action="">
@@ -84,6 +84,7 @@
                   <script type="text/javascript+protovis">
                         window.page.relationsRender();
                   </script>
+                  <p class="browser-alert">{t}Your Web Browser cannot display the graph. Please, use{/t} <a href="http://www.mozilla-europe.org/" target="_blank">Mozilla Firefox</a> {t}or{/t} <a href="http://www.google.com/chrome" target="_blank">Google Chrome</a>.</p>
             </div>  
             <div class="visu-tool">
                 <ul>
@@ -105,8 +106,3 @@
             </section>
       </form>
 </section>
-            
-                  
-<div class="tooltips" title="{t}No relations yet between these entities.{/t} {if $isConnected}<a href='./?screen=relation-add'>{t}Contribute to the database.{/t}</a>{else}{t}Log in to contribute.{/t}{/if}">
-      <p class="browser-alert">{t}Your Web Browser cannot display the graph. Please, use{/t} <a href="http://www.mozilla-europe.org/" target="_blank">Mozilla Firefox</a> {t}or{/t} <a href="http://www.google.com/chrome" target="_blank">Google Chrome</a>.</p>
-</div>
