@@ -21,6 +21,6 @@ RewriteRule ^page/?$ / [R,NC]
 RewriteRule ^contribute/?$ /index.php?screen=relation-add [L,NC,QSA]
 RewriteRule ^review/?$     /index.php?screen=relation-review [L,NC,QSA]
 RewriteRule ^explore/?$    /index.php?screen=relation-visualize [L,NC,QSA]
-RewriteRule ^page/([a-z]+)/?$ /index.php?screen=page&id=$1 [L,NC,QSA]
+RewriteRule ^page/([-_a-z]+)/?$ /index.php?screen=page&id=$1 [L,NC,QSA]
 
 
