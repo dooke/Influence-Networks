@@ -56,7 +56,7 @@
         <!-- Freebase suggest plugin --> 
         <script type="text/javascript" src="http://freebaselibs.com/static/suggest/1.3/suggest.min.js"></script>
 
-        <script type="text/javascript" src="{$smarty.const.APP_URL}appinc/javascript/app.js"></script>   
+        <!--script type="text/javascript" src="{$smarty.const.APP_URL}appinc/javascript/app.js"></script-->   
         <script type="text/javascript" src="{$smarty.const.APP_URL}appinc/javascript/relation-visualize-embed.js"></script>          
 
 
@@ -130,18 +130,23 @@
             </div>
 
 
-                <div id="explore-more" class="button blue">
-                    <label><input type="checkbox" name="explore-more" />{t}Explore more{/t}</label>
-                </div>
-                
-                <div id="visualize-layout">
-                    <script type="text/javascript">                                    
-                            relationsRender();                            	
-                    </script>                      
-                </div>
+            <div id="explore-more" class="button blue">
+                <label><input type="checkbox" name="explore-more" />{t}Explore more{/t}</label>
+            </div>
 
+            <div id="visualize-layout">
+                <script type="text/javascript">                                    
+                        relationsRender();                            	
+                </script>                      
+            </div>
 
-
+            {if $partner}
+                <a href="{$partner.url}" target="_blank" title="{$partner.name}" class="partner">
+                    <img src="{$smarty.const.APP_URL}appinc/images/{$partner.img}" alt="{$partner.name}" />
+                </a>
+            {/if}
+            
+            
             {literal}
                 <script type="text/javascript">
 

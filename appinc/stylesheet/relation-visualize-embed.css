@@ -12,7 +12,8 @@ h1 {
 
 #workspace {
       height:100%;
-      width:100%;
+      width:100% !important;
+      min-width:0;
  }
 
 #workspace, #visualize-layout {
@@ -21,7 +22,7 @@ h1 {
       top:0; left: 0;
       z-index:8;
       
-      width:100%;
+      width:100%  !important;
       height:100%;
       
       margin:0px;
@@ -40,7 +41,9 @@ h1 {
 }
 
 #visualize-layout {
-      background: url("../images/logo-blue.png") no-repeat 5px 5px;
+      background: url("../images/logo-blue-small.png") no-repeat -70px 0px;
+      min-width:0;      
+      width:100%;
 }
   
 #explore-more {
@@ -51,6 +54,7 @@ h1 {
     top:20px;
     right:20px;
     z-index:333;    
+    
 }
 
 #explore-more input {
@@ -61,6 +65,7 @@ h1 {
 menu.ctrl {
       padding:0px;
       margin:0px;
+      
 }
 
 menu.ctrl a {
@@ -269,4 +274,11 @@ a.backApp {
 
 .browser-alert a{
       color:#DAE9EA;
+}
+
+.partner {
+    position:absolute;
+    bottom:20px;
+    left:20px;
+    z-index:9;
 }

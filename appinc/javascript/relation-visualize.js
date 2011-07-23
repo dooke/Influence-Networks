@@ -525,8 +525,7 @@
                         .fillStyle("rgb(255,255,255)");
 
             //  zoom with mouswheel (disable)
-            if (Modernizr.svg && 0)
-                page.vis.event("mousewheel", pv.Behavior.zoom());
+            if (0) page.vis.event("mousewheel", pv.Behavior.zoom());
 
             // registers the mousedown time to distingate the click to the drag event
             pv.listen($("#visualize-layout")[0], "mousedown", function() {
@@ -618,6 +617,9 @@
             try { 
                 page.vis.render();
             } catch(e) {  /* empty exception to clear an idiot IE alert  */ }
+            
+        } else {
+            $(".browser-alert").show();
         }
     };
     

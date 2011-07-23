@@ -9,9 +9,25 @@
      * @author pirhoo <pierre@owni.fr>
      * 
      */
+
     // assing the screen
     $s->assign('screen', 'relation-visualize-embed');
 
+    // partners data
+    $partners = array("sk" => 
+                            array(
+                                "img"  => "logo-sk.gif",
+                                "url"  => "http://suomenkuvalehti.fi/",
+                                "name" => "Suomen Kuvalehti"
+                            )
+                     );
+    
+    // if a partners is specified in the request...
+    if(isset($_GET["partner"]) && key_exists($_GET["partner"], $partners))       
+        // we assign it
+        $s->assign("partner", $partners[$_GET["partner"]]);
+        
+    
     $node_left = null;
     $node_right = null;
 
