@@ -188,12 +188,24 @@ class Action {
             // get every relation
             $relations = $this->managers["relation"]->getMergeNodesRelation($_REQUEST["entity-left-mid"], $_REQUEST["entity-right-mid"]);
             
-            echo json_encode(array("status" => true, "nodes" => array(), "relations" => $relations ));
+            // get nodes
+            $nodes = array();
+            
+            if( isset($_REQUEST["entity-left-mid"]) ) {                
+                $node_instance = $this->managers["node"]->getNode($_REQUEST["entity-left-mid"]);
+                if(!!$node_instance) $nodes[] = $node_instance->getArray();
+            }
+            
+            if( isset($_REQUEST["entity-right-mid"]) ) {
+                $node_instance = $this->managers["node"]->getNode($_REQUEST["entity-right-mid"]);
+                if(!!$node_instance) $nodes[] = $node_instance->getArray();
+            }
+            
+            echo json_encode(array("status" => true, "nodes" => $nodes, "relations" => $relations ));
             exit;
             
         // throw exception    
         } else throw( new Exception("Missing paramters.") );
-            
         
     }
     
@@ -210,7 +222,20 @@ class Action {
             // get every relation
             $relations = $this->managers["relation"]->getMoreNodesRelations($_REQUEST["entity-left-mid"], $_REQUEST["entity-right-mid"]);
             
-            echo json_encode(array("status" => true, "nodes" => array(), "relations" => $relations ));
+            // get nodes
+            $nodes = array();
+            
+            if( isset($_REQUEST["entity-left-mid"]) ) {                
+                $node_instance = $this->managers["node"]->getNode($_REQUEST["entity-left-mid"]);
+                if(!!$node_instance) $nodes[] = $node_instance->getArray();
+            }
+            
+            if( isset($_REQUEST["entity-right-mid"]) ) {
+                $node_instance = $this->managers["node"]->getNode($_REQUEST["entity-right-mid"]);
+                if(!!$node_instance) $nodes[] = $node_instance->getArray();
+            }
+            
+            echo json_encode(array("status" => true, "nodes" => $nodes, "relations" => $relations ));
             exit;
             
         // throw exception    
