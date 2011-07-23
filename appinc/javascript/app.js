@@ -150,8 +150,23 @@
              
          });
          
-         
+         app.resizeProfession();
      };
+     
+    
+    /**
+     * 
+     * @function
+     * @public
+     */
+    app.resizeProfession = function() {
+        
+         var maxHeight = 0;
+          
+         $(".profession").each(function(i, elem) {
+             maxHeight = $(elem).outerHeight() > maxHeight ? $(elem).outerHeight() : maxHeight;
+         }).css('height', maxHeight);
+    }
      
     
     /**
