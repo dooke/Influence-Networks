@@ -369,7 +369,7 @@ class API {
                     if(is_array($node))
                         
                         // get the relations of the node
-                        $node["relations"] = $this->managers['relation']->getNodeRelationArray($id);
+                        $node["relations"] = $this->managers['relation']->getNodeRelationArray( $node["id"] );
                     
                     // return the result
                     return $node; break;
@@ -456,6 +456,7 @@ class API {
         if( $resource !== null ) {
             // select the resource
             switch ($resource) {
+                
                 // it's an entity
                 case "entity":
                     
