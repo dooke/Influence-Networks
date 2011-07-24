@@ -111,7 +111,7 @@
              // if an id is found
              if( id != undefined)
                  // we go to the visualize screen
-                 window.location = "?screen=relation-visualize&rel="+id;
+                 window.location = $(this).attr("action") + "?screen=relation-visualize&rel="+id;
              
          });
          
