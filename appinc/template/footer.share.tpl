@@ -31,7 +31,7 @@
     <div id="links">
         <h3>{t}Links{/t}</h3>
         <p>
-            <a href="{$smarty.const.APP_URL}page/about/">{t}About{/t}</a> &bullet; <a href="{$smarty.const.APP_URL}page/terms-of-use/">{t}Terms of use{/t}</a> &bullet; <a href="{$smarty.const.APP_URL}page/privacy-policy/">{t}Privacy Policy{/t}</a> &bullet; <a href="{$smarty.const.APP_URL}page/licence/">{t}Licence{/t}</a> &bullet; <a target="_blank" href="http://bug.influencenetworks.org/">{t}Report a bug{/t}</a> &bullet; <a target="_blank" href="https://github.com/Pirhoo/Influence-Networks/">{t}Code repository{/t}</a>
+            <a href="{$smarty.const.APP_URL}page/about/">{t}About{/t}</a> &bullet; <a href="{$smarty.const.APP_URL}page/developers/">{t}Developers{/t}</a> &bullet; <a href="{$smarty.const.APP_URL}page/terms-of-use/">{t}Terms of use{/t}</a> &bullet; <a href="{$smarty.const.APP_URL}page/privacy-policy/">{t}Privacy Policy{/t}</a> &bullet; <a href="{$smarty.const.APP_URL}page/licence/">{t}Licence{/t}</a> &bullet; <a target="_blank" href="http://bug.influencenetworks.org/">{t}Report a bug{/t}</a> &bullet; <a target="_blank" href="https://github.com/Pirhoo/Influence-Networks/">{t}Code repository{/t}</a>
         </p>
     </div>
         
