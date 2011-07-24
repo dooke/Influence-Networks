@@ -14,9 +14,7 @@
      * @link http://wordpress.org/
      * @link http://wordpress.org/extend/plugins/json-api/
      * 
-     */
-        
-    require_once(BASE_DIR."/appinc/librarie/functions.page.php");
+     */        
     
     if( isset($_GET["id"]) ) {
         
