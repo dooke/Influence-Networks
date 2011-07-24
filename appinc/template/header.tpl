@@ -174,7 +174,7 @@
 
                     </div>
                 {else}
-                    <form action="index.php" method="post" class="connexion radiusLight simpleShadow" >
+                    <form action="{$smarty.const.APP_URL} method="post" class="connexion radiusLight simpleShadow" >
                         <input type="hidden" name="action" value="signin" />
                         <label>{t}Email{/t}: <input type="text" name="email" class="text" /></label>
                         <label>{t}Password{/t}: <input type="password" name="password" class="text" /></label>
@@ -189,7 +189,7 @@
                         </div>
                     </form>
 
-                    <form action="index.php" method="post" class="inscription radiusLight simpleShadow hidden" >
+                    <form action="{$smarty.const.APP_URL} method="post" class="inscription radiusLight simpleShadow hidden" >
                         <input type="hidden" name="action" value="signup" />
                         <label>{t}Email{/t}: <input type="text" name="email" class="text" /></label>
                         <label>{t}Password{/t}: <input type="password" name="password_1" class="text" /></label>
