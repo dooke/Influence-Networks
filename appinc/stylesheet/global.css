@@ -25,6 +25,7 @@ header {
     color:#5d405d;
     width:100%;
     position:relative;
+    z-index:999;
     top:0;
     
     margin-bottom:115px;
@@ -972,6 +973,8 @@ input.half {
     margin-top:10px;
     display:block;
     text-align: right;
+    padding:0;
+    clear:both;
 }
 
 
@@ -1046,7 +1049,7 @@ input.half {
 
 #errors {
     position:absolute;
-    top:0px;
+    top:-115px;
     left:0px;
     padding:0px 5px;
     z-index:998;
@@ -1056,27 +1059,30 @@ input.half {
     opacity:0.8;
 
     margin:10px 5px;
-    color: #fff4ff;
-    background: #321132;
-    border:2px #5d405d solid;
+    
+    color:#000;
+    background: #abe1e8;
 
     border-radius:3px;
     -webkit-border-radius:3px;
     -moz-border-radius:3px;
     -khtml-border-radius:3px; 
     padding:10px;
+    padding-right: 25px;
 
 
     width:200px;
     display:none;
+    position:relative;
 }
 
 
 #errors .close {
-    float:right;
+    position:absolute;
+    right:10px;
     text-indent: 999px;
-    width:16px;
-    height:16px;
+    width:21px;
+    height:21px;
     margin-top:-5px;
     margin-right:-5px;
     background:url('../images/close.png') no-repeat center center;
