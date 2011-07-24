@@ -12,6 +12,7 @@
         $arrPageQuery = array(
             "about" => PAGES_PROVIDER."about/?json=1",
             "licence" => PAGES_PROVIDER."licence/?json=1",
+            "developers" => PAGES_PROVIDER."developers/?json=1",
             "terms-of-use" => PAGES_PROVIDER."terms-of-use/?json=1",
             "privacy-policy" => PAGES_PROVIDER."privacy-policy/?json=1",
             "introduction" => PAGES_PROVIDER."introduction/?json=1&custom_fields=yt",
