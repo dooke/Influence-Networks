@@ -29,7 +29,7 @@
       <a href="{$smarty.const.APP_URL}?screen=relation-visualize" class="label"   title="{t}See entities relations.{/t}">
             {t}Explore{/t}
       </a>
-      <form  class="search-field">
+      <form  class="search-field" action="{$smarty.const.APP_URL}">
           <input type="text" name="search" placeholder="{t}Type a person's name{/t}" class="text" />
           <input type="submit" value="search" class="submit" />
       </form>
