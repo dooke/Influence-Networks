@@ -311,7 +311,7 @@
                           $(":input[type=password]", $form).val("");             
                           app.showFormError($form, 1);
                     } else
-                        window.location = "index.php";
+                        window.location = form.attr("action");
 
               }
         });
