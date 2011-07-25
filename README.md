@@ -4,7 +4,7 @@
 
 ## Issue report ##
 
-Go on [http://bug.influencenetworks.org](http://bug.influencenetworks.org) to report a bug.
+Go on [https://www.pivotaltracker.com/projects/336991](https://www.pivotaltracker.com/projects/336991) to report a bug.
 
 ## How does it work? ##
 
