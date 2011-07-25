@@ -6,7 +6,7 @@
         <!-- IPAD viewport -->
         <meta name="viewport" content="width=990">
 
-        <title>{t}Influence Networks{/t} &bullet; {$pageTitle}</title>
+        <title>{t}Influence Networks by OWNI{/t} • {$pageTitle}</title>
 
         <meta name="description" content="Influence Networks is an open-source, collaborative directory of relationships between people, institutions and companies. Each relation has its own level of trustworthiness, so that facts can be distinguished from noise." /> 
         <meta name="og:image" content="{$smarty.const.APP_URL}appinc/images/infnets.png" property="og:image"  />            
@@ -136,7 +136,7 @@
     <!-- IPAD loves this attribut to a better displaying -->
     <body onload="window.scrollTo(0, 1)" class="{$screen}">
 
-        <h1 class="fhidden">{t}Influence Networks{/t} &bullet; {$pageTitle}</h1>   
+        <h1 class="fhidden">{t}Influence Networks by OWNI{/t} • {$pageTitle}</h1>   
 
         <!-- Facebook -->
         <div id="fb-root"></div>
