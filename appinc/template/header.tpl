@@ -11,7 +11,10 @@
         <meta name="description" content="Influence Networks is an open-source, collaborative directory of relationships between people, institutions and companies. Each relation has its own level of trustworthiness, so that facts can be distinguished from noise." /> 
         <meta name="og:image" content="{$smarty.const.APP_URL}appinc/images/infnets.png" property="og:image"  />            
         <meta name="keywords" content="OWNI, influence networks, influence, network, networks, relationship, relation" />            
+        
+        <link rel="icon" type="image/ico" href="{$smarty.const.APP_URL}appinc/images/favicon.ico" />
 
+        
         <link rel="canonical" href="{$smarty.const.APP_URL}" /> 
         <link rel="image_src" href="{$smarty.const.APP_URL}appinc/images/infnets.png" /> 
 
