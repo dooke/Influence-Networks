@@ -12,7 +12,7 @@
  *      # GET Entities list:
  *          /api/entity/
  *              @param <optional> page  [1-*]  default: 1
- *              @param <optional> limit [1-15] default: 5
+ *              @param <optional> limit [1-30] default: 5
  * 
  *      # GET Entity with id (or MID):
  *          /api/entity/ID/
@@ -21,7 +21,7 @@
  *      # GET Relation list:
  *          /api/relation/
  *              @param <optional> page  [1-*]  default: 1
- *              @param <optional> limit [1-15] default: 5
+ *              @param <optional> limit [1-30] default: 5
  * 
  *      # GET Relation with id:
  *          /api/relation/ID/
@@ -449,7 +449,7 @@ class API {
     protected function getResources($resource = null, $page = 1, $limit = 5) {
                 
         // minimum and maximun value for limit
-        $limit = $limit > 15 || $limit < 1 ? 5 : $limit;
+        $limit = $limit > 35 || $limit < 1 ? 5 : $limit;
         $offset = ($page - 1) * $limit;
         
         // if parameters are fine
