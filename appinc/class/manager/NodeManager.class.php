@@ -14,6 +14,8 @@ class NodeManager extends Manager {
 
             // call the parent construtor
             parent::__construct($smarty, $db, $managers, $err);
+            
+            $this->ckfile = tempnam ("/tmp", "CURLCOOKIE");
       }
 
       public function getNodeList() {
@@ -201,7 +203,8 @@ class NodeManager extends Manager {
      */
     public function freebaseAuthenfication() {
         
-    
+        $ckfile = tempnam ("/tmp", "CURLCOOKIE");
+        
         $curl = curl_init();  
         // block the certificate checking with curl
         curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
@@ -216,8 +219,8 @@ class NodeManager extends Manager {
         // keep data when target changes the location
         curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
         // initiates cookie file 
-        curl_setopt($curl, CURLOPT_COOKIEFILE, "/tmp/cookieInfNetsFreebase");
-        curl_setopt($curl, CURLOPT_COOKIEJAR, "/tmp/cookieInfNetsFreebase");
+        curl_setopt($curl, CURLOPT_COOKIEFILE, $this->ckfile);
+        curl_setopt($curl, CURLOPT_COOKIEJAR,  $this->ckfile);
         // set target URL
         curl_setopt($curl, CURLOPT_URL, FREEBASE_API_LOGIN); 
         // active POST data
@@ -248,11 +251,12 @@ class NodeManager extends Manager {
      */
     public function createFreebaseNode($name, $type) {
         
-        $auth = $this->freebaseAuthenfication();  
+        $auth = $this->freebaseAuthenfication();
         
         // if query and authentification succeed, and the cookie exists
-        if(!!$auth && json_decode($auth["content"])->code == "/api/status/ok" && file_exists("/tmp/cookieInfNetsFreebase") ) {
-
+        if(!!$auth && json_decode($auth["content"])->code == "/api/status/ok") {
+                        
+            
             $curl = curl_init();  
             // block the certificate checking with curl
             curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, FALSE);
@@ -266,9 +270,13 @@ class NodeManager extends Manager {
             curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
             // keep data when target changes the location
             curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
-
+            // cookie file
+            curl_setopt ($curl, CURLOPT_COOKIEFILE, $this->ckfile); 
+            
             // extract cookies from headers
             preg_match_all('#Cookie: (.*)\b#', $auth["header"], $cookies);                
+
+            
             
             // use authentification cookie
             curl_setopt($curl, CURLOPT_COOKIE, implode(";", $cookies[1]) );

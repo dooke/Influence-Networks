@@ -147,8 +147,8 @@ class Action {
         if(isset($this->GET['name']) && isset($this->GET['type']) && $this->managers["user"]->isConnected()) {
             
             // check first if the the node exist
-            $node = $this->managers["node"]->getFreebaseNodeByName($this->GET['name']);
-
+            $node = $this->managers["node"]->getFreebaseNodeByName($this->GET['name']);            
+            
             // node exists, we shouldn't to add it
             if($node) {            
                 // json encode the result
@@ -159,7 +159,8 @@ class Action {
             } else { 
 
                 // create the topic in Freebase
-                $node = $this->managers["node"]->createFreebaseNode($this->GET['name'], $this->GET['type']);
+                $node = $this->managers["node"]->createFreebaseNode($this->GET['name'], $this->GET['type']);                
+                
                 // if the node was created
                 if($node) {
 
