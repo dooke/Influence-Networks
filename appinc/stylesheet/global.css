@@ -184,13 +184,13 @@ form.inscription.hidden {
 
 /** START HEADER SHARE **/
 .header-share {
-    width:360px;
+    width:380px;
     padding:5px 10px;
     background: #33798E;
     position:absolute;
     top:211px;
     left:50%;
-    margin-left:-180px;
+    margin-left:-190px;
     z-index:9998;
     
     border-radius:0 0 5px 5px;
