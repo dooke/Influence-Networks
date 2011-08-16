@@ -14,6 +14,38 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 --
 
 -- --------------------------------------------------------
+-- phpMyAdmin SQL Dump
+-- version 3.2.5
+-- http://www.phpmyadmin.net
+--
+-- Serveur: localhost
+-- Généré le : Mar 16 Août 2011 à 13:14
+-- Version du serveur: 5.1.44
+-- Version de PHP: 5.2.13
+
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+
+--
+-- Base de données: `influence_networks`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `inf_api_query`
+--
+
+CREATE TABLE `inf_api_query` (
+  `id` smallint(6) NOT NULL AUTO_INCREMENT,
+  `IP` varchar(15) NOT NULL,
+  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `method` varchar(6) NOT NULL,
+  `query` varchar(250) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `IP` (`IP`,`date`,`method`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=49 ;
+
+-- --------------------------------------------------------
 
 --
 -- Structure de la table `inf_node`
@@ -25,7 +57,7 @@ CREATE TABLE `inf_node` (
   `label` varchar(255) DEFAULT NULL,
   `type` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6549 ;
 
 -- --------------------------------------------------------
 
@@ -42,7 +74,7 @@ CREATE TABLE `inf_relation` (
   `trust_level` float DEFAULT NULL,
   `locked` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=731 ;
 
 -- --------------------------------------------------------
 
@@ -67,8 +99,10 @@ CREATE TABLE `inf_relation_type` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `freebase_id` varchar(45) DEFAULT NULL,
   `label` varchar(45) DEFAULT NULL,
+  `direction` enum('ltr','rtl','tw') NOT NULL DEFAULT 'tw' COMMENT ':= ''left-to-right''|''right-to-left''|''two-ways''',
+  `hint` varchar(255) NOT NULL COMMENT ':= "%1 is or was the owner of %2"',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=13 ;
 
 -- --------------------------------------------------------
 
@@ -82,7 +116,7 @@ CREATE TABLE `inf_relation_type_property` (
   `label` varchar(255) NOT NULL,
   `freebase_id` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=56 ;
 
 -- --------------------------------------------------------
 
@@ -96,7 +130,7 @@ CREATE TABLE `inf_relation_value` (
   `relation` int(11) NOT NULL,
   `value` text,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2844 ;
 
 -- --------------------------------------------------------
 
@@ -109,5 +143,9 @@ CREATE TABLE `inf_user` (
   `email` varchar(245) DEFAULT NULL,
   `password` varchar(50) DEFAULT NULL,
   `trust_level` float DEFAULT NULL,
+  `pending` tinyint(4) NOT NULL DEFAULT '1',
+  `confirmation_code` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=996 ;
+
+-- --------------------------------------------------------
